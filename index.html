@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenova Study — Study Smarter. Prepare Better. Win Bigger.</title>
+<meta name="description" content="Zenova Study gives students the tools, resources, classes, and practice they need to prepare confidently for JAMB and other academic examinations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1628;
+    --navy:#0B1D3A;
+    --blue:#2563EB;
+    --blue-bright:#1E5FFF;
+    --amber:#F5A524;
+    --white:#FFFFFF;
+    --paper:#F7F9FC;
+    --ink:#0A1628;
+    --ink-soft:#54607C;
+    --ink-faint:#8592AD;
+    --line:#E6EAF3;
+    --radius:18px;
+    --sora:'Sora', sans-serif;
+    --dm:'DM Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--dm);
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .logo{
+    font-family:var(--sora);font-weight:800;font-size:1.1rem;
+    letter-spacing:0.01em;color:var(--navy-deep);
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark{
+    width:30px;height:30px;border-radius:8px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--navy));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:var(--sora);font-weight:800;font-size:0.9rem;
+  }
+  .logo-mark-img{width:32px;height:32px;object-fit:contain;}
+  .footer-logo-img{width:34px;height:34px;object-fit:contain;}
+  .social-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .social-list a{display:flex;align-items:center;gap:10px;font-size:0.89rem;}
+  .social-list .icon{font-size:1.05rem;line-height:1;width:20px;text-align:center;}
+  nav.desktop-nav{display:flex;align-items:center;gap:32px;}
+  nav.desktop-nav a{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;
+    color:var(--ink-soft);transition:color .15s ease;
+  }
+  nav.desktop-nav a:hover{color:var(--blue-bright);}
+  .cta-btn{
+    font-family:var(--sora);font-weight:700;font-size:0.86rem;
+    background:var(--blue-bright);color:#fff;
+    padding:10px 20px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(30,95,255,0.6);}
+  .cta-btn.outline{background:transparent;color:var(--navy-deep);border:1px solid var(--line);}
+  .cta-btn.outline:hover{border-color:var(--blue-bright);color:var(--blue-bright);box-shadow:none;}
+  .header-actions{display:flex;align-items:center;gap:16px;}
+
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;
+  }
+  .hamburger span{width:21px;height:2px;background:var(--navy-deep);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-panel{
+    display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .mobile-panel.open{max-height:520px;}
+  .mobile-panel a{
+    font-family:var(--sora);font-weight:600;font-size:1rem;color:var(--navy-deep);
+    padding:15px 24px;border-bottom:1px solid var(--line);
+  }
+  .mobile-panel .cta-btn{margin:16px 24px 20px;text-align:center;}
+
+  @media (max-width:860px){
+    nav.desktop-nav{display:none;}
+    .header-actions .cta-btn{display:none;}
+    .hamburger{display:flex;}
+    .mobile-panel{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:104px 0 88px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+    width:900px;height:500px;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.10), transparent 72%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--sora);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .hero h1{
+    font-family:var(--sora);font-weight:800;font-size:clamp(2.1rem,4.6vw,3.2rem);
+    line-height:1.14;margin:0 0 20px;letter-spacing:-0.01em;color:var(--navy-deep);
+  }
+  .hero p.lead{font-size:1.08rem;line-height:1.65;color:var(--ink-soft);max-width:540px;margin:0 auto 34px;}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+  .hero-sub{
+    font-family:var(--sora);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  @media (max-width:860px){.hero{padding:68px 0 56px;}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:600px;margin:0 auto 48px;text-align:center;}
+  .section-eyebrow{
+    font-family:var(--sora);font-weight:700;font-size:0.75rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--blue-bright);margin-bottom:12px;display:block;
+  }
+  .section-head h2{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3vw,2.15rem);
+    margin:0 0 14px;color:var(--navy-deep);letter-spacing:-0.01em;
+  }
+  .section-head p{font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0;}
+  .section-link{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:6px;margin-top:18px;
+  }
+  .section-link svg{transition:transform .15s ease;}
+  .section-link:hover svg{transform:translateX(3px);}
+  .paper{background:var(--paper);}
+
+  /* Ecosystem cards */
+  .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .eco-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .eco-card:hover{transform:translateY(-3px);box-shadow:0 22px 36px -22px rgba(10,22,40,0.22);border-color:#D3E0FA;}
+  .eco-icon{
+    width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:1.25rem;margin-bottom:18px;
+  }
+  .eco-card h3{font-family:var(--sora);font-weight:700;font-size:1.1rem;margin:0 0 10px;color:var(--navy-deep);}
+  .eco-card p{font-size:0.92rem;line-height:1.6;color:var(--ink-soft);margin:0 0 18px;}
+  .eco-card a.go{font-family:var(--sora);font-weight:600;font-size:0.86rem;color:var(--blue-bright);display:inline-flex;align-items:center;gap:6px;}
+  .eco-card a.go svg{transition:transform .15s ease;}
+  .eco-card:hover a.go svg{transform:translateX(3px);}
+
+  /* Why Zenova */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .why-item{padding:4px;}
+  .why-num{
+    font-family:var(--sora);font-weight:800;font-size:0.78rem;color:var(--blue-bright);
+    background:#EAF0FF;width:32px;height:32px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .why-item h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 8px;color:var(--navy-deep);}
+  .why-item p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  /* Subjects */
+  .subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .subject-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    background:#fff;border-top:3px solid var(--track-color,#2563EB);
+  }
+  .subject-card h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 10px;color:var(--navy-deep);}
+  .subject-card p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  /* Resources */
+  .resource-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .resource-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;background:#fff;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .resource-card:hover{border-color:#D3E0FA;transform:translateY(-2px);}
+  .resource-card h3{font-family:var(--sora);font-weight:700;font-size:0.98rem;margin:0 0 8px;color:var(--navy-deep);}
+  .resource-card p{font-size:0.86rem;line-height:1.55;color:var(--ink-soft);margin:0;}
+
+  /* Competition feature banner */
+  .comp-banner{
+    background:linear-gradient(135deg,var(--navy-deep),#12275A);
+    border-radius:28px;padding:64px 48px;text-align:center;color:#fff;
+  }
+  .comp-banner .section-eyebrow{color:#8FB0FF;}
+  .comp-banner h2{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.2rem);margin:0 0 14px;color:#fff;
+  }
+  .comp-banner p{color:#C4D2F0;font-size:1rem;line-height:1.65;max-width:520px;margin:0 auto 30px;}
+
+  /* Testimonials */
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .testimonial-card{
+    background:var(--paper);border-radius:var(--radius);padding:28px;border:1px solid var(--line);
+  }
+  .testimonial-card p{
+    font-family:var(--sora);font-weight:500;font-size:0.98rem;line-height:1.6;color:var(--navy-deep);margin:0;
+  }
+  .testimonial-card p::before{content:"“";color:var(--blue-bright);font-weight:800;}
+  .testimonial-card p::after{content:"”";color:var(--blue-bright);font-weight:800;}
+  .testimonial-note{
+    text-align:center;font-size:0.82rem;color:var(--ink-faint);margin-top:20px;font-style:italic;
+  }
+
+  /* Final CTA */
+  .final-cta{
+    background:linear-gradient(135deg,var(--navy-deep),#0F2450);
+    border-radius:28px;padding:64px 48px;text-align:center;color:#fff;
+  }
+  .final-cta h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.7rem,3.4vw,2.3rem);margin:0 0 14px;}
+  .final-cta p{color:#C4D2F0;font-size:1rem;max-width:480px;margin:0 auto 30px;line-height:1.6;}
+  .final-cta .tagline{
+    font-family:var(--sora);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:#8FA3CC;margin-top:26px;
+  }
+
+  /* Footer */
+  footer{background:var(--navy-deep);color:#8FA3CC;padding:56px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
+  .footer-logo{font-family:var(--sora);font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  footer p.desc{font-size:0.88rem;line-height:1.6;max-width:280px;}
+  footer h4{font-family:var(--sora);font-weight:700;font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:#fff;margin:0 0 16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{font-size:0.89rem;transition:color .15s ease;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.82rem;
+  }
+
+  @media (max-width:860px){
+    .eco-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .subject-grid{grid-template-columns:1fr;}
+    .resource-grid{grid-template-columns:1fr 1fr;}
+    .testimonial-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .comp-banner,.final-cta{padding:48px 28px;}
+    section{padding:60px 0;}
+  }
+  @media (max-width:520px){
+    .why-grid{grid-template-columns:1fr;}
+    .resource-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#" class="logo"><img src="logo.png" alt="Zenova Study" class="logo-mark-img">Zenova Study</a>
+    <nav class="desktop-nav">
+      <a href="#">Home</a>
+      <a href="jamb-2027.html">JAMB 2027</a>
+      <a href="classes.html">Classes</a>
+      <a href="resources.html">Resources</a>
+      <a href="competition.html">Competition</a>
+      <a href="study-hub.html">Study Hub</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#">Home</a>
+    <a href="jamb-2027.html">JAMB 2027</a>
+    <a href="classes.html">Classes</a>
+    <a href="resources.html">Resources</a>
+    <a href="competition.html">Competition</a>
+    <a href="study-hub.html">Study Hub</a>
+    <a href="about.html">About</a>
+    <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="dot"></span>Zenova Study</div>
+    <h1>Study Smarter. Prepare Better. Win Bigger.</h1>
+    <p class="lead">Your journey to academic success starts with the right preparation. Zenova Study gives students the tools, resources, classes, and practice they need to prepare confidently for JAMB and other academic examinations.</p>
+    <div class="hero-ctas">
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Start Learning</a>
+      <a href="jamb-2027.html" class="cta-btn outline">Explore JAMB 2027</a>
+    </div>
+    <div class="hero-sub">Learn · Practice · Compete · Improve</div>
+  </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Introduction</span>
+      <h2>A Smarter Way to Prepare</h2>
+      <p>Preparing for an examination shouldn't be confusing or overwhelming. Zenova Study brings learning, practice, resources, classes, and assessment together in one educational ecosystem — giving you a structured way to learn and keep improving.</p>
+      <a href="study-hub.html" class="section-link">Discover Zenova
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- JAMB 2027 -->
+<section id="jamb2027">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">JAMB 2027</span>
+      <h2>Get Ready for JAMB 2027</h2>
+      <p>Start early. Study consistently. Practice smarter. Zenova Study helps you prepare with structured learning, relevant study materials, practice questions, assessments, and expert-led classes. Whether you're just getting started or already preparing, Zenova gives you the tools to stay on track.</p>
+      <a href="jamb-2027.html" class="section-link">Explore JAMB 2027
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section class="paper" id="study-hub">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">The Zenova Ecosystem</span>
+      <h2>Everything You Need to Learn, Practice &amp; Improve</h2>
+      <p>Zenova is more than just a study website.</p>
+    </div>
+    <div class="eco-grid">
+      <div class="eco-card">
+        <div class="eco-icon" style="background:#EAF0FF;">📚</div>
+        <h3>Study Hub</h3>
+        <p>Access study materials, practice questions, revision resources, and tools designed to support your preparation.</p>
+        <a href="study-hub.html" class="go">Open Study Hub
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="eco-card" id="competition">
+        <div class="eco-icon" style="background:#FFF3DE;">🏆</div>
+        <h3>Competition</h3>
+        <p>Put your knowledge to the test. Challenge yourself, compete with other students, and discover how well you perform.</p>
+        <a href="competition.html" class="go">Enter Competition
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="eco-card" id="classes">
+        <div class="eco-icon" style="background:#E9F9EF;">🎓</div>
+        <h3>Classes</h3>
+        <p>Learn with structured lessons and expert guidance designed to make difficult topics easier to understand.</p>
+        <a href="classes.html" class="go">Explore Classes
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ZENOVA -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Why Zenova</span>
+      <h2>Built for Better Preparation</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <h3>Structured Learning</h3>
+        <p>Know what to study and stay organized throughout your preparation.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <h3>Practice That Matters</h3>
+        <p>Strengthen your knowledge through regular questions, tests, and revision.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <h3>Learn With Confidence</h3>
+        <p>Get access to resources and teaching designed to make learning easier.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <h3>Track Your Growth</h3>
+        <p>Identify your strengths, improve your weaknesses, and keep moving forward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Subjects</span>
+      <h2>Prepare for the Subjects That Matter</h2>
+      <p>Get access to resources and preparation support across a range of JAMB subjects.</p>
+    </div>
+    <div class="subject-grid">
+      <div class="subject-card" style="--track-color:#2563EB;">
+        <h3>Science</h3>
+        <p>Physics · Chemistry · Biology · Mathematics · English</p>
+      </div>
+      <div class="subject-card" style="--track-color:#F5A524;">
+        <h3>Commercial</h3>
+        <p>Economics · Accounting · Commerce · Mathematics · English</p>
+      </div>
+      <div class="subject-card" style="--track-color:#22C55E;">
+        <h3>Arts &amp; Humanities</h3>
+        <p>Literature · Government · History · CRS/IRS · English</p>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#" class="section-link">Explore Subjects
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Resources</span>
+      <h2>Your Study Materials, All in One Place</h2>
+      <p>Find resources to help you understand concepts, revise effectively, and practice what you've learned.</p>
+    </div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h3>Study Notes</h3>
+        <p>Clear materials for important topics.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Past Questions</h3>
+        <p>Practice with examination-style questions.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Revision Materials</h3>
+        <p>Quick resources to help you review key concepts.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Study Guides</h3>
+        <p>Helpful guides to make your preparation more organized.</p>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="resources.html" class="section-link">Explore Resources
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION FEATURE -->
+<section class="paper">
+  <div class="wrap">
+    <div class="comp-banner">
+      <span class="section-eyebrow">Competition</span>
+      <h2>Don't Just Study. Challenge Yourself.</h2>
+      <p>How well do you really know what you've learned? The Zenova Competition gives you an opportunity to put your knowledge to the test, compete, and challenge yourself beyond the classroom.</p>
+      <a href="competition.html" class="cta-btn">Explore Competition</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Student Testimonials</span>
+      <h2>What Students Say</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card"><p>Zenova has made my preparation more organized and easier to follow.</p></div>
+      <div class="testimonial-card"><p>The resources and practice questions have helped me stay consistent with my studies.</p></div>
+      <div class="testimonial-card"><p>I enjoy being able to learn and test myself in the same ecosystem.</p></div>
+    </div>
+    <div class="testimonial-note">Replace these with genuine student testimonials once you have them.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="about">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Ready to Prepare Smarter?</h2>
+      <p>Don't wait until the examination is around the corner. Start learning, practice consistently, and take control of your preparation with Zenova Study.</p>
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+      <div class="tagline">Study Smarter. Prepare Better. Win Bigger.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
+        <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="about.html#founder">Meet the Founder</a></li>
+          <li><a href="#">Support Zenova</a></li>
+          <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <ul class="social-list">
+            <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I"><span class="icon">💬</span>WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU"><span class="icon">✈️</span>Classes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zenova Study. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>

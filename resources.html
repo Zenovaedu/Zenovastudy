@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — Zenova Study</title>
+<meta name="description" content="Free study resources from Zenova — schemes of work, study notes, past questions, and revision materials to help you prepare with confidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1628;
+    --navy:#0B1D3A;
+    --blue:#2563EB;
+    --blue-bright:#1E5FFF;
+    --amber:#F5A524;
+    --white:#FFFFFF;
+    --paper:#F7F9FC;
+    --ink:#0A1628;
+    --ink-soft:#54607C;
+    --ink-faint:#8592AD;
+    --line:#E6EAF3;
+    --radius:18px;
+    --sora:'Sora', sans-serif;
+    --dm:'DM Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--dm);
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .logo{
+    font-family:var(--sora);font-weight:800;font-size:1.1rem;
+    letter-spacing:0.01em;color:var(--navy-deep);
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark{
+    width:30px;height:30px;border-radius:8px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--navy));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:var(--sora);font-weight:800;font-size:0.9rem;
+  }
+  .logo-mark-img{width:32px;height:32px;object-fit:contain;}
+  .footer-logo-img{width:34px;height:34px;object-fit:contain;}
+  .social-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .social-list a{display:flex;align-items:center;gap:10px;font-size:0.89rem;}
+  .social-list .icon{font-size:1.05rem;line-height:1;width:20px;text-align:center;}
+  nav.desktop-nav{display:flex;align-items:center;gap:32px;}
+  nav.desktop-nav a{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;
+    color:var(--ink-soft);transition:color .15s ease;
+  }
+  nav.desktop-nav a:hover{color:var(--blue-bright);}
+  .cta-btn{
+    font-family:var(--sora);font-weight:700;font-size:0.86rem;
+    background:var(--blue-bright);color:#fff;
+    padding:10px 20px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(30,95,255,0.6);}
+  .cta-btn.outline{background:transparent;color:var(--navy-deep);border:1px solid var(--line);}
+  .cta-btn.outline:hover{border-color:var(--blue-bright);color:var(--blue-bright);box-shadow:none;}
+  .header-actions{display:flex;align-items:center;gap:16px;}
+
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;
+  }
+  .hamburger span{width:21px;height:2px;background:var(--navy-deep);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-panel{
+    display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .mobile-panel.open{max-height:520px;}
+  .mobile-panel a{
+    font-family:var(--sora);font-weight:600;font-size:1rem;color:var(--navy-deep);
+    padding:15px 24px;border-bottom:1px solid var(--line);
+  }
+  .mobile-panel .cta-btn{margin:16px 24px 20px;text-align:center;}
+
+  @media (max-width:860px){
+    nav.desktop-nav{display:none;}
+    .header-actions .cta-btn{display:none;}
+    .hamburger{display:flex;}
+    .mobile-panel{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:104px 0 88px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+    width:900px;height:500px;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.10), transparent 72%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--sora);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .hero h1{
+    font-family:var(--sora);font-weight:800;font-size:clamp(2.1rem,4.6vw,3.2rem);
+    line-height:1.14;margin:0 0 20px;letter-spacing:-0.01em;color:var(--navy-deep);
+  }
+  .hero p.lead{font-size:1.08rem;line-height:1.65;color:var(--ink-soft);max-width:540px;margin:0 auto 34px;}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+  .hero-sub{
+    font-family:var(--sora);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  @media (max-width:860px){.hero{padding:68px 0 56px;}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:600px;margin:0 auto 48px;text-align:center;}
+  .section-eyebrow{
+    font-family:var(--sora);font-weight:700;font-size:0.75rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--blue-bright);margin-bottom:12px;display:block;
+  }
+  .section-head h2{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3vw,2.15rem);
+    margin:0 0 14px;color:var(--navy-deep);letter-spacing:-0.01em;
+  }
+  .section-head p{font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0;}
+  .section-link{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:6px;margin-top:18px;
+  }
+  .section-link svg{transition:transform .15s ease;}
+  .section-link:hover svg{transform:translateX(3px);}
+  .paper{background:var(--paper);}
+
+  /* Ecosystem cards */
+  .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .eco-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .eco-card:hover{transform:translateY(-3px);box-shadow:0 22px 36px -22px rgba(10,22,40,0.22);border-color:#D3E0FA;}
+  .eco-icon{
+    width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:1.25rem;margin-bottom:18px;
+  }
+  .eco-card h3{font-family:var(--sora);font-weight:700;font-size:1.1rem;margin:0 0 10px;color:var(--navy-deep);}
+  .eco-card p{font-size:0.92rem;line-height:1.6;color:var(--ink-soft);margin:0 0 18px;}
+  .eco-card a.go{font-family:var(--sora);font-weight:600;font-size:0.86rem;color:var(--blue-bright);display:inline-flex;align-items:center;gap:6px;}
+  .eco-card a.go svg{transition:transform .15s ease;}
+  .eco-card:hover a.go svg{transform:translateX(3px);}
+
+  /* Why Zenova */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .why-item{padding:4px;}
+  .why-num{
+    font-family:var(--sora);font-weight:800;font-size:0.78rem;color:var(--blue-bright);
+    background:#EAF0FF;width:32px;height:32px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .why-item h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 8px;color:var(--navy-deep);}
+  .why-item p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  /* Subjects */
+  .subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .subject-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    background:#fff;border-top:3px solid var(--track-color,#2563EB);
+  }
+  .subject-card h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 10px;color:var(--navy-deep);}
+  .subject-card p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  /* Resources */
+  .resource-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .resource-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;background:#fff;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .resource-card:hover{border-color:#D3E0FA;transform:translateY(-2px);}
+  .resource-card h3{font-family:var(--sora);font-weight:700;font-size:0.98rem;margin:0 0 8px;color:var(--navy-deep);}
+  .resource-card p{font-size:0.86rem;line-height:1.55;color:var(--ink-soft);margin:0;}
+
+  /* Competition feature banner */
+  .comp-banner{
+    background:linear-gradient(135deg,var(--navy-deep),#12275A);
+    border-radius:28px;padding:64px 48px;text-align:center;color:#fff;
+  }
+  .comp-banner .section-eyebrow{color:#8FB0FF;}
+  .comp-banner h2{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.2rem);margin:0 0 14px;color:#fff;
+  }
+  .comp-banner p{color:#C4D2F0;font-size:1rem;line-height:1.65;max-width:520px;margin:0 auto 30px;}
+
+  /* Testimonials */
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .testimonial-card{
+    background:var(--paper);border-radius:var(--radius);padding:28px;border:1px solid var(--line);
+  }
+  .testimonial-card p{
+    font-family:var(--sora);font-weight:500;font-size:0.98rem;line-height:1.6;color:var(--navy-deep);margin:0;
+  }
+  .testimonial-card p::before{content:"“";color:var(--blue-bright);font-weight:800;}
+  .testimonial-card p::after{content:"”";color:var(--blue-bright);font-weight:800;}
+  .testimonial-note{
+    text-align:center;font-size:0.82rem;color:var(--ink-faint);margin-top:20px;font-style:italic;
+  }
+
+  /* Final CTA */
+  .final-cta{
+    background:linear-gradient(135deg,var(--navy-deep),#0F2450);
+    border-radius:28px;padding:64px 48px;text-align:center;color:#fff;
+  }
+  .final-cta h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.7rem,3.4vw,2.3rem);margin:0 0 14px;}
+  .final-cta p{color:#C4D2F0;font-size:1rem;max-width:480px;margin:0 auto 30px;line-height:1.6;}
+  .final-cta .tagline{
+    font-family:var(--sora);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:#8FA3CC;margin-top:26px;
+  }
+
+  /* Footer */
+  footer{background:var(--navy-deep);color:#8FA3CC;padding:56px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
+  .footer-logo{font-family:var(--sora);font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  footer p.desc{font-size:0.88rem;line-height:1.6;max-width:280px;}
+  footer h4{font-family:var(--sora);font-weight:700;font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:#fff;margin:0 0 16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{font-size:0.89rem;transition:color .15s ease;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.82rem;
+  }
+
+  @media (max-width:860px){
+    .eco-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .subject-grid{grid-template-columns:1fr;}
+    .resource-grid{grid-template-columns:1fr 1fr;}
+    .testimonial-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .comp-banner,.final-cta{padding:48px 28px;}
+    section{padding:60px 0;}
+  }
+  @media (max-width:520px){
+    .why-grid{grid-template-columns:1fr;}
+    .resource-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- JAMB 2027 page extras ---------- */
+  .flow-line{
+    display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--sora);font-weight:700;font-size:0.95rem;color:var(--blue-bright);
+    margin-top:10px;
+  }
+  .flow-line .sep{color:var(--ink-faint);font-weight:400;}
+
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .feat-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
+  .feat-card:hover{transform:translateY(-3px);box-shadow:0 20px 34px -20px rgba(10,22,40,0.2);border-color:#D3E0FA;}
+  .feat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:16px;background:#EAF0FF;}
+  .feat-card h3{font-family:var(--sora);font-weight:700;font-size:1.02rem;margin:0 0 8px;color:var(--navy-deep);}
+  .feat-card p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  .subject-list-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .subject-item{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff;}
+  .subject-item h3{font-family:var(--sora);font-weight:700;font-size:0.95rem;margin:0 0 8px;color:var(--navy-deep);}
+  .subject-item p{font-size:0.84rem;line-height:1.55;color:var(--ink-soft);margin:0;}
+  .fine-print{font-size:0.8rem;line-height:1.6;color:var(--ink-faint);font-style:italic;max-width:680px;margin:22px auto 0;text-align:center;}
+
+  .step-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .step-card{padding:4px;}
+  .step-card .why-num{background:var(--blue-bright);color:#fff;}
+
+  .checklist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;max-width:600px;margin:28px auto 0;}
+  .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--ink-soft);}
+  .checklist li::before{content:"✓";color:var(--blue-bright);font-weight:800;flex-shrink:0;}
+
+  .mini-banner{
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:40px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+    background:#fff;
+  }
+  .mini-banner .mb-text h3{font-family:var(--sora);font-weight:700;font-size:1.15rem;margin:0 0 8px;color:var(--navy-deep);}
+  .mini-banner .mb-text p{font-size:0.92rem;color:var(--ink-soft);margin:0;max-width:440px;}
+
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:22px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    font-family:var(--sora);font-weight:700;font-size:0.98rem;color:var(--navy-deep);
+  }
+  .faq-q .plus{font-size:1.2rem;color:var(--blue-bright);transition:transform .2s ease;flex-shrink:0;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-a p{font-size:0.9rem;line-height:1.65;color:var(--ink-soft);padding:0 4px 22px;margin:0;}
+  .faq-wrap{max-width:760px;margin:0 auto;}
+
+  .important-note{
+    background:#FFF8E8;border:1px solid #F5D98A;border-radius:16px;
+    padding:24px 26px;max-width:760px;margin:0 auto;
+  }
+  .important-note h3{font-family:var(--sora);font-weight:700;font-size:0.92rem;margin:0 0 8px;color:#8A5A00;}
+  .important-note p{font-size:0.86rem;line-height:1.6;color:#8A5A00;margin:0;}
+
+  .final-cta .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .final-cta .cta-btn.outline{background:rgba(255,255,255,0.06);color:#fff;border-color:rgba(255,255,255,0.28);}
+
+  @media (max-width:860px){
+    .feat-grid{grid-template-columns:1fr 1fr;}
+    .subject-list-grid{grid-template-columns:1fr 1fr;}
+    .step-row{grid-template-columns:1fr 1fr;}
+    .checklist{grid-template-columns:1fr;}
+    .mini-banner{flex-direction:column;text-align:center;}
+  }
+  @media (max-width:520px){
+    .feat-grid{grid-template-columns:1fr;}
+    .subject-list-grid{grid-template-columns:1fr;}
+    .step-row{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Resources page extras ---------- */
+  .why-grid-5{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .step-row-6{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+
+  .scheme-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .scheme-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .scheme-card:hover{transform:translateY(-3px);box-shadow:0 22px 36px -22px rgba(10,22,40,0.22);border-color:#D3E0FA;}
+  .scheme-num{
+    font-family:var(--sora);font-weight:800;font-size:0.72rem;letter-spacing:0.06em;
+    color:var(--blue-bright);background:#EAF0FF;display:inline-block;
+    padding:5px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  .scheme-preview{
+    width:100%;aspect-ratio:16/9;border-radius:12px;
+    background:#F7F9FC;border:1px solid var(--line);overflow:hidden;
+    margin-bottom:18px;
+  }
+  .scheme-preview img{width:100%;height:100%;object-fit:cover;display:block;}
+  .scheme-card h3{font-family:var(--sora);font-weight:700;font-size:1.08rem;margin:0 0 10px;color:var(--navy-deep);}
+  .scheme-card p{font-size:0.9rem;line-height:1.6;color:var(--ink-soft);margin:0 0 20px;}
+  .scheme-btn-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .scheme-btn-row .cta-btn.outline{color:var(--navy-deep);border-color:var(--line);padding:10px 18px;font-size:0.84rem;}
+  .scheme-btn-row .cta-btn{padding:10px 18px;font-size:0.84rem;}
+
+  .guide-list{list-style:none;padding:0;margin:26px auto 0;max-width:520px;display:flex;flex-direction:column;gap:12px;}
+  .guide-list li{
+    display:flex;align-items:center;gap:10px;font-size:0.94rem;color:var(--ink-soft);
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;
+  }
+  .guide-list li::before{content:"→";color:var(--blue-bright);font-weight:800;flex-shrink:0;}
+
+  .search-box{max-width:560px;margin:0 auto;}
+  .search-input{
+    width:100%;padding:15px 20px;border-radius:999px;border:1px solid var(--line);
+    font-family:var(--dm);font-size:0.95rem;color:var(--ink);background:#fff;
+    outline:none;transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .search-input:focus{border-color:var(--blue-bright);box-shadow:0 0 0 4px rgba(37,99,235,0.12);}
+  .filter-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;}
+  .filter-chip{
+    font-family:var(--sora);font-weight:600;font-size:0.82rem;color:var(--ink-soft);
+    background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    cursor:pointer;transition:all .15s ease;
+  }
+  .filter-chip.active{background:var(--blue-bright);color:#fff;border-color:var(--blue-bright);}
+  .filter-chip:hover:not(.active){border-color:var(--blue-bright);color:var(--blue-bright);}
+
+  @media (max-width:860px){
+    .why-grid-5{grid-template-columns:1fr 1fr;}
+    .step-row-6{grid-template-columns:1fr 1fr;}
+    .scheme-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:520px){
+    .why-grid-5{grid-template-columns:1fr;}
+    .step-row-6{grid-template-columns:1fr;}
+  }
+</style>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><img src="logo.png" alt="Zenova Study" class="logo-mark-img">Zenova Study</a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="jamb-2027.html">JAMB 2027</a>
+      <a href="classes.html">Classes</a>
+      <a href="#top">Resources</a>
+      <a href="competition.html">Competition</a>
+      <a href="study-hub.html">Study Hub</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="index.html">Home</a>
+    <a href="jamb-2027.html">JAMB 2027</a>
+    <a href="classes.html">Classes</a>
+    <a href="#top">Resources</a>
+    <a href="competition.html">Competition</a>
+    <a href="study-hub.html">Study Hub</a>
+    <a href="about.html">About</a>
+    <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="dot"></span>Resources</div>
+    <h1>Everything You Need to Study Smarter</h1>
+    <p class="lead">Access free study resources designed to help you stay organized, understand your subjects, practise effectively, and prepare with confidence.<br><br>From schemes of work and study materials to past questions and revision resources, Zenova gives you the tools to make your preparation easier.</p>
+    <div class="hero-ctas">
+      <a href="#scheme-of-work" class="cta-btn">Explore Resources</a>
+      <a href="#scheme-of-work" class="cta-btn outline">View Scheme of Work</a>
+    </div>
+    <div class="badge-row">Free Resources <span class="sep">·</span> Easy to Access <span class="sep">·</span> Built for Students</div>
+  </div>
+</section>
+
+<!-- RESOURCE CATEGORIES -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Resource Categories</span>
+      <h2>Find What You Need</h2>
+    </div>
+    <div class="resource-grid">
+      <div class="resource-card"><h3>📚 Scheme of Work</h3><p>Know what to study and follow a clear path throughout your preparation.</p></div>
+      <div class="resource-card"><h3>📝 Past Questions</h3><p>Practise with examination-style questions and strengthen your understanding.</p></div>
+      <div class="resource-card"><h3>📖 Study Notes</h3><p>Access useful notes to help you understand and revise important topics.</p></div>
+      <div class="resource-card"><h3>🧠 Revision Materials</h3><p>Quickly review important concepts before tests and examinations.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEME OF WORK INTRO -->
+<section id="scheme-of-work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Scheme of Work</span>
+      <h2>Plan Your Study. Stay on Track.</h2>
+      <p>Not sure what to study next? The Zenova Study Schemes of Work help you organize your preparation by giving you a structured overview of the topics you need to cover. Instead of studying randomly, use the scheme of work to understand what you need to learn, plan your study sessions, and track your progress.</p>
+    </div>
+    <div class="section-head">
+      <span class="section-eyebrow">Why Use a Scheme of Work?</span>
+    </div>
+    <div class="why-grid-5">
+      <div class="why-item"><div class="why-num">01</div><h3>Know What to Study</h3><p>See the topics you need to cover across your subjects.</p></div>
+      <div class="why-item"><div class="why-num">02</div><h3>Stay Organized</h3><p>Follow a structured learning path instead of studying randomly.</p></div>
+      <div class="why-item"><div class="why-num">03</div><h3>Track Your Progress</h3><p>Mark topics as you complete them and see how far you've come.</p></div>
+      <div class="why-item"><div class="why-num">04</div><h3>Plan Your Revision</h3><p>Identify topics you've completed and areas you still need to revise.</p></div>
+      <div class="why-item"><div class="why-num">05</div><h3>Prepare Consistently</h3><p>Break your preparation into manageable topics and study sessions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEMES OF WORK LIST -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Zenova Study Schemes of Work</span>
+      <h2>Choose Your Study Path</h2>
+      <p>We have organized schemes of work for different academic groups to help you plan your preparation.</p>
+    </div>
+    <div class="scheme-grid">
+      <div class="scheme-card">
+        <div class="scheme-num">01 — SCIENCE</div>
+        <div class="scheme-preview"><img src="1.png" alt="Zenova Study Science Scheme of Work preview"></div>
+        <h3>Zenova Study Science Scheme of Work</h3>
+        <p>A structured scheme of work designed to help Science students organize their preparation across their relevant subjects. Use it to plan your study, keep track of topics, and make sure you cover the areas you need to prepare.</p>
+        <div class="scheme-btn-row">
+          <a href="Zenova Study JAMB 2027 Science Scheme of Work PDF.pdf" download class="cta-btn">Download ↓</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-num">02 — ARTS</div>
+        <div class="scheme-preview"><img src="2.png" alt="Zenova Study Arts Scheme of Work preview"></div>
+        <h3>Zenova Study Arts Scheme of Work</h3>
+        <p>A structured study guide designed to help Arts and Humanities students organize their preparation and work through their subjects systematically. Use it to plan study sessions, monitor completed topics, and prepare for revision.</p>
+        <div class="scheme-btn-row">
+          <a href="Zenova Study JAMB 2027 Art Scheme Of Work.pdf" download class="cta-btn">Download ↓</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-num">03 — COMMERCIAL</div>
+        <div class="scheme-preview"><img src="3.png" alt="Zenova Study Commercial Scheme of Work preview"></div>
+        <h3>Zenova Study Commercial Scheme of Work</h3>
+        <p>A structured scheme designed to help Commercial students plan their learning and stay organized throughout their examination preparation. Work through your subjects systematically and keep track of the topics you've covered.</p>
+        <div class="scheme-btn-row">
+          <a href="Zenova_Study_JAMB 2027 Commercial Scheme of Work PDF.pdf" download class="cta-btn">Download ↓</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-num">04 — PHYSICS FORMULA PDF</div>
+        <div class="scheme-preview"><img src="4.png" alt="Zenova Physics Formula PDF preview"></div>
+        <h3>Zenova Physics Formula PDF</h3>
+        <p>A quick-reference formula sheet covering the key Physics formulas you need for JAMB. Preorder now to lock in launch pricing.</p>
+        <div class="scheme-num" style="background:#FFF3DE;color:#B5730C;margin-bottom:14px;">Use code ZENOVA20 for a discount</div>
+        <div class="scheme-btn-row">
+          <a href="https://wa.me/2347073607977?text=I%20want%20to%20buy%20Zenova%20Physics%20formula%20pdf" class="cta-btn">Preorder Now →</a>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</section>
+
+<!-- HOW TO USE THE SCHEME -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">How to Use the Scheme of Work</span>
+      <h2>Turn Your Scheme Into a Study Plan</h2>
+      <p>Downloading the PDF is only the first step.</p>
+    </div>
+    <div class="step-row-6">
+      <div class="step-card"><div class="why-num">01</div><h3>Download</h3><p>Get the scheme of work for your academic category.</p></div>
+      <div class="step-card"><div class="why-num">02</div><h3>Review</h3><p>Look through the subjects and topics you need to cover.</p></div>
+      <div class="step-card"><div class="why-num">03</div><h3>Plan</h3><p>Create a realistic study schedule around the topics.</p></div>
+      <div class="step-card"><div class="why-num">04</div><h3>Study</h3><p>Use Zenova classes, notes, and other resources to learn each topic.</p></div>
+      <div class="step-card"><div class="why-num">05</div><h3>Practise</h3><p>Test your understanding with questions and assessments.</p></div>
+      <div class="step-card"><div class="why-num">06</div><h3>Track</h3><p>Mark completed topics and return to areas where you need more practice.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY NOTES -->
+<section class="paper">
+  <div class="wrap">
+    <div class="mini-banner">
+      <div class="mb-text">
+        <h3>Study Notes</h3>
+        <p>Need more than a list of topics? Explore study notes designed to help you understand important concepts and revise more effectively.</p>
+      </div>
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Explore Study Notes →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAST QUESTIONS -->
+<section>
+  <div class="wrap">
+    <div class="mini-banner">
+      <div class="mb-text">
+        <h3>Past Questions</h3>
+        <p>One of the best ways to strengthen your preparation is to practise. Use past questions and practice materials to become familiar with examination-style questions and identify areas that need more attention.</p>
+      </div>
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Explore Past Questions →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVISION MATERIALS -->
+<section class="paper">
+  <div class="wrap">
+    <div class="mini-banner">
+      <div class="mb-text">
+        <h3>Revision Materials</h3>
+        <p>When examination day gets closer, you'll need resources that help you review efficiently. Explore concise revision materials, summaries, formulas, key concepts, and other resources to support your final preparation.</p>
+      </div>
+      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Explore Revision Materials →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY GUIDES -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Study Guides</span>
+      <h2>Make Your Preparation More Organized</h2>
+      <p>Not sure how to structure your study time? Access helpful guides covering topics such as:</p>
+    </div>
+    <ul class="guide-list">
+      <li>How to create a study timetable</li>
+      <li>How to study effectively</li>
+      <li>How to prepare for JAMB</li>
+      <li>How to use past questions</li>
+      <li>How to revise effectively</li>
+      <li>How to avoid last-minute preparation</li>
+    </ul>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="#" class="section-link">Explore Study Guides
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCE SEARCH -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Resource Search</span>
+      <h2>Looking for Something Specific?</h2>
+      <p>Make it easy to find exactly what you need.</p>
+    </div>
+    <div class="search-box">
+      <input type="text" class="search-input" placeholder="Search resources...">
+      <div class="filter-row">
+        <button class="filter-chip active">All Resources</button>
+        <button class="filter-chip">Scheme of Work</button>
+        <button class="filter-chip">Study Notes</button>
+        <button class="filter-chip">Past Questions</button>
+        <button class="filter-chip">Revision</button>
+        <button class="filter-chip">Study Guides</button>
+        <button class="filter-chip">JAMB Resources</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECTED TO ZENOVA -->
+<section id="study-hub">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Connected to Zenova</span>
+      <h2>Your Resources Are Just the Beginning</h2>
+      <p>Your preparation doesn't stop after downloading a PDF. Use the rest of the Zenova ecosystem to turn your resources into real learning.</p>
+    </div>
+    <div class="flow-vert">
+      <div class="flow-step"><div class="fs-icon">📖</div><div class="fs-label">Resources</div><div class="fs-sub">Learn</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="fs-icon">🎓</div><div class="fs-label">Classes</div><div class="fs-sub">Understand</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="fs-icon">📚</div><div class="fs-label">Study Hub</div><div class="fs-sub">Practise</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="fs-icon">🧪</div><div class="fs-label">Assessments</div><div class="fs-sub">Test Yourself</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" id="competition"><div class="fs-icon">🏆</div><div class="fs-label">Competition</div><div class="fs-sub">Challenge Yourself</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="fs-icon">📈</div><div class="fs-label">Improve</div><div class="fs-sub">Keep Growing</div></div>
+    </div>
+    <div class="hero-ctas" style="justify-content:center;margin-top:32px;">
+      <a href="classes.html" class="cta-btn">Explore Classes →</a>
+      <a href="study-hub.html" class="cta-btn outline" style="color:var(--navy-deep);border-color:var(--line);">Open Study Hub →</a>
+      <a href="competition.html" class="cta-btn outline" style="color:var(--navy-deep);border-color:var(--line);">Enter Competition →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FREE FOR STUDENTS -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Free for Students</span>
+      <h2>Learning Resources Without the Cost</h2>
+      <p>Zenova Study resources are designed to make quality educational materials more accessible to students. Download the resources you need, study at your own pace, and combine them with Zenova's free classes and learning tools.</p>
+      <div class="flow-line" style="font-size:0.92rem;">No complicated plans. Just useful resources for your preparation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">FAQ</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q">Are the Zenova Study resources free?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. The resources featured on this page are provided free of charge unless otherwise stated.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I download the Scheme of Work?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Each available Scheme of Work has a download option.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Which Scheme of Work should I download?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Choose the scheme that matches your academic category: Science, Arts, or Commercial.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I view the PDF before downloading it?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. The PDF preview image allows you to see the resource before opening or downloading it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I use the Scheme of Work with Zenova Classes?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Absolutely. Use the Scheme of Work to know what to study, then use Zenova Classes to learn the topics.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I use the resources with the Study Hub?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. The resources are designed to work alongside the wider Zenova learning ecosystem.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="paper">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Ready to Start Studying?</h2>
+      <p>Choose a resource, download what you need, and start preparing today.</p>
+      <div class="cta-row">
+        <a href="#scheme-of-work" class="cta-btn">Explore Resources →</a>
+        <a href="#scheme-of-work" class="cta-btn outline">Download Scheme of Work →</a>
+        <a href="classes.html" class="cta-btn outline">Start Learning Free →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
+        <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="about.html#founder">Meet the Founder</a></li>
+          <li><a href="#">Support Zenova</a></li>
+          <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <ul class="social-list">
+         <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I"><span class="icon">💬</span>WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU"><span class="icon">✈️</span>Classes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zenova Study. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item){
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if (isOpen){
+        item.classList.remove('open');
+        a.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Resource filter chips
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
