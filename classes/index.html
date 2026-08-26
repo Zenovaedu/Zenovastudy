@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Classes — Zenova Study</title>
-<meta name="description" content="Free classes from Zenova Study — the JAMB 2027 Community class, led by guest tutors, completely free.">
+<title>Competition — Zenova Study</title>
+<meta name="description" content="The Zenova JAMB Competition — register now and test your knowledge against other students. Competition day: August 29, 2026.">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -290,9 +290,21 @@
   .subject-item p{font-size:0.84rem;line-height:1.55;color:var(--ink-soft);margin:0;}
   .fine-print{font-size:0.8rem;line-height:1.6;color:var(--ink-faint);font-style:italic;max-width:680px;margin:22px auto 0;text-align:center;}
 
+  .step-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .step-card{padding:4px;}
+  .step-card .why-num{background:var(--blue-bright);color:#fff;}
+
   .checklist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;max-width:600px;margin:28px auto 0;}
   .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--ink-soft);}
   .checklist li::before{content:"✓";color:var(--blue-bright);font-weight:800;flex-shrink:0;}
+
+  .mini-banner{
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:40px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+    background:#fff;
+  }
+  .mini-banner .mb-text h3{font-family:var(--sora);font-weight:700;font-size:1.15rem;margin:0 0 8px;color:var(--navy-deep);}
+  .mini-banner .mb-text p{font-size:0.92rem;color:var(--ink-soft);margin:0;max-width:440px;}
 
   .faq-item{border-bottom:1px solid var(--line);}
   .faq-q{
@@ -321,6 +333,7 @@
     .subject-list-grid{grid-template-columns:1fr 1fr;}
     .step-row{grid-template-columns:1fr 1fr;}
     .checklist{grid-template-columns:1fr;}
+    .mini-banner{flex-direction:column;text-align:center;}
   }
   @media (max-width:520px){
     .feat-grid{grid-template-columns:1fr;}
@@ -328,46 +341,47 @@
     .step-row{grid-template-columns:1fr;}
   }
 
-  /* ---------- Classes page extras ---------- */
-  .badge-row{
-    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;
-    font-family:var(--sora);font-weight:600;font-size:0.8rem;color:var(--ink-faint);
+  /* ---------- Competition page extras ---------- */
+  .status-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--sora);font-weight:700;font-size:0.8rem;letter-spacing:0.04em;
+    text-transform:uppercase;color:#1FAE5C;background:rgba(31,174,92,0.12);
+    border:1px solid rgba(31,174,92,0.3);padding:8px 16px;border-radius:999px;margin-bottom:22px;
   }
-  .badge-row .sep{color:var(--line);}
+  .status-badge .pulse{width:8px;height:8px;border-radius:50%;background:#1FAE5C;animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,174,92,0.5);}70%{box-shadow:0 0 0 8px rgba(31,174,92,0);}100%{box-shadow:0 0 0 0 rgba(31,174,92,0);}}
 
-  .schedule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-  .schedule-card{
-    position:relative;
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:24px 22px;display:flex;flex-direction:column;gap:6px;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, opacity .18s ease;
+  .date-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:24px 0 30px;}
+  .date-chip{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);
+    border-radius:14px;padding:14px 22px;text-align:center;
   }
-  .schedule-card:hover{transform:translateY(-3px);box-shadow:0 20px 34px -20px rgba(10,22,40,0.2);border-color:#D3E0FA;}
-  .schedule-card .subj{font-family:var(--sora);font-weight:700;font-size:1.05rem;color:var(--navy-deep);}
-  .schedule-card .tag{font-size:0.82rem;color:var(--ink-faint);}
-  .schedule-card .time{font-family:var(--sora);font-weight:600;font-size:0.86rem;color:var(--blue-bright);margin:6px 0 12px;}
-  .schedule-card .join{
-    font-family:var(--sora);font-weight:600;font-size:0.84rem;color:#fff;
-    background:var(--blue-bright);border-radius:999px;padding:9px 16px;text-align:center;
-  }
-  .schedule-card.next{border-color:var(--blue-bright);box-shadow:0 16px 30px -18px rgba(37,99,235,0.4);}
-  .schedule-card.next::before{
-    content:"Next Session";position:absolute;top:-11px;left:18px;
-    background:var(--amber);color:#fff;font-family:var(--sora);font-weight:700;
-    font-size:0.66rem;letter-spacing:0.04em;text-transform:uppercase;
-    padding:4px 10px;border-radius:999px;
-  }
-  .schedule-card.past{opacity:0.55;}
-  .schedule-card.past:hover{transform:none;box-shadow:none;border-color:var(--line);}
-  .schedule-card.past .join{background:var(--ink-faint);pointer-events:none;cursor:default;}
+  .date-chip .dc-label{font-family:var(--sora);font-weight:600;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:#8FA3CC;margin-bottom:4px;}
+  .date-chip .dc-value{font-family:var(--sora);font-weight:700;font-size:0.95rem;color:#fff;}
 
-  .schedule-foot-note{font-size:0.8rem;line-height:1.6;color:var(--ink-faint);font-style:italic;max-width:680px;margin:22px auto 0;text-align:center;}
+  .dates-table{width:100%;border-collapse:collapse;max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .dates-table th{
+    font-family:var(--sora);font-weight:700;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;
+    color:var(--ink-faint);text-align:left;padding:16px 22px;background:var(--paper);border-bottom:1px solid var(--line);
+  }
+  .dates-table td{padding:18px 22px;font-size:0.95rem;color:var(--navy-deep);border-bottom:1px solid var(--line);}
+  .dates-table tr:last-child td{border-bottom:none;}
+  .dates-table td.event{font-family:var(--sora);font-weight:600;}
+  .dates-table td.date{font-family:var(--sora);font-weight:700;color:var(--blue-bright);text-align:right;}
+
+  .prep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .prep-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;}
+  .prep-card h3{font-family:var(--sora);font-weight:700;font-size:0.98rem;margin:0 0 8px;color:var(--navy-deep);}
+  .prep-card p{font-size:0.86rem;line-height:1.55;color:var(--ink-soft);margin:0;}
 
   @media (max-width:860px){
-    .schedule-grid{grid-template-columns:1fr 1fr;}
+    .date-row{gap:16px;}
+    .prep-grid{grid-template-columns:1fr 1fr;}
+    .dates-table th, .dates-table td{padding:14px 16px;font-size:0.86rem;}
   }
   @media (max-width:520px){
-    .schedule-grid{grid-template-columns:1fr;}
+    .prep-grid{grid-template-columns:1fr;}
+    .date-row{flex-direction:column;align-items:center;}
   }
 </style>
 <body>
@@ -378,9 +392,9 @@
     <nav class="desktop-nav">
       <a href="/">Home</a>
       <a href="/jamb-2027/">JAMB 2027</a>
-      <a href="#top">Classes</a>
+      <a href="/classes/">Classes</a>
       <a href="/resources/">Resources</a>
-      <a href="/competition/">Competition</a>
+      <a href="#top">Competition</a>
       <a href="/study-hub/">Study Hub</a>
       <a href="/about/">About</a>
     </nav>
@@ -394,9 +408,9 @@
   <div class="mobile-panel" id="mobilePanel">
     <a href="/">Home</a>
     <a href="/jamb-2027/">JAMB 2027</a>
-    <a href="#top">Classes</a>
+    <a href="/classes/">Classes</a>
     <a href="/resources/">Resources</a>
-    <a href="/competition/">Competition</a>
+    <a href="#top">Competition</a>
     <a href="/study-hub/">Study Hub</a>
     <a href="/about/">About</a>
     <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
@@ -406,129 +420,90 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap hero-inner">
-    <div class="eyebrow"><span class="dot"></span>Classes</div>
-    <h1>Learn for Free. Prepare With Confidence.</h1>
-    <p class="lead"><strong>Access quality classes designed to help you understand, practise, and prepare for JAMB 2027 — completely free.</strong><br><br>Learn from structured lessons, practise what you learn, and build the confidence you need for your examination.</p>
+    <div class="eyebrow"><span class="dot"></span>🏆 The Zenova JAMB Competition</div>
+    <h1>Think you know JAMB? Now prove it.</h1>
+    <p class="lead">Challenge yourself, test your knowledge, and compete with other students in the Zenova JAMB Competition.</p>
+    <div class="status-badge"><span class="pulse"></span>Registration Is Now Open</div>
+    <div class="date-row">
+      <div class="date-chip"><div class="dc-label">Registration</div><div class="dc-value">Aug 14 – Aug 24, 2026</div></div>
+      <div class="date-chip"><div class="dc-label">Competition Day</div><div class="dc-value">August 29, 2026</div></div>
+    </div>
     <div class="hero-ctas">
-      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Explore Free Classes</a>
-      <a href="#live-classes" class="cta-btn outline">View Class Schedule</a>
+      <a href="https://compete.zenovastudy.com.ng/" class="cta-btn">Register Now →</a>
     </div>
-    <div class="badge-row">100% Free <span class="sep">·</span> Learn at Your Pace <span class="sep">·</span> Prepare Smarter</div>
   </div>
 </section>
 
-<!-- UTME TALKS SCHEDULE -->
-<section id="live-classes">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">🎤 UTME Talks</span>
-      <h2>Our Biweekly Live Talk Series</h2>
-      <p>Every two weeks, a guest speaker joins the JAMB 2027 Community to break down a topic that matters for your UTME prep — free to attend.</p>
-    </div>
-    <div class="schedule-grid">
-      <div class="schedule-card" data-date="2026-09-05">
-        <span class="tag">UTME Talks 1</span>
-        <span class="subj">How to Start Preparing for UTME 2027</span>
-        <span class="time">Sept 5</span>
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-09-19">
-        <span class="tag">UTME Talks 2</span>
-        <span class="subj">How to Score 300+ in UTME</span>
-        <span class="time">Sept 19</span>
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-10-03">
-        <span class="tag">UTME Talks 3</span>
-        <span class="subj">Common Mistakes UTME Candidates Make</span>
-        <span class="time">Oct 3</span>
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-10-17">
-        <span class="tag">UTME Talks 4</span>
-        <span class="subj">How to Create a Winning UTME Study Plan</span>
-        <span class="time">Oct 17</span>
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-10-31">
-        <span class="tag">UTME Talks 5</span>
-        <span class="subj">How to Balance School &amp; UTME Preparation</span>
-        <span class="time">Oct 31</span>
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-11-14">
-        <span class="tag">UTME Talks 6</span>
-        <span class="subj">How to Improve Your Weakest Subject</span>
-        <span class="time">Nov 14</span>
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="join">Join →</a>
-      </div>
-    </div>
-    <p class="schedule-foot-note">All sessions hold inside the JAMB 2027 Community on WhatsApp — completely free to join.</p>
-  </div>
-</section>
-
-<!-- INTRODUCTION -->
+<!-- ABOUT -->
 <section class="paper">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">Introduction</span>
-      <h2>Quality Learning Should Be Accessible</h2>
-      <p>You shouldn't have to pay to get access to quality learning. Zenova Classes provides free educational lessons designed to help students understand difficult topics, strengthen their knowledge, and prepare more effectively for JAMB and other examinations. Whether you're starting your preparation or revising what you've already learned, you can learn with Zenova without worrying about class fees.</p>
-      <div class="flow-line" style="font-size:0.92rem;">No tuition fees. No complicated plans. Just learning.</div>
+      <span class="section-eyebrow">About the Competition</span>
+      <h2>Study. Compete. Stand Out.</h2>
+      <p>The Zenova JAMB Competition is an opportunity for students to put their knowledge to the test in a competitive academic environment. Prepare yourself, answer challenging questions, and see how you perform against other participants.</p>
     </div>
   </div>
 </section>
 
-<!-- WHY ZENOVA CLASSES -->
+<!-- HOW IT WORKS -->
 <section>
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">Why Zenova Classes?</span>
-      <h2>Everything You Need to Learn Better</h2>
+      <span class="section-eyebrow">How It Works</span>
+      <h2>Four Steps to Competition Day</h2>
     </div>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon">🎓</div><h3>Completely Free</h3><p>Access Zenova classes without paying tuition or subscription fees.</p></div>
-      <div class="feat-card"><div class="feat-icon">👨‍🏫</div><h3>Learn From Guest Tutors</h3><p>Get lessons designed and delivered by tutors who understand the subjects they teach.</p></div>
-      <div class="feat-card"><div class="feat-icon">📚</div><h3>Structured Materials</h3><p>Follow organized lessons and supporting materials that help you move from one topic to the next.</p></div>
-      <div class="feat-card"><div class="feat-icon">📝</div><h3>Practice & Assessments</h3><p>Reinforce every lesson with questions, exercises, and assessments that test your understanding.</p></div>
-      <div class="feat-card"><div class="feat-icon">🔄</div><h3>Revise At Your Pace</h3><p>Review lessons and revisit difficult topics whenever you need to.</p></div>
-      <div class="feat-card"><div class="feat-icon">📊</div><h3>Track Your Progress</h3><p>Monitor how you're improving and keep your prep focused on what matters.</p></div>
+    <div class="step-row">
+      <div class="step-card"><div class="why-num">01</div><h3>Register</h3><p>Complete your registration before August 24, 2026.</p></div>
+      <div class="step-card"><div class="why-num">02</div><h3>Prepare</h3><p>Use Zenova Classes, Resources, and the Study Hub to prepare.</p></div>
+      <div class="step-card"><div class="why-num">03</div><h3>Compete</h3><p>Join the competition on August 29, 2026.</p></div>
+      <div class="step-card"><div class="why-num">04</div><h3>Challenge Yourself</h3><p>Test your knowledge and see how you perform.</p></div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- IMPORTANT DATES -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Important Dates</span>
+      <h2>Mark Your Calendar</h2>
+    </div>
+    <table class="dates-table">
+      <thead>
+        <tr><th>Event</th><th style="text-align:right;">Date</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="event">🟢 Registration Opens</td><td class="date">August 14, 2026</td></tr>
+        <tr><td class="event">🔴 Registration Closes</td><td class="date">August 24, 2026</td></tr>
+        <tr><td class="event">🏆 Competition Day</td><td class="date">August 29, 2026</td></tr>
+      </tbody>
+    </table>
+    <div class="section-head" style="margin-top:28px;">
+      <p><strong>Don't wait until registration closes.</strong></p>
+      <div class="hero-ctas" style="justify-content:center;">
+        <a href="https://compete.zenovastudy.com.ng/" class="cta-btn">Register Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREPARE WITH ZENOVA -->
 <section>
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">FAQ</span>
-      <h2>Frequently Asked Questions</h2>
+      <span class="section-eyebrow">Prepare With Zenova</span>
+      <h2>Get Ready Before Competition Day</h2>
+      <p>Use the Zenova ecosystem to prepare:</p>
     </div>
-    <div class="faq-wrap">
-      <div class="faq-item">
-        <button class="faq-q">Are Zenova classes really free?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. Zenova's classes are provided free of charge.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Do I need to pay a subscription to attend classes?<span class="plus">+</span></button>
-        <div class="faq-a"><p>No. There is no tuition fee required to access the free classes.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Which class is available right now?<span class="plus">+</span></button>
-        <div class="faq-a"><p>The JAMB 2027 Community is currently our one active class. We'll add more classes here as they open.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Is the class live or recorded?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Sessions are led by guest tutors. We'll clearly indicate whether each session is live, recorded, or both once scheduled.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I practise after attending a class?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. You can continue your preparation through Zenova's Study Hub, practice resources, and assessments.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Do I need to be preparing for JAMB to join?<span class="plus">+</span></button>
-        <div class="faq-a"><p>The JAMB 2027 Community is focused on JAMB preparation. As Zenova grows, we plan to open classes for other academic goals too.</p></div>
-      </div>
+    <div class="prep-grid">
+      <div class="prep-card"><h3>🎓 Classes</h3><p>Learn and strengthen your understanding.</p></div>
+      <div class="prep-card"><h3>📚 Resources</h3><p>Review useful study materials.</p></div>
+      <div class="prep-card"><h3>🧠 Study Hub</h3><p>Practise and test yourself.</p></div>
+      <div class="prep-card"><h3>🏆 Competition</h3><p>Put your preparation to the test.</p></div>
+    </div>
+    <div class="hero-ctas" style="justify-content:center;margin-top:32px;">
+      <a href="/jamb-2027/" class="cta-btn">Explore JAMB 2027 →</a>
+      <a href="/study-hub/" class="cta-btn outline" style="color:var(--navy-deep);border-color:var(--line);">Open Study Hub →</a>
     </div>
   </div>
 </section>
@@ -537,13 +512,12 @@
 <section class="paper">
   <div class="wrap">
     <div class="final-cta">
-      <h2>Your Next Class Is Free.</h2>
-      <p>Don't let the cost of learning stand between you and your goals. Join the JAMB 2027 Community and start learning today.</p>
-      <div class="tagline" style="margin-bottom:22px;">Learn. Practise. Improve.</div>
+      <h2>Your Challenge Starts Here.</h2>
+      <p>Registration is open, but only until August 24, 2026. Don't miss your chance to test your knowledge and compete with other students.</p>
       <div class="cta-row">
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join the Community →</a>
-        <a href="#live-classes" class="cta-btn outline">Learn More →</a>
+        <a href="https://compete.zenovastudy.com.ng/" class="cta-btn">Register for the Competition →</a>
       </div>
+      <div class="tagline" style="margin-top:24px;">Competition Date: August 29, 2026</div>
     </div>
   </div>
 </section>
@@ -558,17 +532,17 @@
       <div>
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="/about/">About Us</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/about/#founder">Meet the Founder</a></li>
-          <li><a href="/support/">Support Zenova</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="about.html#founder">Meet the Founder</a></li>
+          <li><a href="#">Support Zenova</a></li>
           <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
         </ul>
       </div>
       <div>
         <h4>Follow Us</h4>
         <ul class="social-list">
-              <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
+         <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
           <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
           <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
           <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
@@ -579,8 +553,8 @@
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="/privacy/">Privacy Policy</a></li>
-          <li><a href="/terms/">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -605,54 +579,8 @@
       hamburgerBtn.setAttribute('aria-expanded', 'false');
     });
   });
-
-  // UTME Talks — mark past sessions and flag the next upcoming one
-  (function(){
-    const cards = Array.from(document.querySelectorAll('.schedule-card[data-date]'));
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    let nextCard = null;
-    cards.forEach(card => {
-      const sessionDate = new Date(card.dataset.date + 'T00:00:00');
-      if (sessionDate < today){
-        card.classList.add('past');
-        const join = card.querySelector('.join');
-        if (join){
-          join.textContent = 'Completed';
-          join.removeAttribute('href');
-          join.setAttribute('tabindex', '-1');
-        }
-      } else if (!nextCard){
-        nextCard = card;
-      }
-    });
-    if (nextCard) nextCard.classList.add('next');
-  })();
-
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const q = item.querySelector('.faq-q');
-    const a = item.querySelector('.faq-a');
-    q.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(other => {
-        if (other !== item){
-          other.classList.remove('open');
-          other.querySelector('.faq-a').style.maxHeight = null;
-        }
-      });
-      if (isOpen){
-        item.classList.remove('open');
-        a.style.maxHeight = null;
-      } else {
-        item.classList.add('open');
-        a.style.maxHeight = a.scrollHeight + 'px';
-      }
-    });
-  });
 </script>
 
-</body>
-</html>
+
 
 
