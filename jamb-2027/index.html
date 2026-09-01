@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JAMB 2027 — Zenova Study</title>
-<meta name="description" content="Prepare for JAMB 2027 with Zenova Study — structured lessons, practice questions, mock tests, and progress tracking in one place.">
+<title>JAMB Bootcamp 2027 — Zenova Study</title>
+<meta name="description" content="Join the Zenova Study JAMB Bootcamp 2027 — expert-led lessons, JAMB past questions, regular CBT practice, weekly tests and revision. Starting October 2026. Limited spaces.">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -320,6 +320,63 @@
   .final-cta .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
   .final-cta .cta-btn.outline{background:rgba(255,255,255,0.06);color:#fff;border-color:rgba(255,255,255,0.28);}
 
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;}
+  .pricing-card{
+    position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px 28px 28px;display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .pricing-card:hover{transform:translateY(-3px);box-shadow:0 22px 36px -22px rgba(10,22,40,0.22);}
+  .pricing-card.featured{border-color:var(--blue-bright);box-shadow:0 22px 40px -20px rgba(37,99,235,0.28);}
+  .pricing-tag{
+    font-family:var(--sora);font-weight:700;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--blue-bright);margin-bottom:10px;
+  }
+  .pricing-card h3{font-family:var(--sora);font-weight:800;font-size:1.15rem;margin:0 0 4px;color:var(--navy-deep);}
+  .pricing-price{font-family:var(--sora);font-weight:800;font-size:2rem;color:var(--navy-deep);margin:10px 0 2px;}
+  .pricing-price span{font-family:var(--dm);font-weight:400;font-size:0.9rem;color:var(--ink-faint);}
+  .pricing-save{
+    display:inline-block;font-family:var(--sora);font-weight:700;font-size:0.75rem;color:#8A5A00;
+    background:#FFF3D2;padding:4px 10px;border-radius:999px;margin-bottom:14px;width:fit-content;
+  }
+  .pricing-list{list-style:none;padding:0;margin:14px 0 20px;display:flex;flex-direction:column;gap:10px;flex-grow:1;}
+  .pricing-list li{display:flex;align-items:flex-start;gap:9px;font-size:0.88rem;line-height:1.5;color:var(--ink-soft);}
+  .pricing-list li::before{content:"✓";color:var(--blue-bright);font-weight:800;flex-shrink:0;}
+  .pricing-ebook{
+    font-family:var(--sora);font-weight:700;font-size:0.8rem;color:var(--navy-deep);
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 12px;text-align:center;margin-bottom:16px;
+  }
+  .pricing-badge{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--amber);color:#12275A;font-family:var(--sora);font-weight:800;font-size:0.72rem;
+    letter-spacing:0.04em;text-transform:uppercase;padding:6px 16px;border-radius:999px;
+    box-shadow:0 8px 16px -6px rgba(245,165,36,0.5);
+  }
+
+  /* Early bird banner */
+  .earlybird-banner{
+    background:linear-gradient(135deg,#12275A,var(--navy-deep));
+    border-radius:24px;padding:40px 36px;display:flex;align-items:center;justify-content:space-between;
+    gap:24px;flex-wrap:wrap;color:#fff;
+  }
+  .earlybird-banner .eb-text h3{font-family:var(--sora);font-weight:800;font-size:1.3rem;margin:0 0 8px;}
+  .earlybird-banner .eb-text p{color:#C4D2F0;font-size:0.94rem;line-height:1.6;margin:0;max-width:440px;}
+  .earlybird-banner .eb-price{text-align:center;flex-shrink:0;}
+  .earlybird-banner .eb-price .amount{font-family:var(--sora);font-weight:800;font-size:2.1rem;color:var(--amber);}
+  .earlybird-banner .eb-price .note{font-size:0.78rem;color:#C4D2F0;}
+
+  .phone-cta{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--sora);font-weight:700;
+    font-size:1.05rem;color:var(--navy-deep);background:var(--paper);border:1px solid var(--line);
+    padding:14px 24px;border-radius:14px;
+  }
+
+  @media (max-width:860px){
+    .pricing-grid{grid-template-columns:1fr;}
+    .earlybird-banner{flex-direction:column;text-align:center;}
+    .earlybird-banner .eb-text p{max-width:none;}
+  }
+
   @media (max-width:860px){
     .feat-grid{grid-template-columns:1fr 1fr;}
     .subject-list-grid{grid-template-columns:1fr 1fr;}
@@ -339,256 +396,133 @@
   <div class="wrap nav-row">
     <a href="/" class="logo"><img src="logo.png" alt="Zenova Study" class="logo-mark-img">Zenova Study</a>
     <nav class="desktop-nav">
-      <a href="/">Home</a>
-      <a href="/jamb-2027/">JAMB 2027</a>
-      <a href="/classes/">Classes</a>
-      <a href="/resources/">Resources</a>
-      <a href="/competition/">Competition</a>
-      <a href="/study-hub/">Study Hub</a>
-      <a href="/about/">About</a>
+      <a href="#top">Home</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <div class="header-actions">
-      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+      <a href="#pricing" class="cta-btn">Register Now</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="/">Home</a>
-    <a href="/jamb-2027/">JAMB 2027</a>
-    <a href="/classes/">Classes</a>
-    <a href="/resources/">Resources</a>
-    <a href="/competition/">Competition</a>
-    <a href="/study-hub/">Study Hub</a>
-    <a href="/about/">About</a>
-    <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+    <a href="#top">Home</a>
+    <a href="#subjects">Subjects</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#pricing" class="cta-btn">Register Now</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="wrap hero-inner">
-    <div class="eyebrow"><span class="dot"></span>JAMB 2027</div>
-    <h1>Your JAMB 2027 Journey Starts Here</h1>
-    <p class="lead"><strong>Prepare early. Study consistently. Walk into the exam with confidence.</strong><br><br>Zenova Study gives you a structured environment to learn, practice, revise, and track your progress as you prepare for JAMB 2027.</p>
-    <div class="hero-ctas">
-      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Start Preparing</a>
-      <a href="/classes/" class="cta-btn outline">Join a Class</a>
-    </div>
-  </div>
-</section>
-
-<!-- WHY START NOW -->
-<section class="paper">
+<!-- PRICING -->
+<section class="paper" id="pricing">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">Why Start Now?</span>
-      <h2>Don't Wait Until It's Too Late</h2>
-      <p>Great results don't happen from last-minute preparation. Starting early gives you more time to understand difficult topics, practice questions, identify your weaknesses, and build confidence before examination day. With Zenova, you can turn your preparation into a clear and manageable journey.</p>
-      <div class="flow-line">Learn <span class="sep">→</span> Practice <span class="sep">→</span> Test <span class="sep">→</span> Improve <span class="sep">→</span> Repeat</div>
+      <span class="section-eyebrow">Choose Your Plan</span>
+      <h2>Bootcamp Pricing</h2>
+      <p>Learn Smarter. Practice More. Score Higher.</p>
     </div>
-  </div>
-</section>
-
-<!-- YOUR JAMB PREPARATION -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Your JAMB Preparation</span>
-      <h2>Everything You Need to Prepare Better</h2>
-      <p>Zenova brings the major parts of your preparation together.</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon">📚</div><h3>Structured Lessons</h3><p>Learn important concepts through organized lessons designed around your preparation journey.</p></div>
-      <div class="feat-card"><div class="feat-icon">📝</div><h3>Practice Questions</h3><p>Put what you've learned into practice with examination-style questions.</p></div>
-      <div class="feat-card"><div class="feat-icon">🧪</div><h3>Mock Tests</h3><p>Test your preparation in a realistic examination environment.</p></div>
-      <div class="feat-card"><div class="feat-icon">🧠</div><h3>Analyse & Revise</h3><p>Identify topics where your performance needs improvement, then revise and practise again.</p></div>
-      <div class="feat-card"><div class="feat-icon">📊</div><h3>Progress Tracking</h3><p>Monitor your performance and identify areas that need improvement.</p></div>
-      <div class="feat-card"><div class="feat-icon">👨‍🏫</div><h3>Expert Guidance</h3><p>Get support through structured classes and teaching designed to make difficult topics easier to understand.</p></div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-badge">Discount</div>
+        <span class="pricing-tag">Monthly</span>
+        <h3>Bootcamp Monthly</h3>
+        <div class="pricing-price">₦3,000<span>/month</span></div>
+        <ul class="pricing-list">
+          <li>Full classes</li>
+          <li>CBTs</li>
+          <li>Tests & assessments</li>
+          <li>Revision sessions</li>
+        </ul>
+        <div class="pricing-ebook">🎁 10% off all Zenova Study eBooks</div>
+        <a href="https://flutterwave.com/pay/zenova-jamb-bootcamp-2027" class="cta-btn outline" style="text-align:center;">Register Now</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Save ₦2,000</div>
+        <span class="pricing-tag">3-Month</span>
+        <h3>Bootcamp 3-Month</h3>
+        <div class="pricing-price">₦10,000</div>
+        <ul class="pricing-list">
+          <li>Everything in the Monthly Plan</li>
+        </ul>
+        <div class="pricing-ebook">🎁 30% off all Zenova Study eBooks</div>
+        <a href="https://flutterwave.com/pay/zenova-jamb-bootcamp-2027-3-month" class="cta-btn" style="text-align:center;">Register Now</a>
+      </div>
+      <div class="pricing-card">
+        <span class="pricing-tag">Full Program</span>
+        <h3>Bootcamp Full Program</h3>
+        <div class="pricing-price">₦20,000</div>
+        <ul class="pricing-list">
+          <li>Full program from October → JAMB 2027</li>
+          <li>All bootcamp resources</li>
+          <li>Full classes + CBTs + tests + revision</li>
+        </ul>
+        <div class="pricing-ebook">🎁 50% off all Zenova Study eBooks</div>
+        <a href="https://flutterwave.com/pay/zenova-jamb-bootcamp-2027-full-program" class="cta-btn outline" style="text-align:center;">Register Now</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SUBJECTS -->
-<section class="paper">
+<section id="subjects">
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Subjects</span>
-      <h2>Prepare Across Your UTME Subjects</h2>
-      <p>Choose the subjects relevant to your intended course and institution.</p>
+      <h2>Covering Science, Arts & Commercial</h2>
+      <p>Whatever your subject combination, the bootcamp has you covered.</p>
     </div>
-    <div class="subject-list-grid">
-      <div class="subject-item"><h3>English Language</h3><p>Build confidence in comprehension, vocabulary, grammar, and other key areas.</p></div>
-      <div class="subject-item"><h3>Mathematics</h3><p>Develop your understanding through guided lessons and consistent practice.</p></div>
-      <div class="subject-item"><h3>Physics</h3><p>Understand concepts, formulas, calculations, and their applications.</p></div>
-      <div class="subject-item"><h3>Chemistry</h3><p>Build strong foundations and practise applying concepts to questions.</p></div>
-      <div class="subject-item"><h3>Biology</h3><p>Study important biological concepts and strengthen your understanding through practice.</p></div>
-      <div class="subject-item"><h3>Economics</h3><p>Understand economic concepts and develop your ability to apply them to questions.</p></div>
-      <div class="subject-item"><h3>Government</h3><p>Study important concepts, institutions, systems, and political ideas.</p></div>
-      <div class="subject-item"><h3>Literature</h3><p>Develop your understanding of literary works, themes, characters, and techniques.</p></div>
+    <div class="subject-grid">
+      <div class="subject-card" style="--track-color:#2563EB;"><h3>🧪 Science</h3><p>Physics, Chemistry, Biology, Mathematics, and other science-track subjects.</p></div>
+      <div class="subject-card" style="--track-color:#F5A524;"><h3>📖 Arts</h3><p>English Language, Literature, Government, and other arts-track subjects.</p></div>
+      <div class="subject-card" style="--track-color:#0B1D3A;"><h3>📈 Commercial</h3><p>Economics, Accounting, Commerce, and other commercial-track subjects.</p></div>
     </div>
-    <div style="text-align:center;margin-top:28px;">
-      <a href="/resources/" class="section-link">View All Subjects
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-    <p class="fine-print">Subject combinations should always be checked against the official JAMB/IBASS information for the candidate's intended programme. JAMB's IBASS system provides programme eligibility and UTME subject-combination information.</p>
   </div>
 </section>
 
-<!-- STUDY PLAN -->
-<section class="paper">
-  <div class="wrap">
+<!-- CONTACT -->
+<section>
+  <div class="wrap" style="text-align:center;">
     <div class="section-head">
-      <span class="section-eyebrow">Study Plan</span>
-      <h2>Know What to Study and When</h2>
-      <p>Don't study randomly. Zenova helps you organize your preparation so you can work through your subjects systematically and maintain a consistent study routine.</p>
+      <span class="section-eyebrow">Register / Enquiries</span>
+      <h2>Ready to Join the Bootcamp?</h2>
+      <p>Registration opens soon — limited spaces available. Call or WhatsApp to register or ask a question.</p>
     </div>
-    <ul class="checklist">
-      <li>Topic-by-topic learning</li>
-      <li>Weekly study targets</li>
-      <li>Practice sessions</li>
-      <li>Revision periods</li>
-      <li>Mock examinations</li>
-      <li>Performance reviews</li>
-    </ul>
-    <div style="text-align:center;margin-top:28px;">
-      <a href="/study-hub/" class="section-link">View Study Plan
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTINUE YOUR PREPARATION -->
-<section id="study-hub">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Continue Your Preparation</span>
-      <h2>Practise, Learn, and Test Yourself</h2>
-      <p>Your JAMB prep doesn't stop here — these tools are ready when you are.</p>
-    </div>
-    <div class="eco-grid">
-      <div class="eco-card">
-        <div class="eco-icon" style="background:#EAF0FF;">📚</div>
-        <h3>Study Hub</h3>
-        <p>Access resources and practice tools designed to support your JAMB preparation.</p>
-        <a href="/study-hub/" class="go">Open Study Hub
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-      <div class="eco-card" id="classes">
-        <div class="eco-icon" style="background:#EAF0FF;">👨‍🏫</div>
-        <h3>Classes</h3>
-        <p>Get structured teaching to help you understand difficult topics and stay accountable.</p>
-        <a href="/classes/" class="go">Explore Classes
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-      <div class="eco-card">
-        <div class="eco-icon" style="background:#EAF0FF;">🧪</div>
-        <h3>Mock Examinations</h3>
-        <p>Practise under timed conditions and identify areas that need more attention.</p>
-        <a href="/competition/" class="go">Take a Mock Test
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPETITION -->
-<section class="paper" id="competition">
-  <div class="wrap">
-    <div class="comp-banner">
-      <span class="section-eyebrow">JAMB Competition</span>
-      <h2>Turn Preparation Into a Challenge</h2>
-      <p>Studying doesn't have to be boring. Test your knowledge through the Zenova Competition and challenge yourself against other students.</p>
-      <a href="/competition/" class="cta-btn">Enter Competition →</a>
-    </div>
-  </div>
-</section>
-
-<!-- RESOURCES -->
-<section id="resources">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Resources</span>
-      <h2>Everything You Need for Revision</h2>
-      <p>Access useful materials to support your preparation.</p>
-    </div>
-    <div class="resource-grid">
-      <div class="resource-card"><h3>Study Notes</h3><p>Review important concepts in a clear and organized format.</p></div>
-      <div class="resource-card"><h3>Past Questions</h3><p>Practise with questions and become familiar with examination-style tasks.</p></div>
-      <div class="resource-card"><h3>Revision Materials</h3><p>Quickly review important concepts before tests and examinations.</p></div>
-      <div class="resource-card"><h3>Study Guides</h3><p>Use structured guides to keep your preparation organized.</p></div>
-    </div>
-    <div style="text-align:center;margin-top:28px;">
-      <a href="/resources/" class="section-link">Explore Resources
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PROGRESS -->
-<section class="paper">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Progress</span>
-      <h2>See How You're Improving</h2>
-      <p>Your preparation should be measurable. Keep track of your practice, test performance, strengths, and areas that need more attention.</p>
-      <div class="flow-line" style="font-size:0.88rem;">Learn. Practise. See Your Progress. Improve.</div>
-      <a href="/study-hub/" class="section-link">Track Your Progress
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
+    <a href="tel:07073607977" class="phone-cta">📞 07073607977</a>
   </div>
 </section>
 
 <!-- FAQ -->
-<section>
+<section class="paper" id="faq">
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">FAQ</span>
-      <h2>JAMB 2027 Frequently Asked Questions</h2>
+      <h2>Bootcamp Frequently Asked Questions</h2>
     </div>
     <div class="faq-wrap">
       <div class="faq-item">
-        <button class="faq-q">When should I start preparing for JAMB 2027?<span class="plus">+</span></button>
-        <div class="faq-a"><p>The earlier you begin, the more time you have to understand topics, practise consistently, and revise.</p></div>
+        <button class="faq-q">When does the JAMB Bootcamp 2027 start?<span class="plus">+</span></button>
+        <div class="faq-a"><p>The bootcamp starts in October 2026 and runs through to JAMB 2027.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Which subjects should I study?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Your UTME subjects depend on your intended programme and institution. Use the official JAMB/IBASS information to verify the correct combination.</p></div>
+        <button class="faq-q">Which subjects are covered?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Science, Arts, and Commercial subjects are all covered in the bootcamp.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Can I prepare for JAMB with Zenova without joining a class?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. You can use Zenova's study resources and practice tools independently. Classes are available if you want additional teaching and guidance.</p></div>
+        <button class="faq-q">What plans are available?<span class="plus">+</span></button>
+        <div class="faq-a"><p>You can choose Bootcamp Monthly (₦3,000/month), Bootcamp 3-Month (₦10,000), or the Bootcamp Full Program (₦20,000) from October through JAMB 2027.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Does Zenova provide practice questions?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. The Zenova ecosystem includes practice and assessment tools to support your preparation.</p></div>
+        <button class="faq-q">Do I get any other benefits?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Every plan comes with a discount on all Zenova Study eBooks — 10% on Monthly, 30% on 3-Month, and 50% on the Full Program.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Will Zenova publish JAMB registration information?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes, when official information becomes available, Zenova can provide helpful guidance and direct students to official JAMB channels.</p></div>
+        <button class="faq-q">How do I register?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Call or WhatsApp 07073607977 to register or make enquiries. Spaces are limited.</p></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Where do I register for JAMB?<span class="plus">+</span></button>
-        <div class="faq-a"><p>JAMB registration should be completed through JAMB's official process and accredited CBT centres.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMPORTANT NOTE -->
-<section class="paper">
-  <div class="wrap">
-    <div class="important-note">
-      <h3>Important</h3>
-      <p>JAMB dates, requirements, subject combinations, registration procedures, and other examination information may change. Always verify official information through JAMB before making registration or examination decisions.</p>
     </div>
   </div>
 </section>
@@ -597,13 +531,13 @@
 <section>
   <div class="wrap">
     <div class="final-cta">
-      <h2>Ready to Start Your JAMB 2027 Preparation?</h2>
-      <p>Don't leave your preparation until the last minute. Start learning, practise consistently, and keep improving with Zenova Study.</p>
+      <h2>Your Journey to a High JAMB Score Starts Here</h2>
+      <p>Registration opens soon. Limited spaces available for JAMB Bootcamp 2027 — don't miss your spot.</p>
       <div class="cta-row">
-        <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Start Preparing Now →</a>
-        <a href="/study-hub/" class="cta-btn outline">Explore Study Hub →</a>
-        <a href="/classes/" class="cta-btn outline">Join a Class →</a>
+        <a href="#pricing" class="cta-btn">Register Now</a>
+        <a href="#pricing" class="cta-btn outline">View Plans →</a>
       </div>
+      <div class="tagline">Zenova Study — Study Smarter, Win Bigger.</div>
     </div>
   </div>
 </section>
@@ -691,5 +625,6 @@
 
 </body>
 </html>
+
 
 
