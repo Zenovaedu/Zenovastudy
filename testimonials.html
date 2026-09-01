@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials — Zenova Study</title>
+<meta name="description" content="Hear from students learning, practicing, and preparing for JAMB and WAEC with Zenova Study.">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1628;
+    --navy:#0B1D3A;
+    --blue:#2563EB;
+    --blue-bright:#1E5FFF;
+    --amber:#F5A524;
+    --white:#FFFFFF;
+    --paper:#F7F9FC;
+    --ink:#0A1628;
+    --ink-soft:#54607C;
+    --ink-faint:#8592AD;
+    --line:#E6EAF3;
+    --radius:18px;
+    --sora:'Sora', sans-serif;
+    --dm:'DM Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--dm);
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .logo{
+    font-family:var(--sora);font-weight:800;font-size:1.1rem;
+    letter-spacing:0.01em;color:var(--navy-deep);
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark-img{width:32px;height:32px;object-fit:contain;}
+  .footer-logo-img{width:34px;height:34px;object-fit:contain;}
+  .social-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .social-list a{display:flex;align-items:center;gap:10px;font-size:0.89rem;}
+  .social-list .icon{font-size:1.05rem;line-height:1;width:20px;text-align:center;}
+  nav.desktop-nav{display:flex;align-items:center;gap:32px;}
+  nav.desktop-nav a{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;
+    color:var(--ink-soft);transition:color .15s ease;
+  }
+  nav.desktop-nav a:hover{color:var(--blue-bright);}
+  .cta-btn{
+    font-family:var(--sora);font-weight:700;font-size:0.86rem;
+    background:var(--blue-bright);color:#fff;
+    padding:10px 20px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(30,95,255,0.6);}
+  .cta-btn.outline{background:transparent;color:var(--navy-deep);border:1px solid var(--line);}
+  .cta-btn.outline:hover{border-color:var(--blue-bright);color:var(--blue-bright);box-shadow:none;}
+  .header-actions{display:flex;align-items:center;gap:16px;}
+
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;
+  }
+  .hamburger span{width:21px;height:2px;background:var(--navy-deep);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-panel{
+    display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .mobile-panel.open{max-height:520px;}
+  .mobile-panel a{
+    font-family:var(--sora);font-weight:600;font-size:1rem;color:var(--navy-deep);
+    padding:15px 24px;border-bottom:1px solid var(--line);
+  }
+  .mobile-panel .cta-btn{margin:16px 24px 20px;text-align:center;}
+
+  @media (max-width:860px){
+    nav.desktop-nav{display:none;}
+    .header-actions .cta-btn{display:none;}
+    .hamburger{display:flex;}
+    .mobile-panel{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 64px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+    width:900px;height:500px;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.10), transparent 72%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--sora);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .hero h1{
+    font-family:var(--sora);font-weight:800;font-size:clamp(2rem,4.4vw,2.9rem);
+    line-height:1.14;margin:0 0 18px;letter-spacing:-0.01em;color:var(--navy-deep);
+  }
+  .hero p.lead{font-size:1.05rem;line-height:1.65;color:var(--ink-soft);max-width:520px;margin:0 auto;}
+  @media (max-width:860px){.hero{padding:56px 0 44px;}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:24px 0 84px;}
+  .section-head{max-width:600px;margin:0 auto 40px;text-align:center;}
+  .section-eyebrow{
+    font-family:var(--sora);font-weight:700;font-size:0.75rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--blue-bright);margin-bottom:12px;display:block;
+  }
+  .section-head h2{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.4rem,2.6vw,1.8rem);
+    margin:0 0 10px;color:var(--navy-deep);letter-spacing:-0.01em;
+  }
+  .section-head p{font-size:0.98rem;line-height:1.65;color:var(--ink-soft);margin:0;}
+
+  /* Testimonials */
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .testimonial-card{
+    background:var(--paper);border-radius:var(--radius);padding:28px;border:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .testimonial-card p.quote{
+    font-family:var(--sora);font-weight:500;font-size:0.98rem;line-height:1.6;color:var(--navy-deep);margin:0 0 18px;
+  }
+  .testimonial-card p.quote::before{content:"“";color:var(--blue-bright);font-weight:800;}
+  .testimonial-card p.quote::after{content:"”";color:var(--blue-bright);font-weight:800;}
+  .testimonial-author{
+    font-family:var(--sora);font-weight:700;font-size:0.86rem;color:var(--navy-deep);
+    display:flex;align-items:center;gap:10px;
+  }
+  .avatar{
+    width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue-bright),var(--navy));
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:var(--sora);font-weight:800;font-size:0.82rem;flex-shrink:0;
+  }
+  .testimonial-tag{font-weight:500;color:var(--ink-faint);font-size:0.78rem;display:block;}
+
+  /* Final CTA */
+  .final-cta{
+    background:linear-gradient(135deg,var(--navy-deep),#0F2450);
+    border-radius:28px;padding:60px 48px;text-align:center;color:#fff;
+  }
+  .final-cta h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.5rem,3vw,2rem);margin:0 0 14px;}
+  .final-cta p{color:#C4D2F0;font-size:1rem;max-width:460px;margin:0 auto 28px;line-height:1.6;}
+
+  /* Footer */
+  footer{background:var(--navy-deep);color:#8FA3CC;padding:56px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
+  .footer-logo{font-family:var(--sora);font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  footer p.desc{font-size:0.88rem;line-height:1.6;max-width:280px;}
+  footer h4{font-family:var(--sora);font-weight:700;font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:#fff;margin:0 0 16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{font-size:0.89rem;transition:color .15s ease;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.82rem;
+  }
+
+  @media (max-width:860px){
+    .testimonial-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .final-cta{padding:44px 26px;}
+    section{padding:16px 0 60px;}
+  }
+  @media (max-width:520px){
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="/" class="logo"><img src="logo.png" alt="Zenova Study" class="logo-mark-img">Zenova Study</a>
+    <nav class="desktop-nav">
+      <a href="/">Home</a>
+      <a href="/jamb-2027/">JAMB 2027</a>
+      <a href="/classes/">Classes</a>
+      <a href="/resources/">Resources</a>
+      <a href="/competition/">Competition</a>
+      <a href="/study-hub/">Study Hub</a>
+      <a href="/about/">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="/">Home</a>
+    <a href="/jamb-2027/">JAMB 2027</a>
+    <a href="/classes/">Classes</a>
+    <a href="/resources/">Resources</a>
+    <a href="/competition/">Competition</a>
+    <a href="/study-hub/">Study Hub</a>
+    <a href="/about/">About</a>
+    <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="dot"></span>Testimonials</div>
+    <h1>What Students Say About Zenova</h1>
+    <p class="lead">Real words from real students learning, practicing, and preparing for JAMB and WAEC with Zenova Study.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="wrap">
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="quote">Ever since the group class started it's been a great opportunity for me. Even when things haven't been easy, I'm still managing it — it's helped me build real interest in studying and become better. I've gained so much and I'm serious with my studies now, all thanks to Zenova.</p>
+        <div class="testimonial-author"><div class="avatar">Z</div><div>Group Class Student<span class="testimonial-tag">Zenova Study Group</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">Thank u for the opportunity.</p>
+        <div class="testimonial-author"><div class="avatar">O</div><div>Ollypsal<span class="testimonial-tag">Zenova Study Group</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">I love the way u teach physics.</p>
+        <div class="testimonial-author"><div class="avatar">F</div><div>Favour<span class="testimonial-tag">Zenova Study Group</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">The formula PDF is really nice and helpful. Everything is well arranged and easy to understand. It's definitely going to help me with my physics revision. Thank you sir! ❤️</p>
+        <div class="testimonial-author"><div class="avatar">F</div><div>Fatima Mohammed Iman<span class="testimonial-tag">Physics Formulas Handbook</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">The formula book is really helpful. While I was using it, it helped me remember some formulas I wasn't sure about quickly.</p>
+        <div class="testimonial-author"><div class="avatar">E</div><div>Emmy<span class="testimonial-tag">Physics Formulas Handbook</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">The book is helpful, and it helps me remember and understand the formulas.</p>
+        <div class="testimonial-author"><div class="avatar">S</div><div>Sammy Tee<span class="testimonial-tag">Physics Formulas Handbook</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">I'd rate it 9.5/10. It's helpful, covering the major syllabus, and helps me study more efficiently.</p>
+        <div class="testimonial-author"><div class="avatar">T</div><div>Temitope Samuel<span class="testimonial-tag">Physics Formulas Handbook</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">10/10 for me — it's solid for quick formula checks before JAMB or WAEC. The formulas are summarized well and it's easy to carry around. I love it 💖</p>
+        <div class="testimonial-author"><div class="avatar">H</div><div>Hassan Taiwo<span class="testimonial-tag">Physics Formulas Handbook</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Ready to Write Your Own Story?</h2>
+      <p>Join the Zenova Study community and start learning, practicing, and preparing with confidence.</p>
+      <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
+        <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="about.html#founder">Meet the Founder</a></li>
+          <li><a href="#">Support Zenova</a></li>
+          <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <ul class="social-list">
+            <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I"><span class="icon">💬</span>WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H"><span class="icon">✈️</span>Classes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zenova Study. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
