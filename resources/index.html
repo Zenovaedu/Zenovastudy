@@ -335,6 +335,14 @@
     margin-bottom:18px;
   }
   .scheme-preview img{width:100%;height:100%;object-fit:cover;display:block;}
+  .scheme-preview.book-cover{
+    aspect-ratio:auto;height:280px;background:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .scheme-preview.book-cover img{
+    width:auto;height:auto;max-width:100%;max-height:100%;
+    object-fit:contain;
+  }
   .scheme-card h3{font-family:var(--sora);font-weight:700;font-size:1.08rem;margin:0 0 10px;color:var(--navy-deep);}
   .scheme-card p{font-size:0.9rem;line-height:1.6;color:var(--ink-soft);margin:0 0 20px;}
   .scheme-btn-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -352,6 +360,7 @@
     .why-grid-5{grid-template-columns:1fr 1fr;}
     .step-row-6{grid-template-columns:1fr 1fr;}
     .scheme-grid{grid-template-columns:1fr;}
+    .scheme-preview.book-cover{height:320px;}
   }
   @media (max-width:520px){
     .why-grid-5{grid-template-columns:1fr;}
@@ -373,7 +382,7 @@
       <a href="/about/">About</a>
     </nav>
     <div class="header-actions">
-      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+      <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -387,7 +396,7 @@
     <a href="/competition/">Competition</a>
     <a href="/study-hub/">Study Hub</a>
     <a href="/about/">About</a>
-    <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="cta-btn">Join Zenova</a>
+    <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
   </div>
 </header>
 
@@ -396,7 +405,7 @@
   <div class="wrap hero-inner">
     <div class="eyebrow"><span class="dot"></span>Resources</div>
     <h1>Everything You Need to Study Smarter</h1>
-    <p class="lead">Access free study resources designed to help you stay organized, understand your subjects, practise effectively, and prepare with confidence.<br><br>From schemes of work and study materials to past questions and revision resources, Zenova gives you the tools to make your preparation easier.</p>
+    <p class="lead">Free study resources to help you stay organized, understand your subjects, and prepare with confidence — schemes of work, ebooks, handbooks, and more.</p>
     <div class="hero-ctas">
       <a href="#scheme-of-work" class="cta-btn">Explore Resources</a>
       <a href="#scheme-of-work" class="cta-btn outline">View Scheme of Work</a>
@@ -405,18 +414,18 @@
   </div>
 </section>
 
-<!-- SCHEMES OF WORK LIST -->
+<!-- SCHEMES OF WORK & EBOOKS LIST -->
 <section id="scheme-of-work">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">Zenova Study Schemes of Work</span>
+      <span class="section-eyebrow">Zenova Study Resources</span>
       <h2>Choose Your Study Path</h2>
-      <p>We have organized schemes of work for different academic groups to help you plan your preparation.</p>
+      <p>Schemes of work organized by academic group, plus ebooks and quick-reference handbooks to guide your preparation.</p>
     </div>
     <div class="scheme-grid">
       <div class="scheme-card">
         <div class="scheme-num">01 — SCIENCE</div>
-        <div class="scheme-preview"><img src="1.png" alt="Zenova Study Science Scheme of Work preview"></div>
+        <div class="scheme-preview book-cover"><img src="1.png" alt="Zenova Study Science Scheme of Work preview"></div>
         <h3>Zenova Study Science Scheme of Work</h3>
         <p>A structured scheme of work designed to help Science students organize their preparation across their relevant subjects. Use it to plan your study, keep track of topics, and make sure you cover the areas you need to prepare.</p>
         <div class="scheme-btn-row">
@@ -425,7 +434,7 @@
       </div>
       <div class="scheme-card">
         <div class="scheme-num">02 — ARTS</div>
-        <div class="scheme-preview"><img src="2.png" alt="Zenova Study Arts Scheme of Work preview"></div>
+        <div class="scheme-preview book-cover"><img src="2.png" alt="Zenova Study Arts Scheme of Work preview"></div>
         <h3>Zenova Study Arts Scheme of Work</h3>
         <p>A structured study guide designed to help Arts and Humanities students organize their preparation and work through their subjects systematically. Use it to plan study sessions, monitor completed topics, and prepare for revision.</p>
         <div class="scheme-btn-row">
@@ -434,7 +443,7 @@
       </div>
       <div class="scheme-card">
         <div class="scheme-num">03 — COMMERCIAL</div>
-        <div class="scheme-preview"><img src="3.png" alt="Zenova Study Commercial Scheme of Work preview"></div>
+        <div class="scheme-preview book-cover"><img src="3.png" alt="Zenova Study Commercial Scheme of Work preview"></div>
         <h3>Zenova Study Commercial Scheme of Work</h3>
         <p>A structured scheme designed to help Commercial students plan their learning and stay organized throughout their examination preparation. Work through your subjects systematically and keep track of the topics you've covered.</p>
         <div class="scheme-btn-row">
@@ -443,16 +452,54 @@
       </div>
       <div class="scheme-card">
         <div class="scheme-num">04 — PHYSICS HANDBOOK</div>
-        <div class="scheme-preview"><img src="4.png" alt="Zenova Physics Handbook preview"></div>
+        <div class="scheme-preview book-cover"><img src="4.png" alt="Zenova Physics Handbook preview"></div>
         <h3>Zenova Physics Handbook</h3>
         <p>A quick-reference formula handbook covering the key Physics formulas you need for JAMB.</p>
-        <div class="scheme-num" style="background:#FFF3DE;color:#B5730C;margin-bottom:14px;">Use code ZENOVA20 for a discount</div>
+        <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:14px;">₦1,000</div>
         <div class="scheme-btn-row">
           <a href="https://wa.me/2347073607977?text=I%20want%20to%20buy%20the%20Zenova%20Physics%20Handbook" class="cta-btn">Buy Now →</a>
         </div>
       </div>
+      <div class="scheme-card">
+        <div class="scheme-num">05 — JAMB UNLOCKED</div>
+        <div class="scheme-preview book-cover"><img src="5.png" alt="JAMB Unlocked preview"></div>
+        <h3>JAMB Unlocked</h3>
+        <p>An ebook guide to help you understand how JAMB works and how to prepare strategically for it.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+          <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:0;">₦1,500</div>
+          <div class="scheme-num" style="background:#EAF0FF;color:var(--blue-bright);margin-bottom:0;">Preorder</div>
+        </div>
+        <div class="scheme-btn-row">
+          <a href="https://wa.me/2347073607977?text=I%20want%20to%20preorder%20JAMB%20Unlocked" class="cta-btn">Preorder Now →</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-num">06 — MATHEMATICS HANDBOOK</div>
+        <div class="scheme-preview book-cover"><img src="6.png" alt="Zenova Study JAMB Mathematics Handbook preview"></div>
+        <h3>Zenova Study JAMB Mathematics Handbook</h3>
+        <p>A quick-reference handbook covering the key Mathematics formulas and concepts you need for JAMB.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+          <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:0;">₦1,500</div>
+          <div class="scheme-num" style="background:#EAF0FF;color:var(--blue-bright);margin-bottom:0;">Preorder</div>
+        </div>
+        <div class="scheme-btn-row">
+          <a href="https://wa.me/2347073607977?text=I%20want%20to%20preorder%20the%20Zenova%20Study%20JAMB%20Mathematics%20Handbook" class="cta-btn">Preorder Now →</a>
+        </div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-num">07 — ENGLISH HANDBOOK</div>
+        <div class="scheme-preview book-cover"><img src="7.png" alt="Zenova English JAMB Handbook preview"></div>
+        <h3>Zenova English JAMB Handbook</h3>
+        <p>A focused handbook covering key English Language rules, tips, and practice areas for JAMB.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+          <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:0;">₦1,000</div>
+          <div class="scheme-num" style="background:#EAF0FF;color:var(--blue-bright);margin-bottom:0;">Preorder</div>
+        </div>
+        <div class="scheme-btn-row">
+          <a href="https://wa.me/2347073607977?text=I%20want%20to%20preorder%20the%20Zenova%20English%20JAMB%20Handbook" class="cta-btn">Preorder Now →</a>
+        </div>
+      </div>
     </div>
-   
   </div>
 </section>
 
@@ -607,51 +654,3 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Zenova Study. All rights reserved.</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobilePanel = document.getElementById('mobilePanel');
-  hamburgerBtn.addEventListener('click', () => {
-    const isOpen = mobilePanel.classList.toggle('open');
-    hamburgerBtn.classList.toggle('open', isOpen);
-    hamburgerBtn.setAttribute('aria-expanded', isOpen);
-  });
-  mobilePanel.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobilePanel.classList.remove('open');
-      hamburgerBtn.classList.remove('open');
-      hamburgerBtn.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const q = item.querySelector('.faq-q');
-    const a = item.querySelector('.faq-a');
-    q.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(other => {
-        if (other !== item){
-          other.classList.remove('open');
-          other.querySelector('.faq-a').style.maxHeight = null;
-        }
-      });
-      if (isOpen){
-        item.classList.remove('open');
-        a.style.maxHeight = null;
-      } else {
-        item.classList.add('open');
-        a.style.maxHeight = a.scrollHeight + 'px';
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
-
