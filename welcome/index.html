@@ -1,1 +1,391 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Zenova JAMB Community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#05112A;
+    --navy:#0B1F3A;
+    --navy-mid:#13294F;
+    --blue-accent:#3B6EE8;
+    --blue-soft:#9DB6EE;
+    --paper:#FFFFFF;
+    --paper-dim:#F4F7FC;
+    --line:rgba(255,255,255,0.12);
+    --line-dark:rgba(11,31,58,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:var(--paper);
+    color:var(--navy);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .wrap{max-width:640px;margin:0 auto;}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-mid) 100%);
+    color:var(--paper);
+    padding:56px 24px 48px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-120px; right:-100px;
+    width:360px; height:360px;
+    background:radial-gradient(circle, rgba(59,110,232,0.35), transparent 70%);
+  }
+  .brandmark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    font-size:15px;
+    margin-bottom:36px;
+    position:relative;
+  }
+  .brandmark .dot{
+    width:9px;height:9px;border-radius:50%;
+    background:var(--blue-accent);
+  }
+  .hero-badge{
+    display:inline-block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--blue-soft);
+    border:1px solid rgba(157,182,238,0.35);
+    padding:5px 12px;
+    border-radius:20px;
+    margin-bottom:20px;
+    position:relative;
+  }
+  .hero h1{
+    font-size:clamp(30px, 7vw, 40px);
+    line-height:1.15;
+    font-weight:800;
+    margin:0 0 18px;
+    position:relative;
+    max-width:20ch;
+  }
+  .hero p{
+    font-size:16px;
+    line-height:1.65;
+    color:rgba(255,255,255,0.82);
+    margin:0 0 14px;
+    position:relative;
+    max-width:46ch;
+  }
+  .hero .tagline{
+    margin-top:22px;
+    font-size:15px;
+    font-weight:700;
+    color:var(--paper);
+    position:relative;
+  }
+  .hero .tagline span{color:var(--blue-soft);}
+  .hero .signoff{
+    margin-top:26px;
+    font-size:14px;
+    color:rgba(255,255,255,0.6);
+    position:relative;
+  }
+
+  /* SECTION SHELL */
+  section{
+    padding:44px 24px;
+    border-bottom:1px solid var(--line-dark);
+  }
+  section:last-of-type{border-bottom:none;}
+  .eyebrow-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:22px;
+  }
+  h2{
+    font-size:22px;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .section-note{
+    font-size:13px;
+    color:#6B7690;
+    font-weight:600;
+  }
+
+  /* TIMETABLE */
+  .day-row{
+    display:grid;
+    grid-template-columns:104px 1fr;
+    gap:16px;
+    align-items:start;
+    padding:16px 0;
+    border-top:1px solid var(--line-dark);
+  }
+  .day-row:first-of-type{border-top:1px solid var(--line-dark);}
+  .day-name{
+    font-weight:700;
+    font-size:15px;
+    color:var(--navy);
+    padding-top:2px;
+  }
+  .day-subjects{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .subject-chip{
+    background:var(--paper-dim);
+    border:1px solid var(--line-dark);
+    color:var(--navy);
+    font-size:13.5px;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:8px;
+  }
+  .timeslots{
+    margin-top:26px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .timeslot{
+    flex:1;
+    min-width:140px;
+    background:var(--navy);
+    color:var(--paper);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .timeslot .label{
+    font-size:12px;
+    font-weight:600;
+    color:var(--blue-soft);
+    margin-bottom:4px;
+  }
+  .timeslot .time{
+    font-size:19px;
+    font-weight:800;
+  }
+
+  /* SCHEME OF WORK */
+  .doc-card{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px;
+    border:1px solid var(--line-dark);
+    border-radius:12px;
+    margin-bottom:14px;
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .doc-card:hover{border-color:var(--blue-accent);}
+  .doc-card:last-child{margin-bottom:0;}
+  .doc-icon{
+    width:46px;height:46px;
+    border-radius:9px;
+    background:var(--navy);
+    color:var(--paper);
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:-0.02em;
+  }
+  .doc-info{flex:1;min-width:0;}
+  .doc-title{font-size:15px;font-weight:700;margin-bottom:3px;}
+  .doc-sub{font-size:13px;color:#6B7690;}
+  .doc-arrow{
+    font-size:18px;
+    color:var(--blue-accent);
+    flex-shrink:0;
+  }
+
+  /* BOOTCAMP COMING SOON */
+  .bootcamp{
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border-radius:16px;
+    padding:32px 24px;
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  .bootcamp::after{
+    content:"";
+    position:absolute;
+    bottom:-80px; left:-60px;
+    width:220px;height:220px;
+    background:radial-gradient(circle, rgba(59,110,232,0.3), transparent 70%);
+  }
+  .coming-soon-tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    background:rgba(59,110,232,0.18);
+    color:var(--blue-soft);
+    border:1px solid rgba(157,182,238,0.3);
+    padding:5px 11px;
+    border-radius:6px;
+    margin-bottom:16px;
+    position:relative;
+  }
+  .bootcamp h3{
+    font-size:24px;
+    font-weight:800;
+    margin:0 0 10px;
+    position:relative;
+    max-width:18ch;
+  }
+  .bootcamp p{
+    font-size:14.5px;
+    line-height:1.6;
+    color:rgba(255,255,255,0.75);
+    margin:0;
+    position:relative;
+    max-width:40ch;
+  }
+
+  /* FOOTER */
+  footer{
+    padding:32px 24px 44px;
+    text-align:center;
+  }
+  footer .line{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    color:var(--navy);
+    margin-bottom:6px;
+  }
+  footer .sub{
+    font-size:12.5px;
+    color:#9AA4BC;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brandmark"><span class="dot"></span>ZENOVA STUDY</div>
+    <div class="hero-badge">JAMB Community</div>
+    <h1>Welcome to the Zenova JAMB Community!</h1>
+    <p>We're excited to have you here 💙 Get ready for quality lessons, practice questions, tips, updates, and motivation to help you prepare better for UTME.</p>
+    <div class="tagline">Study Smart. <span>Stay Consistent.</span> Win Bigger!</div>
+    <div class="signoff">Once again, welcome to Zenova Study!</div>
+  </header>
+
+  <section>
+    <div class="eyebrow-row">
+      <h2>Weekly timetable</h2>
+      <span class="section-note">Every week</span>
+    </div>
+
+    <div class="day-row">
+      <div class="day-name">Monday</div>
+      <div class="day-subjects"><span class="subject-chip">Maths</span><span class="subject-chip">English</span></div>
+    </div>
+    <div class="day-row">
+      <div class="day-name">Tuesday</div>
+      <div class="day-subjects"><span class="subject-chip">Physics</span><span class="subject-chip">Government</span></div>
+    </div>
+    <div class="day-row">
+      <div class="day-name">Wednesday</div>
+      <div class="day-subjects"><span class="subject-chip">CRS</span><span class="subject-chip">IRS</span></div>
+    </div>
+    <div class="day-row">
+      <div class="day-name">Thursday</div>
+      <div class="day-subjects"><span class="subject-chip">Chemistry</span><span class="subject-chip">Commerce</span></div>
+    </div>
+    <div class="day-row">
+      <div class="day-name">Friday</div>
+      <div class="day-subjects"><span class="subject-chip">Economics</span><span class="subject-chip">Literature in English</span></div>
+    </div>
+    <div class="day-row">
+      <div class="day-name">Saturday</div>
+      <div class="day-subjects"><span class="subject-chip">Biology</span></div>
+    </div>
+    <div class="day-row">
+      <div class="day-name">Sunday</div>
+      <div class="day-subjects"><span class="subject-chip">Accounting</span></div>
+    </div>
+
+    <div class="timeslots">
+      <div class="timeslot">
+        <div class="label">FIRST CLASS</div>
+        <div class="time">8 – 9 PM</div>
+      </div>
+      <div class="timeslot">
+        <div class="label">SECOND CLASS</div>
+        <div class="time">9 – 10 PM</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow-row">
+      <h2>Scheme of work</h2>
+      <span class="section-note">Download</span>
+    </div>
+
+    <a class="doc-card" href="Zenova_Study_JAMB_2027_Science_Scheme_of_Work_PDF.pdf" download>
+      <div class="doc-icon">PDF</div>
+      <div class="doc-info">
+        <div class="doc-title">Science Scheme of Work</div>
+        <div class="doc-sub">Maths, English, Biology, Chemistry, Physics, Agric Science, Geography</div>
+      </div>
+      <div class="doc-arrow">↓</div>
+    </a>
+
+    <a class="doc-card" href="Zenova_Study_JAMB_2027_Commercial_Scheme_of_Work_PDF.pdf" download>
+      <div class="doc-icon">PDF</div>
+      <div class="doc-info">
+        <div class="doc-title">Commercial Scheme of Work</div>
+        <div class="doc-sub">Maths, English, Economics, Accounting, Commerce, Government, Geography</div>
+      </div>
+      <div class="doc-arrow">↓</div>
+    </a>
+
+    <a class="doc-card" href="Zenova Study JAMB 2027 Art Scheme Of Work.pdf" download>
+      <div class="doc-icon">PDF</div>
+      <div class="doc-info">
+        <div class="doc-title">Arts Scheme of Work</div>
+        <div class="doc-sub">Full scheme for JAMB 2027 Arts stream subjects</div>
+      </div>
+      <div class="doc-arrow">↓</div>
+    </a>
+  </section>
+
+  <section>
+    <div class="bootcamp">
+      <div class="coming-soon-tag">COMING SOON</div>
+      <h3>UTME Bootcamp</h3>
+      <p>An intensive push toward exam day — details are being finalised. Stay in the community to be first to know when it opens.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="line">ZENOVA STUDY</div>
+    <div class="sub">Study Smarter, Win Bigger.</div>
+  </footer>
+
+</div>
+</body>
+</html>
