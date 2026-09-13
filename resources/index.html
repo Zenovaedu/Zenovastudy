@@ -382,7 +382,7 @@
       <a href="/about/">About</a>
     </nav>
     <div class="header-actions">
-      <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+      <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -457,46 +457,17 @@
         <p>A quick-reference formula handbook covering the key Physics formulas you need for JAMB.</p>
         <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:14px;">₦1,000</div>
         <div class="scheme-btn-row">
-          <a href="https://wa.me/2347073607977?text=I%20want%20to%20buy%20the%20Zenova%20Physics%20Handbook" class="cta-btn">Buy Now →</a>
+          <a href="https://flutterwave.com/pay/zenovastudyebook" class="cta-btn">Buy Now →</a>
         </div>
       </div>
       <div class="scheme-card">
-        <div class="scheme-num">05 — JAMB UNLOCKED</div>
-        <div class="scheme-preview book-cover"><img src="5.png" alt="JAMB Unlocked preview"></div>
-        <h3>JAMB Unlocked</h3>
+        <div class="scheme-num">05 — UTME UNLOCKED</div>
+        <div class="scheme-preview book-cover"><img src="5.png" alt="UTME Unlocked preview"></div>
+        <h3>UTME Unlocked</h3>
         <p>An ebook guide to help you understand how JAMB works and how to prepare strategically for it.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
-          <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:0;">₦1,500</div>
-          <div class="scheme-num" style="background:#EAF0FF;color:var(--blue-bright);margin-bottom:0;">Preorder</div>
-        </div>
+        <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:14px;">₦1,000</div>
         <div class="scheme-btn-row">
-          <a href="https://wa.me/2347073607977?text=I%20want%20to%20preorder%20JAMB%20Unlocked" class="cta-btn">Preorder Now →</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-num">06 — MATHEMATICS HANDBOOK</div>
-        <div class="scheme-preview book-cover"><img src="6.png" alt="Zenova Study JAMB Mathematics Handbook preview"></div>
-        <h3>Zenova Study JAMB Mathematics Handbook</h3>
-        <p>A quick-reference handbook covering the key Mathematics formulas and concepts you need for JAMB.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
-          <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:0;">₦1,500</div>
-          <div class="scheme-num" style="background:#EAF0FF;color:var(--blue-bright);margin-bottom:0;">Preorder</div>
-        </div>
-        <div class="scheme-btn-row">
-          <a href="https://wa.me/2347073607977?text=I%20want%20to%20preorder%20the%20Zenova%20Study%20JAMB%20Mathematics%20Handbook" class="cta-btn">Preorder Now →</a>
-        </div>
-      </div>
-      <div class="scheme-card">
-        <div class="scheme-num">07 — ENGLISH HANDBOOK</div>
-        <div class="scheme-preview book-cover"><img src="7.png" alt="Zenova English JAMB Handbook preview"></div>
-        <h3>Zenova English JAMB Handbook</h3>
-        <p>A focused handbook covering key English Language rules, tips, and practice areas for JAMB.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
-          <div class="scheme-num" style="background:#EAF7EE;color:#1E7A3E;margin-bottom:0;">₦1,000</div>
-          <div class="scheme-num" style="background:#EAF0FF;color:var(--blue-bright);margin-bottom:0;">Preorder</div>
-        </div>
-        <div class="scheme-btn-row">
-          <a href="https://wa.me/2347073607977?text=I%20want%20to%20preorder%20the%20Zenova%20English%20JAMB%20Handbook" class="cta-btn">Preorder Now →</a>
+          <a href="https://flutterwave.com/pay/zenovastudyutmeunlocked" class="cta-btn">Buy Now →</a>
         </div>
       </div>
     </div>
@@ -654,3 +625,50 @@
         </ul>
       </div>
     </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zenova Study. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item){
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if (isOpen){
+        item.classList.remove('open');
+        a.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
