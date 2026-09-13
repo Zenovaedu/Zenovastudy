@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Classes — Zenova Study</title>
-<meta name="description" content="Free classes from Zenova Study — the JAMB 2027 Community class, led by guest tutors, completely free.">
+<meta name="description" content="Join Zenova Study's free UTME class and register for the JAMB 2027 Bootcamp.">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,12 +53,6 @@
     letter-spacing:0.01em;color:var(--navy-deep);
     display:flex;align-items:center;gap:10px;
   }
-  .logo-mark{
-    width:30px;height:30px;border-radius:8px;
-    background:linear-gradient(135deg,var(--blue-bright),var(--navy));
-    display:flex;align-items:center;justify-content:center;
-    color:#fff;font-family:var(--sora);font-weight:800;font-size:0.9rem;
-  }
   .logo-mark-img{width:32px;height:32px;object-fit:contain;}
   .footer-logo-img{width:34px;height:34px;object-fit:contain;}
   .social-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
@@ -75,6 +69,7 @@
     background:var(--blue-bright);color:#fff;
     padding:10px 20px;border-radius:999px;border:none;cursor:pointer;
     transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
   }
   .cta-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(30,95,255,0.6);}
   .cta-btn.outline{background:transparent;color:var(--navy-deep);border:1px solid var(--line);}
@@ -109,14 +104,14 @@
   }
 
   /* ---------- HERO ---------- */
-  .hero{padding:104px 0 88px;text-align:center;position:relative;overflow:hidden;}
+  .hero{padding:96px 0 40px;text-align:center;position:relative;overflow:hidden;}
   .hero::before{
     content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
     width:900px;height:500px;
     background:radial-gradient(closest-side, rgba(37,99,235,0.10), transparent 72%);
     pointer-events:none;
   }
-  .hero-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+  .hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;}
   .eyebrow{
     font-family:var(--sora);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;
     text-transform:uppercase;color:var(--blue-bright);
@@ -124,122 +119,53 @@
   }
   .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
   .hero h1{
-    font-family:var(--sora);font-weight:800;font-size:clamp(2.1rem,4.6vw,3.2rem);
-    line-height:1.14;margin:0 0 20px;letter-spacing:-0.01em;color:var(--navy-deep);
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.9rem,4.2vw,2.8rem);
+    line-height:1.16;margin:0 0 18px;letter-spacing:-0.01em;color:var(--navy-deep);
   }
-  .hero p.lead{font-size:1.08rem;line-height:1.65;color:var(--ink-soft);max-width:540px;margin:0 auto 34px;}
-  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
-  .hero-sub{
-    font-family:var(--sora);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--ink-faint);
-  }
-  @media (max-width:860px){.hero{padding:68px 0 56px;}}
+  .hero p.lead{font-size:1.05rem;line-height:1.65;color:var(--ink-soft);max-width:540px;margin:0 auto;}
+  @media (max-width:860px){.hero{padding:56px 0 32px;}}
 
-  /* ---------- SECTIONS ---------- */
-  section{padding:84px 0;}
-  .section-head{max-width:600px;margin:0 auto 48px;text-align:center;}
-  .section-eyebrow{
-    font-family:var(--sora);font-weight:700;font-size:0.75rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--blue-bright);margin-bottom:12px;display:block;
+  /* ---------- CTA CARDS ---------- */
+  section.offers{padding:56px 0 100px;}
+  .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:940px;margin:0 auto;}
+  .offer-card{
+    background:#fff;border:1px solid var(--line);border-radius:24px;
+    padding:40px 34px;display:flex;flex-direction:column;gap:14px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   }
-  .section-head h2{
-    font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3vw,2.15rem);
-    margin:0 0 14px;color:var(--navy-deep);letter-spacing:-0.01em;
-  }
-  .section-head p{font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0;}
-  .section-link{
-    font-family:var(--sora);font-weight:600;font-size:0.9rem;color:var(--blue-bright);
-    display:inline-flex;align-items:center;gap:6px;margin-top:18px;
-  }
-  .section-link svg{transition:transform .15s ease;}
-  .section-link:hover svg{transform:translateX(3px);}
-  .paper{background:var(--paper);}
-
-  /* Ecosystem cards */
-  .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .eco-card{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:30px 26px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-  .eco-card:hover{transform:translateY(-3px);box-shadow:0 22px 36px -22px rgba(10,22,40,0.22);border-color:#D3E0FA;}
-  .eco-icon{
-    width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    font-size:1.25rem;margin-bottom:18px;
-  }
-  .eco-card h3{font-family:var(--sora);font-weight:700;font-size:1.1rem;margin:0 0 10px;color:var(--navy-deep);}
-  .eco-card p{font-size:0.92rem;line-height:1.6;color:var(--ink-soft);margin:0 0 18px;}
-  .eco-card a.go{font-family:var(--sora);font-weight:600;font-size:0.86rem;color:var(--blue-bright);display:inline-flex;align-items:center;gap:6px;}
-  .eco-card a.go svg{transition:transform .15s ease;}
-  .eco-card:hover a.go svg{transform:translateX(3px);}
-
-  /* Why Zenova */
-  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-  .why-item{padding:4px;}
-  .why-num{
-    font-family:var(--sora);font-weight:800;font-size:0.78rem;color:var(--blue-bright);
-    background:#EAF0FF;width:32px;height:32px;border-radius:9px;
-    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
-  }
-  .why-item h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 8px;color:var(--navy-deep);}
-  .why-item p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
-
-  /* Subjects */
-  .subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .subject-card{
-    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
-    background:#fff;border-top:3px solid var(--track-color,#2563EB);
-  }
-  .subject-card h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 10px;color:var(--navy-deep);}
-  .subject-card p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
-
-  /* Resources */
-  .resource-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .resource-card{
-    border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;background:#fff;
-    transition:border-color .18s ease, transform .18s ease;
-  }
-  .resource-card:hover{border-color:#D3E0FA;transform:translateY(-2px);}
-  .resource-card h3{font-family:var(--sora);font-weight:700;font-size:0.98rem;margin:0 0 8px;color:var(--navy-deep);}
-  .resource-card p{font-size:0.86rem;line-height:1.55;color:var(--ink-soft);margin:0;}
-
-  /* Competition feature banner */
-  .comp-banner{
+  .offer-card:hover{transform:translateY(-4px);box-shadow:0 26px 44px -24px rgba(10,22,40,0.22);border-color:#D3E0FA;}
+  .offer-card.featured{
     background:linear-gradient(135deg,var(--navy-deep),#12275A);
-    border-radius:28px;padding:64px 48px;text-align:center;color:#fff;
+    border-color:transparent;color:#fff;
   }
-  .comp-banner .section-eyebrow{color:#8FB0FF;}
-  .comp-banner h2{
-    font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.2rem);margin:0 0 14px;color:#fff;
+  .offer-icon{
+    width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    background:#EAF0FF;
   }
-  .comp-banner p{color:#C4D2F0;font-size:1rem;line-height:1.65;max-width:520px;margin:0 auto 30px;}
+  .offer-icon svg{width:24px;height:24px;stroke:var(--blue-bright);}
+  .offer-card.featured .offer-icon{background:rgba(255,255,255,0.1);}
+  .offer-card.featured .offer-icon svg{stroke:#8FB0FF;}
+  .offer-tag{
+    font-family:var(--sora);font-weight:700;font-size:0.72rem;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--blue-bright);
+  }
+  .offer-card.featured .offer-tag{color:#8FB0FF;}
+  .offer-card h2{
+    font-family:var(--sora);font-weight:800;font-size:1.3rem;margin:0;
+    color:var(--navy-deep);letter-spacing:-0.01em;
+  }
+  .offer-card.featured h2{color:#fff;}
+  .offer-card p{font-size:0.95rem;line-height:1.65;color:var(--ink-soft);margin:0;flex-grow:1;}
+  .offer-card.featured p{color:#C4D2F0;}
+  .offer-card .cta-btn{align-self:flex-start;margin-top:6px;}
+  .offer-card.featured .cta-btn.outline{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.28);}
 
-  /* Testimonials */
-  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .testimonial-card{
-    background:var(--paper);border-radius:var(--radius);padding:28px;border:1px solid var(--line);
-  }
-  .testimonial-card p{
-    font-family:var(--sora);font-weight:500;font-size:0.98rem;line-height:1.6;color:var(--navy-deep);margin:0;
-  }
-  .testimonial-card p::before{content:"“";color:var(--blue-bright);font-weight:800;}
-  .testimonial-card p::after{content:"”";color:var(--blue-bright);font-weight:800;}
-  .testimonial-note{
-    text-align:center;font-size:0.82rem;color:var(--ink-faint);margin-top:20px;font-style:italic;
-  }
-
-  /* Final CTA */
-  .final-cta{
-    background:linear-gradient(135deg,var(--navy-deep),#0F2450);
-    border-radius:28px;padding:64px 48px;text-align:center;color:#fff;
-  }
-  .final-cta h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.7rem,3.4vw,2.3rem);margin:0 0 14px;}
-  .final-cta p{color:#C4D2F0;font-size:1rem;max-width:480px;margin:0 auto 30px;line-height:1.6;}
-  .final-cta .tagline{
-    font-family:var(--sora);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:#8FA3CC;margin-top:26px;
+  @media (max-width:760px){
+    .offer-grid{grid-template-columns:1fr;}
+    section.offers{padding:36px 0 72px;}
   }
 
-  /* Footer */
+  /* ---------- Footer ---------- */
   footer{background:var(--navy-deep);color:#8FA3CC;padding:56px 0 32px;}
   .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
   .footer-logo{font-family:var(--sora);font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
@@ -252,122 +178,11 @@
     border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.82rem;
   }
-
   @media (max-width:860px){
-    .eco-grid{grid-template-columns:1fr;}
-    .why-grid{grid-template-columns:1fr 1fr;}
-    .subject-grid{grid-template-columns:1fr;}
-    .resource-grid{grid-template-columns:1fr 1fr;}
-    .testimonial-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
-    .comp-banner,.final-cta{padding:48px 28px;}
-    section{padding:60px 0;}
   }
   @media (max-width:520px){
-    .why-grid{grid-template-columns:1fr;}
-    .resource-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr;}
-  }
-
-  /* ---------- JAMB 2027 page extras ---------- */
-  .flow-line{
-    display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;
-    font-family:var(--sora);font-weight:700;font-size:0.95rem;color:var(--blue-bright);
-    margin-top:10px;
-  }
-  .flow-line .sep{color:var(--ink-faint);font-weight:400;}
-
-  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .feat-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
-  .feat-card:hover{transform:translateY(-3px);box-shadow:0 20px 34px -20px rgba(10,22,40,0.2);border-color:#D3E0FA;}
-  .feat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:16px;background:#EAF0FF;}
-  .feat-card h3{font-family:var(--sora);font-weight:700;font-size:1.02rem;margin:0 0 8px;color:var(--navy-deep);}
-  .feat-card p{font-size:0.88rem;line-height:1.6;color:var(--ink-soft);margin:0;}
-
-  .subject-list-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-  .subject-item{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff;}
-  .subject-item h3{font-family:var(--sora);font-weight:700;font-size:0.95rem;margin:0 0 8px;color:var(--navy-deep);}
-  .subject-item p{font-size:0.84rem;line-height:1.55;color:var(--ink-soft);margin:0;}
-  .fine-print{font-size:0.8rem;line-height:1.6;color:var(--ink-faint);font-style:italic;max-width:680px;margin:22px auto 0;text-align:center;}
-
-  .checklist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;max-width:600px;margin:28px auto 0;}
-  .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:0.92rem;color:var(--ink-soft);}
-  .checklist li::before{content:"✓";color:var(--blue-bright);font-weight:800;flex-shrink:0;}
-
-  .faq-item{border-bottom:1px solid var(--line);}
-  .faq-q{
-    width:100%;text-align:left;background:none;border:none;cursor:pointer;
-    padding:22px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;
-    font-family:var(--sora);font-weight:700;font-size:0.98rem;color:var(--navy-deep);
-  }
-  .faq-q .plus{font-size:1.2rem;color:var(--blue-bright);transition:transform .2s ease;flex-shrink:0;}
-  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-  .faq-a p{font-size:0.9rem;line-height:1.65;color:var(--ink-soft);padding:0 4px 22px;margin:0;}
-  .faq-wrap{max-width:760px;margin:0 auto;}
-
-  .important-note{
-    background:#FFF8E8;border:1px solid #F5D98A;border-radius:16px;
-    padding:24px 26px;max-width:760px;margin:0 auto;
-  }
-  .important-note h3{font-family:var(--sora);font-weight:700;font-size:0.92rem;margin:0 0 8px;color:#8A5A00;}
-  .important-note p{font-size:0.86rem;line-height:1.6;color:#8A5A00;margin:0;}
-
-  .final-cta .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .final-cta .cta-btn.outline{background:rgba(255,255,255,0.06);color:#fff;border-color:rgba(255,255,255,0.28);}
-
-  @media (max-width:860px){
-    .feat-grid{grid-template-columns:1fr 1fr;}
-    .subject-list-grid{grid-template-columns:1fr 1fr;}
-    .step-row{grid-template-columns:1fr 1fr;}
-    .checklist{grid-template-columns:1fr;}
-  }
-  @media (max-width:520px){
-    .feat-grid{grid-template-columns:1fr;}
-    .subject-list-grid{grid-template-columns:1fr;}
-    .step-row{grid-template-columns:1fr;}
-  }
-
-  /* ---------- Classes page extras ---------- */
-  .badge-row{
-    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;
-    font-family:var(--sora);font-weight:600;font-size:0.8rem;color:var(--ink-faint);
-  }
-  .badge-row .sep{color:var(--line);}
-
-  .schedule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-  .schedule-card{
-    position:relative;
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:24px 22px;display:flex;flex-direction:column;gap:6px;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, opacity .18s ease;
-  }
-  .schedule-card:hover{transform:translateY(-3px);box-shadow:0 20px 34px -20px rgba(10,22,40,0.2);border-color:#D3E0FA;}
-  .schedule-card .subj{font-family:var(--sora);font-weight:700;font-size:1.05rem;color:var(--navy-deep);}
-  .schedule-card .tag{font-size:0.82rem;color:var(--ink-faint);}
-  .schedule-card .time{font-family:var(--sora);font-weight:600;font-size:0.86rem;color:var(--blue-bright);margin:6px 0 12px;}
-  .schedule-card .join{
-    font-family:var(--sora);font-weight:600;font-size:0.84rem;color:#fff;
-    background:var(--blue-bright);border-radius:999px;padding:9px 16px;text-align:center;
-  }
-  .schedule-card.next{border-color:var(--blue-bright);box-shadow:0 16px 30px -18px rgba(37,99,235,0.4);}
-  .schedule-card.next::before{
-    content:"Next Session";position:absolute;top:-11px;left:18px;
-    background:var(--amber);color:#fff;font-family:var(--sora);font-weight:700;
-    font-size:0.66rem;letter-spacing:0.04em;text-transform:uppercase;
-    padding:4px 10px;border-radius:999px;
-  }
-  .schedule-card.past{opacity:0.55;}
-  .schedule-card.past:hover{transform:none;box-shadow:none;border-color:var(--line);}
-  .schedule-card.past .join{background:var(--ink-faint);pointer-events:none;cursor:default;}
-
-  .schedule-foot-note{font-size:0.8rem;line-height:1.6;color:var(--ink-faint);font-style:italic;max-width:680px;margin:22px auto 0;text-align:center;}
-
-  @media (max-width:860px){
-    .schedule-grid{grid-template-columns:1fr 1fr;}
-  }
-  @media (max-width:520px){
-    .schedule-grid{grid-template-columns:1fr;}
   }
 </style>
 <body>
@@ -385,7 +200,7 @@
       <a href="/about/">About</a>
     </nav>
     <div class="header-actions">
-      <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+      <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -399,151 +214,44 @@
     <a href="/competition/">Competition</a>
     <a href="/study-hub/">Study Hub</a>
     <a href="/about/">About</a>
-    <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+    <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap hero-inner">
-    <div class="eyebrow"><span class="dot"></span>JAMB Bootcamp 2027</div>
-    <h1>Zenova Study JAMB Bootcamp 2027</h1>
-    <p class="lead"><strong>Your journey to a higher JAMB score starts here.</strong><br><br>An intensive, structured programme with expert-led lessons, past-question practice, CBT mock exams, and performance tracking — built to help you understand concepts, not just memorize answers.</p>
-    <div class="hero-ctas">
-      <a href="https://zenovastudy.com.ng/jamb-2027/" class="cta-btn">Join the Bootcamp</a>
-      <a href="#introduction" class="cta-btn outline">View Schedule</a>
-    </div>
-    <div class="badge-row">Structured Lessons <span class="sep">·</span> CBT Practice <span class="sep">·</span> Score Higher</div>
+    <div class="eyebrow"><span class="dot"></span>Zenova Study Classes</div>
+    <h1>Structured Preparation. Real Results.</h1>
+    <p class="lead">Two ways to strengthen your JAMB preparation with Zenova Study — join our free UTME class, or register for the structured 2027 Bootcamp.</p>
   </div>
 </section>
 
-<!-- UTME TALKS SCHEDULE -->
-<section id="live-classes">
+<!-- OFFERS -->
+<section class="offers">
   <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">🎤 UTME Talks</span>
-      <h2>Our Biweekly Live Talk Series</h2>
-      <p>Every two weeks, a guest speaker joins the JAMB 2027 Community to break down a topic that matters for your UTME prep — free to attend.</p>
-    </div>
-    <div class="schedule-grid">
-      <div class="schedule-card" data-date="2026-09-05">
-        <span class="tag">UTME Talks 1</span>
-        <span class="subj">How to Start Preparing for UTME 2027</span>
-        <span class="time">Sept 5</span>
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-09-19">
-        <span class="tag">UTME Talks 2</span>
-        <span class="subj">How to Score 300+ in UTME</span>
-        <span class="time">Sept 19</span>
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-10-03">
-        <span class="tag">UTME Talks 3</span>
-        <span class="subj">Common Mistakes UTME Candidates Make</span>
-        <span class="time">Oct 3</span>
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-10-17">
-        <span class="tag">UTME Talks 4</span>
-        <span class="subj">How to Create a Winning UTME Study Plan</span>
-        <span class="time">Oct 17</span>
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-10-31">
-        <span class="tag">UTME Talks 5</span>
-        <span class="subj">How to Balance School &amp; UTME Preparation</span>
-        <span class="time">Oct 31</span>
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="join">Join →</a>
-      </div>
-      <div class="schedule-card" data-date="2026-11-14">
-        <span class="tag">UTME Talks 6</span>
-        <span class="subj">How to Improve Your Weakest Subject</span>
-        <span class="time">Nov 14</span>
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="join">Join →</a>
-      </div>
-    </div>
-    <p class="schedule-foot-note">All sessions hold inside the JAMB 2027 Community on WhatsApp — completely free to join.</p>
-  </div>
-</section>
+    <div class="offer-grid">
 
-<!-- INTRODUCTION -->
-<section class="paper" id="introduction">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Introduction</span>
-      <h2>Your Journey to a Higher JAMB Score Starts Here</h2>
-      <p>Zenova Study JAMB Bootcamp 2027 is an intensive, structured preparation programme built to help you prepare smarter, strengthen your subject knowledge, master CBT techniques, and confidently approach the 2027 UTME. You'll get comprehensive lessons, JAMB-focused revision, past-question practice, CBT exams, performance tracking, and continuous academic support — all structured around the JAMB syllabus.</p>
-      <div class="flow-line" style="font-size:0.92rem;">Understand concepts. Don't just memorize answers.</div>
-    </div>
-  </div>
-</section>
+      <div class="offer-card">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <span class="offer-tag">Free Class</span>
+        <h2>Zenova Study UTME Free Class</h2>
+        <p>Join our free UTME class on WhatsApp and learn alongside thousands of students preparing for the 2027 exam, at no cost.</p>
+        <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Now</a>
+      </div>
 
-<!-- WHY ZENOVA CLASSES -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">What You Get</span>
-      <h2>Everything You Need to Score Higher</h2>
-    </div>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon">📚</div><h3>Expert-Led Lessons</h3><p>Clear, simplified lessons across all your UTME subjects.</p></div>
-      <div class="feat-card"><div class="feat-icon">📝</div><h3>JAMB Past Questions</h3><p>Regular practice with past questions to master question patterns and improve accuracy.</p></div>
-      <div class="feat-card"><div class="feat-icon">💻</div><h3>CBT Practice & Mock Exams</h3><p>Computer-based tests that build speed, accuracy, confidence, and exam readiness.</p></div>
-      <div class="feat-card"><div class="feat-icon">📊</div><h3>Performance Tracking</h3><p>Monitor your scores, spot weak areas, and know what needs more attention.</p></div>
-      <div class="feat-card"><div class="feat-icon">🎯</div><h3>Targeted Revision</h3><p>Focused sessions built around key topics and areas students struggle with most.</p></div>
-      <div class="feat-card"><div class="feat-icon">👨‍🏫</div><h3>Academic Support</h3><p>Ask questions, clarify difficult concepts, and get guidance throughout your prep.</p></div>
-    </div>
-  </div>
-</section>
+      <div class="offer-card featured">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <span class="offer-tag">Bootcamp · Upcoming</span>
+        <h2>Zenova Study Bootcamp Session</h2>
+        <p>Our structured JAMB 2027 Bootcamp is launching soon — comprehensive lessons, past-question practice, CBT mock exams, and performance tracking designed to raise your score. Register now to secure your place.</p>
+        <a href="https://zenovastudy.com.ng/jamb-2027/" class="cta-btn outline">Register Interest</a>
+      </div>
 
-<!-- FAQ -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">FAQ</span>
-      <h2>Frequently Asked Questions</h2>
-    </div>
-    <div class="faq-wrap">
-      <div class="faq-item">
-        <button class="faq-q">What is the Zenova Study JAMB Bootcamp 2027?<span class="plus">+</span></button>
-        <div class="faq-a"><p>It's an intensive, structured preparation programme covering lessons, past-question practice, CBT mock exams, performance tracking, and academic support — all built around the JAMB syllabus.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Who can join the Bootcamp?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Any student preparing for the 2027 UTME, whether you're just starting your preparation or revising what you've already learned.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What subjects are covered?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Lessons are structured across your UTME subjects, following the JAMB syllabus so nothing important is missed.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Are the sessions live or recorded?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Sessions are led by our tutors. We'll clearly indicate whether each session is live, recorded, or both once scheduled.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I practise after each lesson?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. Every lesson is reinforced with past questions, CBT mock exams, and progress tracking through Zenova's Study Hub.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How do I know if I'm improving?<span class="plus">+</span></button>
-        <div class="faq-a"><p>The Bootcamp includes performance tracking so you can monitor your scores, spot weak areas, and focus your revision where it matters most.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="paper">
-  <div class="wrap">
-    <div class="final-cta">
-      <h2>Become a Better, Smarter, More Confident Candidate.</h2>
-      <p>Walk into the CBT centre prepared. Join Zenova Study JAMB Bootcamp 2027 and start your journey to a higher score today.</p>
-      <div class="tagline" style="margin-bottom:22px;">Learn. Practice. Improve. Score Higher.</div>
-      <div class="cta-row">
-        <a href="https://zenovastudy.com.ng/jamb-2027/" class="cta-btn">Join the Bootcamp →</a>
-        <a href="#introduction" class="cta-btn outline">Learn More →</a>
-      </div>
     </div>
   </div>
 </section>
@@ -568,12 +276,12 @@
       <div>
         <h4>Follow Us</h4>
         <ul class="social-list">
-              <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
-          <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
-          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
-          <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
-          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I"><span class="icon">💬</span>WhatsApp</a></li>
-          <li><a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H"><span class="icon">✈️</span>Classes</a></li>
+          <li><a href="https://www.tiktok.com/@zenova.study">TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy">YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813">Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I">WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9">Classes</a></li>
         </ul>
       </div>
       <div>
@@ -605,54 +313,7 @@
       hamburgerBtn.setAttribute('aria-expanded', 'false');
     });
   });
-
-  // UTME Talks — mark past sessions and flag the next upcoming one
-  (function(){
-    const cards = Array.from(document.querySelectorAll('.schedule-card[data-date]'));
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    let nextCard = null;
-    cards.forEach(card => {
-      const sessionDate = new Date(card.dataset.date + 'T00:00:00');
-      if (sessionDate < today){
-        card.classList.add('past');
-        const join = card.querySelector('.join');
-        if (join){
-          join.textContent = 'Completed';
-          join.removeAttribute('href');
-          join.setAttribute('tabindex', '-1');
-        }
-      } else if (!nextCard){
-        nextCard = card;
-      }
-    });
-    if (nextCard) nextCard.classList.add('next');
-  })();
-
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const q = item.querySelector('.faq-q');
-    const a = item.querySelector('.faq-a');
-    q.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(other => {
-        if (other !== item){
-          other.classList.remove('open');
-          other.querySelector('.faq-a').style.maxHeight = null;
-        }
-      });
-      if (isOpen){
-        item.classList.remove('open');
-        a.style.maxHeight = null;
-      } else {
-        item.classList.add('open');
-        a.style.maxHeight = a.scrollHeight + 'px';
-      }
-    });
-  });
 </script>
 
 </body>
 </html>
-
-
