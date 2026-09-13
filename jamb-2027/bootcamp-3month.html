@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootcamp 3-Month — Zenova Study</title>
+<meta name="description" content="Join the Zenova Study JAMB Bootcamp 3-Month plan — ₦10,000/3 months. Choose your department and make payment.">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1628;
+    --navy:#0B1D3A;
+    --blue:#2563EB;
+    --blue-bright:#1E5FFF;
+    --amber:#F5A524;
+    --white:#FFFFFF;
+    --paper:#F7F9FC;
+    --ink:#0A1628;
+    --ink-soft:#54607C;
+    --ink-faint:#8592AD;
+    --line:#E6EAF3;
+    --radius:18px;
+    --sora:'Sora', sans-serif;
+    --dm:'DM Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--dm);
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .logo{
+    font-family:var(--sora);font-weight:800;font-size:1.1rem;
+    letter-spacing:0.01em;color:var(--navy-deep);
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark-img{width:32px;height:32px;object-fit:contain;}
+  .footer-logo-img{width:34px;height:34px;object-fit:contain;}
+  .social-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .social-list a{display:flex;align-items:center;gap:10px;font-size:0.89rem;}
+  nav.desktop-nav{display:flex;align-items:center;gap:32px;}
+  nav.desktop-nav a{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;
+    color:var(--ink-soft);transition:color .15s ease;
+  }
+  nav.desktop-nav a:hover{color:var(--blue-bright);}
+  .cta-btn{
+    font-family:var(--sora);font-weight:700;font-size:0.86rem;
+    background:var(--blue-bright);color:#fff;
+    padding:10px 20px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .cta-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(30,95,255,0.6);}
+  .cta-btn.outline{background:transparent;color:var(--navy-deep);border:1px solid var(--line);}
+  .cta-btn.outline:hover{border-color:var(--blue-bright);color:var(--blue-bright);box-shadow:none;}
+  .header-actions{display:flex;align-items:center;gap:16px;}
+
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;
+  }
+  .hamburger span{width:21px;height:2px;background:var(--navy-deep);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-panel{
+    display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .mobile-panel.open{max-height:520px;}
+  .mobile-panel a{
+    font-family:var(--sora);font-weight:600;font-size:1rem;color:var(--navy-deep);
+    padding:15px 24px;border-bottom:1px solid var(--line);
+  }
+  .mobile-panel .cta-btn{margin:16px 24px 20px;text-align:center;}
+
+  @media (max-width:860px){
+    nav.desktop-nav{display:none;}
+    .header-actions .cta-btn{display:none;}
+    .hamburger{display:flex;}
+    .mobile-panel{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:96px 0 32px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+    width:900px;height:500px;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.10), transparent 72%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--sora);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .hero h1{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.9rem,4.2vw,2.7rem);
+    line-height:1.16;margin:0 0 16px;letter-spacing:-0.01em;color:var(--navy-deep);
+  }
+  .hero p.lead{font-size:1.03rem;line-height:1.65;color:var(--ink-soft);max-width:520px;margin:0 auto 20px;}
+  .price-tag{
+    display:inline-flex;align-items:baseline;gap:6px;
+    font-family:var(--sora);color:var(--navy-deep);
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:10px 22px;
+  }
+  .price-tag .amount{font-weight:800;font-size:1.35rem;}
+  .price-tag .period{font-weight:600;font-size:0.86rem;color:var(--ink-faint);}
+  @media (max-width:860px){.hero{padding:56px 0 24px;}}
+
+  /* ---------- DEPARTMENT SELECT ---------- */
+  section.select{padding:52px 0 100px;}
+  .select-head{max-width:560px;margin:0 auto 44px;text-align:center;}
+  .select-head h2{
+    font-family:var(--sora);font-weight:800;font-size:clamp(1.4rem,2.6vw,1.8rem);
+    margin:0 0 10px;color:var(--navy-deep);letter-spacing:-0.01em;
+  }
+  .select-head p{font-size:0.95rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  .dept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1040px;margin:0 auto;}
+  .dept-card{
+    background:#fff;border:1px solid var(--line);border-radius:22px;
+    padding:36px 30px;display:flex;flex-direction:column;gap:14px;text-align:left;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .dept-card:hover{transform:translateY(-4px);box-shadow:0 24px 40px -24px rgba(10,22,40,0.2);border-color:#D3E0FA;}
+  .dept-mark{
+    width:44px;height:44px;border-radius:12px;background:#EAF0FF;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--sora);font-weight:800;font-size:0.95rem;color:var(--blue-bright);
+  }
+  .dept-card h3{font-family:var(--sora);font-weight:700;font-size:1.12rem;margin:0;color:var(--navy-deep);}
+  .dept-card p{font-size:0.9rem;line-height:1.6;color:var(--ink-soft);margin:0;flex-grow:1;}
+  .dept-card .cta-btn{align-self:flex-start;margin-top:4px;}
+
+  .plan-note{
+    max-width:640px;margin:44px auto 0;text-align:center;
+    font-size:0.85rem;line-height:1.65;color:var(--ink-faint);font-style:italic;
+  }
+
+  @media (max-width:860px){
+    .dept-grid{grid-template-columns:1fr;}
+    section.select{padding:36px 0 72px;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#8FA3CC;padding:56px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
+  .footer-logo{font-family:var(--sora);font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  footer p.desc{font-size:0.88rem;line-height:1.6;max-width:280px;}
+  footer h4{font-family:var(--sora);font-weight:700;font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:#fff;margin:0 0 16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{font-size:0.89rem;transition:color .15s ease;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.82rem;
+  }
+  @media (max-width:860px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="/" class="logo"><img src="logo.png" alt="Zenova Study" class="logo-mark-img">Zenova Study</a>
+    <nav class="desktop-nav">
+      <a href="/">Home</a>
+      <a href="/jamb-2027/">JAMB 2027</a>
+      <a href="/classes/">Classes</a>
+      <a href="/resources/">Resources</a>
+      <a href="/competition/">Competition</a>
+      <a href="/study-hub/">Study Hub</a>
+      <a href="/about/">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#departments" class="cta-btn">Choose Department</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="/">Home</a>
+    <a href="/jamb-2027/">JAMB 2027</a>
+    <a href="/classes/">Classes</a>
+    <a href="/resources/">Resources</a>
+    <a href="/competition/">Competition</a>
+    <a href="/study-hub/">Study Hub</a>
+    <a href="/about/">About</a>
+    <a href="#departments" class="cta-btn">Choose Department</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="dot"></span>Bootcamp 3-Month</div>
+    <h1>Zenova Study Bootcamp — 3-Month Plan</h1>
+    <p class="lead">Get full access to the Zenova Study JAMB Bootcamp for 3 months — structured lessons, past-question practice, CBT mock exams, and performance tracking built around your department.</p>
+    <div class="price-tag"><span class="amount">₦10,000</span><span class="period">/ 3 months</span></div>
+  </div>
+</section>
+
+<!-- DEPARTMENT SELECT -->
+<section class="select" id="departments">
+  <div class="wrap">
+    <div class="select-head">
+      <h2>Choose Your Department and Make Payment</h2>
+      <p>Select the department that matches your subject combination to proceed to payment.</p>
+    </div>
+    <div class="dept-grid">
+
+      <div class="dept-card">
+        <div class="dept-mark">SCI</div>
+        <h3>Science</h3>
+        <p>For students offering Science subjects such as Physics, Chemistry, Biology, and Mathematics.</p>
+        <a href="https://flutterwave.com/pay/premiumsciencestudent" class="cta-btn">Pay ₦10,000 →</a>
+      </div>
+
+      <div class="dept-card">
+        <div class="dept-mark">ART</div>
+        <h3>Arts</h3>
+        <p>For students offering Arts and Humanities subjects such as Literature, Government, and CRS/IRS.</p>
+        <a href="https://flutterwave.com/pay/premiumartsstudent" class="cta-btn">Pay ₦10,000 →</a>
+      </div>
+
+      <div class="dept-card">
+        <div class="dept-mark">COM</div>
+        <h3>Commercial</h3>
+        <p>For students offering Commercial subjects such as Economics, Accounting, and Commerce.</p>
+        <a href="https://flutterwave.com/pay/premiumcommercialstudent" class="cta-btn">Pay ₦10,000 →</a>
+      </div>
+
+    </div>
+    <p class="plan-note">Payments are processed securely via Flutterwave. Your Bootcamp access covers 3 months at ₦10,000 per department.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
+        <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/about/#founder">Meet the Founder</a></li>
+          <li><a href="/support/">Support Zenova</a></li>
+          <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <ul class="social-list">
+          <li><a href="https://www.tiktok.com/@zenova.study">TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy">YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813">Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zenova Study. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
