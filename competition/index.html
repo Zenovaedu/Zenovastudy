@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Competition — Zenova Study</title>
-<meta name="description" content="The Zenova JAMB Competition — register now and test your knowledge against other students. Competition day: August 29, 2026.">
+<title>UTME CBT Challenge — Zenova Study</title>
+<meta name="description" content="Zenova Study UTME CBT Challenge. Registration opens Nov 10 and closes Nov 18. Win up to ₦5,000.">
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -383,6 +383,86 @@
     .prep-grid{grid-template-columns:1fr;}
     .date-row{flex-direction:column;align-items:center;}
   }
+
+  /* ---------- UTME CBT Challenge ---------- */
+  .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:40px;max-width:1040px;}
+  .hero-grid .hero-inner{margin:0;max-width:none;text-align:left;}
+  .hero-grid .hero-inner p.lead{margin-left:0;margin-right:0;margin-bottom:26px;}
+  .hero-zen{position:relative;display:flex;justify-content:center;z-index:1;}
+  .hero-zen::before{
+    content:"";position:absolute;inset:6% 4%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.16), transparent 75%);
+  }
+  .hero-zen img{position:relative;width:min(340px,100%);height:auto;filter:drop-shadow(0 22px 22px rgba(10,22,40,0.16));animation:zenFloat 5s ease-in-out infinite;}
+  @keyframes zenFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @media (prefers-reduced-motion:reduce){.hero-zen img{animation:none;}}
+
+  .cd-label{font-family:var(--sora);font-weight:700;font-size:0.85rem;color:var(--navy-deep);margin:0 0 12px;}
+  .countdown{display:flex;gap:12px;flex-wrap:nowrap;}
+  .cd-box{
+    background:linear-gradient(135deg,var(--navy-deep),#12275A);color:#fff;border-radius:16px;
+    padding:14px 8px;min-width:84px;text-align:center;
+  }
+  .cd-num{font-family:var(--sora);font-weight:800;font-size:1.9rem;line-height:1;display:block;}
+  .cd-unit{font-size:0.74rem;color:#8FB0FF;margin-top:6px;display:block;letter-spacing:0.04em;}
+  .cd-note{max-width:480px;margin:22px 0 0;}
+  .cd-note strong{display:block;font-family:var(--sora);font-weight:700;font-size:1rem;color:var(--navy-deep);margin-bottom:6px;}
+  .cd-note p{margin:0 0 18px;font-size:0.95rem;line-height:1.6;color:var(--ink-soft);}
+
+  .prize-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:900px;margin:0 auto;}
+  .prize-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 24px;text-align:center;}
+  .prize-card.first{background:linear-gradient(135deg,var(--navy-deep),#12275A);border-color:transparent;color:#fff;}
+  .prize-rank{
+    width:48px;height:48px;border-radius:14px;background:#EAF0FF;color:var(--blue-bright);margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;font-family:var(--sora);font-weight:800;font-size:1.1rem;
+  }
+  .prize-card.first .prize-rank{background:rgba(255,255,255,0.12);color:#fff;}
+  .prize-place{font-family:var(--sora);font-weight:600;font-size:0.9rem;color:var(--ink-soft);margin:0 0 6px;}
+  .prize-card.first .prize-place{color:#8FB0FF;}
+  .prize-amount{font-family:var(--sora);font-weight:800;font-size:1.9rem;margin:0;color:var(--navy-deep);}
+  .prize-card.first .prize-amount{color:#fff;}
+
+  .how-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;max-width:1040px;margin:0 auto;}
+  .how-zen{position:relative;display:flex;justify-content:center;}
+  .how-zen::before{
+    content:"";position:absolute;inset:4% 0;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.14), transparent 75%);
+  }
+  .how-zen img{position:relative;width:min(480px,100%);height:auto;filter:drop-shadow(0 22px 22px rgba(10,22,40,0.14));}
+  .how-copy h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3vw,2.15rem);margin:0 0 6px;color:var(--navy-deep);letter-spacing:-0.01em;}
+  .steps{list-style:none;counter-reset:step;padding:0;margin:22px 0 28px;display:flex;flex-direction:column;gap:16px;}
+  .steps li{counter-increment:step;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;font-size:0.95rem;line-height:1.6;color:var(--ink-soft);}
+  .steps li::before{
+    content:counter(step);width:36px;height:36px;border-radius:10px;background:#EAF0FF;color:var(--blue-bright);
+    display:flex;align-items:center;justify-content:center;font-family:var(--sora);font-weight:800;font-size:0.9rem;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:28px;}
+    .hero-grid .hero-inner{text-align:center;}
+    .hero-grid .hero-inner p.lead{margin-left:auto;margin-right:auto;}
+    .countdown{justify-content:center;}
+    .cd-note{margin-left:auto;margin-right:auto;}
+    .hero-zen img{width:min(210px,58%);}
+    .prize-grid{grid-template-columns:1fr;max-width:420px;}
+    .how-grid{grid-template-columns:1fr;gap:28px;}
+    .how-zen img{width:min(320px,90%);}
+  }
+  @media (max-width:520px){
+    .countdown{gap:8px;}
+    .cd-box{min-width:0;flex:1;padding:12px 4px;}
+    .cd-num{font-size:1.45rem;}
+  }
+
+  .footer-zen{display:inline-flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px;}
+  .footer-zen-img{position:relative;display:block;}
+  .footer-zen-img::before{
+    content:"";position:absolute;inset:-6%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.40), rgba(143,176,255,0.08) 70%, transparent 100%);
+  }
+  .footer-zen-img img{position:relative;width:130px;height:auto;}
+  .footer-zen-label{font-family:var(--sora);font-weight:700;font-size:0.86rem;color:#fff;transition:color .15s ease;}
+  .footer-zen:hover .footer-zen-label{color:var(--amber);}
 </style>
 <body>
 
@@ -413,81 +493,69 @@
     <a href="#top">Competition</a>
     <a href="/study-hub/">Study Hub</a>
     <a href="/about/">About</a>
-    <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+    <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap hero-inner">
-    <div class="eyebrow"><span class="dot"></span>🏆 Zenova JAMB Competition — First Edition</div>
-    <h1>Meet the Winners.</h1>
-    <p class="lead">The first edition of the Zenova JAMB Competition is complete. Here's how our top students performed — and what participants had to say about the experience.</p>
-    <div class="status-badge"><span class="pulse"></span>Results Announced</div>
-    <div class="date-row">
-      <div class="date-chip" style="background:var(--paper);border-color:var(--line);"><div class="dc-label" style="color:var(--ink-faint);">Registered</div><div class="dc-value" style="color:var(--navy-deep);">164 Students</div></div>
-      <div class="date-chip" style="background:var(--paper);border-color:var(--line);"><div class="dc-label" style="color:var(--ink-faint);">Took The Exam</div><div class="dc-value" style="color:var(--navy-deep);">94 Students</div></div>
+  <div class="wrap hero-grid">
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="dot"></span>Zenova Study</div>
+      <h1>UTME CBT Challenge</h1>
+      <p class="lead">Registration opens Nov 10 and closes Nov 18.</p>
+      <p class="cd-label" id="cdLabel">Opens in:</p>
+      <div class="countdown" id="countdown" aria-live="off">
+        <div class="cd-box"><span class="cd-num" id="cdDays">--</span><span class="cd-unit">days</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdHours">--</span><span class="cd-unit">hours</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdMins">--</span><span class="cd-unit">mins</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdSecs">--</span><span class="cd-unit">secs</span></div>
+      </div>
+      <div class="cd-note">
+        <strong id="cdNoteTitle">Registration opens Nov 10</strong>
+        <p id="cdNoteText">Create a free account now so you are ready to register on the day.</p>
+        <a href="https://hub.zenovastudy.com.ng/#/compete" class="cta-btn" id="cdBtn">Create a Free Account</a>
+      </div>
+    </div>
+    <div class="hero-zen">
+      <img src="zen.png" width="480" height="681" alt="Zen, the Zenova Study mascot, giving a thumbs up" fetchpriority="high">
     </div>
   </div>
 </section>
 
-<!-- WINNERS -->
+<!-- PRIZES -->
 <section class="paper">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-eyebrow">First Edition Results</span>
-      <h2>Top 10 Finishers</h2>
-      <p>Ranked by score, with time of completion used as tiebreaker.</p>
+      <span class="section-eyebrow">Prizes</span>
+      <h2>What You Can Win</h2>
     </div>
-    <table class="dates-table">
-      <thead>
-        <tr><th>Position</th><th>Student</th><th>Score</th><th style="text-align:right;">Time Finished</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="event">🥇 1st</td><td>Obelawo Sherifat</td><td>386.67/400 (97%)</td><td class="date">30 Aug, 12:18</td></tr>
-        <tr><td class="event">🥈 2nd</td><td>Ekeke Caleb</td><td>386.67/400 (97%)</td><td class="date">30 Aug, 15:17</td></tr>
-        <tr><td class="event">🥉 3rd</td><td>George Deke</td><td>386.67/400 (97%)</td><td class="date">31 Aug, 19:02</td></tr>
-        <tr><td class="event">4th</td><td>Wisdom Light</td><td>386.67/400 (97%)</td><td class="date">1 Sept, 09:59</td></tr>
-        <tr><td class="event">5th</td><td>Waribo Victory</td><td>383.33/400 (96%)</td><td class="date">29 Aug, 15:48</td></tr>
-        <tr><td class="event">6th</td><td>Okpara Chibueze</td><td>380.83/400 (95%)</td><td class="date">30 Aug, 01:40</td></tr>
-        <tr><td class="event">7th</td><td>Momodu Rex</td><td>379.17/400 (95%)</td><td class="date">30 Aug, 14:24</td></tr>
-        <tr><td class="event">8th</td><td>Oshiobugie Godsgift</td><td>372.50/400 (93%)</td><td class="date">30 Aug, 01:06</td></tr>
-        <tr><td class="event">9th</td><td>Divine Charles-Umege</td><td>361.67/400 (90%)</td><td class="date">31 Aug, 16:13</td></tr>
-        <tr><td class="event">10th</td><td>Emmanuel Iragbogie</td><td>355.83/400 (89%)</td><td class="date">30 Aug, 00:17</td></tr>
-      </tbody>
-    </table>
+    <div class="prize-grid">
+      <div class="prize-card first"><div class="prize-rank">1</div><p class="prize-place">1st place</p><p class="prize-amount">₦5,000</p></div>
+      <div class="prize-card"><div class="prize-rank">2</div><p class="prize-place">2nd place</p><p class="prize-amount">₦3,000</p></div>
+      <div class="prize-card"><div class="prize-rank">3</div><p class="prize-place">3rd place</p><p class="prize-amount">₦2,000</p></div>
+    </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- HOW IT WORKS -->
 <section>
   <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">In Their Words</span>
-      <h2>What Students Said</h2>
-      <p>Feedback from students who took part in the competition.</p>
-    </div>
-    <div class="testimonial-grid">
-      <div class="testimonial-card"><p>First I was nervous about taking the exam, but as I continued, I grew more confident. I enjoyed testing my knowledge and challenging myself. The competition helped me identify my strengths and the areas where I need to improve. It also motivated me to study harder and prepare better for future exams.</p></div>
-      <div class="testimonial-card"><p>The competition was good and simple, although I got 300 😢. It helps students get prepared for likely questions we can see in our exam.</p></div>
-      <div class="testimonial-card"><p>It is truly amazing, it was an awesome experience. The exam felt real.</p></div>
-      <div class="testimonial-card"><p>It was easier than I expected.</p></div>
-      <div class="testimonial-card"><p>It has shown me how JAMB is.</p></div>
-      <div class="testimonial-card"><p>Nice interface, user friendly.</p></div>
-      <div class="testimonial-card"><p>The competition made me recognize my weak points in my study areas.</p></div>
-      <div class="testimonial-card"><p>My experience was very educative and splendid. I worked under pressure and at last saw my results and noticed my capability. Thanks Zenova for this opportunity.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="paper">
-  <div class="wrap">
-    <div class="final-cta">
-      <h2>The Next Edition Is Coming.</h2>
-      <p>Congratulations to all our winners and participants. Stay tuned for the next Zenova JAMB Competition.</p>
-      <div class="cta-row">
-        <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova →</a>
+    <div class="how-grid">
+      <div class="how-zen">
+        <img src="zen-class.png" width="560" height="514" alt="Zen pointing at a whiteboard that reads Study Smarter, Win Bigger" loading="lazy">
+      </div>
+      <div class="how-copy">
+        <h2>How It Works</h2>
+        <ol class="steps">
+          <li><span>Register between Nov 10 and Nov 18. You need a free account and a WhatsApp number we can pay your prize to.</span></li>
+          <li><span>Pick your 4 subjects when you register. English is compulsory.</span></li>
+          <li><span>The challenge is on Nov 21. You get one attempt and 2 hours once you start.</span></li>
+          <li><span>It uses the same exam screen as the Monthly Mock: 60 English questions and 40 for each other subject, scored out of 400.</span></li>
+          <li><span>Ranking is by score. If scores are tied, the faster finish wins.</span></li>
+          <li><span>Final rankings and answers are published after the challenge closes. Winners are checked, then contacted on WhatsApp.</span></li>
+        </ol>
+        <a href="https://wa.me/2347073607977?text=Hello%2C%20I%20have%20a%20question%20about%20the%20UTME%20CBT%20Challenge" class="cta-btn outline">Questions? Message us on WhatsApp</a>
       </div>
     </div>
   </div>
@@ -499,33 +567,38 @@
       <div>
         <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
         <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+        <a href="/meet-zen/" class="footer-zen">
+          <span class="footer-zen-img"><img src="zen.png" width="480" height="681" alt="Zen, the Zenova Study mascot" loading="lazy"></span>
+          <span class="footer-zen-label">Meet Zen →</span>
+        </a>
       </div>
       <div>
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="about.html#founder">Meet the Founder</a></li>
-          <li><a href="#">Support Zenova</a></li>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/about/#founder">Meet the Founder</a></li>
+          <li><a href="/meet-zen/">Meet Zen</a></li>
+          <li><a href="/support/">Support Zenova</a></li>
           <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
         </ul>
       </div>
       <div>
         <h4>Follow Us</h4>
         <ul class="social-list">
-         <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
-          <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
-          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
-          <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
-          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I"><span class="icon">💬</span>WhatsApp</a></li>
-          <li><a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H"><span class="icon">✈️</span>Classes</a></li>
+         <li><a href="https://www.tiktok.com/@zenova.study">TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶</span>YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813">Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I">WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9">Classes</a></li>
         </ul>
       </div>
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -550,10 +623,48 @@
       hamburgerBtn.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // UTME CBT Challenge countdown (Nigeria time, WAT = UTC+1)
+  (function(){
+    const OPEN  = new Date('2026-11-10T00:00:00+01:00').getTime();
+    const CLOSE = new Date('2026-11-19T00:00:00+01:00').getTime(); // end of Nov 18
+    const $ = id => document.getElementById(id);
+    const pad = n => String(n).padStart(2,'0');
+    function render(ms){
+      const t = Math.max(0, Math.floor(ms/1000));
+      $('cdDays').textContent  = Math.floor(t/86400);
+      $('cdHours').textContent = pad(Math.floor(t%86400/3600));
+      $('cdMins').textContent  = pad(Math.floor(t%3600/60));
+      $('cdSecs').textContent  = pad(t%60);
+    }
+    function tick(){
+      const now = Date.now();
+      if (now < OPEN){
+        $('cdLabel').textContent = 'Opens in:';
+        render(OPEN - now);
+      } else if (now < CLOSE){
+        $('cdLabel').textContent = 'Registration is open. Closes in:';
+        $('cdNoteTitle').textContent = 'Registration is open until Nov 18';
+        $('cdNoteText').textContent = 'Create your free account and register now.';
+        $('cdBtn').textContent = 'Register Now';
+        render(CLOSE - now);
+      } else {
+        $('cdLabel').textContent = 'Registration has closed.';
+        $('countdown').style.display = 'none';
+        $('cdNoteTitle').textContent = 'Registration is closed';
+        $('cdNoteText').textContent = 'Thanks to everyone who registered.';
+        $('cdBtn').style.display = 'none';
+        clearInterval(timer);
+      }
+    }
+    const timer = setInterval(tick, 1000);
+    tick();
+  })();
 </script>
 
 </body>
 </html>
+
 
 
 
