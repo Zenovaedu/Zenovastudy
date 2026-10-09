@@ -184,6 +184,33 @@
   @media (max-width:520px){
     .footer-grid{grid-template-columns:1fr;}
   }
+
+  /* ---------- Zen mascot ---------- */
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:36px;max-width:1040px;}
+  .hero-grid .hero-inner{margin:0;max-width:none;text-align:left;}
+  .hero-grid .hero-inner p.lead{margin-left:0;margin-right:0;}
+  .hero-zen{position:relative;display:flex;justify-content:center;z-index:1;}
+  .hero-zen::before{
+    content:"";position:absolute;inset:6% 2%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.14), transparent 75%);
+  }
+  .hero-zen img{position:relative;width:min(470px,100%);height:auto;filter:drop-shadow(0 22px 22px rgba(10,22,40,0.14));}
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:24px;}
+    .hero-grid .hero-inner{text-align:center;}
+    .hero-grid .hero-inner p.lead{margin-left:auto;margin-right:auto;}
+    .hero-zen img{width:min(320px,92%);}
+  }
+
+  .footer-zen{display:inline-flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px;}
+  .footer-zen-img{position:relative;display:block;}
+  .footer-zen-img::before{
+    content:"";position:absolute;inset:-6%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.40), rgba(143,176,255,0.08) 70%, transparent 100%);
+  }
+  .footer-zen-img img{position:relative;width:130px;height:auto;}
+  .footer-zen-label{font-family:var(--sora);font-weight:700;font-size:0.86rem;color:#fff;transition:color .15s ease;}
+  .footer-zen:hover .footer-zen-label{color:var(--amber);}
 </style>
 <body>
 
@@ -220,10 +247,15 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap hero-inner">
+  <div class="wrap hero-grid">
+    <div class="hero-inner">
     <div class="eyebrow"><span class="dot"></span>Zenova Study Classes</div>
     <h1>Structured Preparation. Real Results.</h1>
     <p class="lead">Two ways to strengthen your JAMB preparation with Zenova Study — join our free UTME class, or register for the structured 2027 Bootcamp.</p>
+    </div>
+    <div class="hero-zen">
+      <img src="zen-class.png" width="560" height="514" alt="Zen pointing at a whiteboard that reads Study Smarter, Win Bigger" fetchpriority="high">
+    </div>
   </div>
 </section>
 
@@ -262,6 +294,10 @@
       <div>
         <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
         <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+        <a href="/meet-zen/" class="footer-zen">
+          <span class="footer-zen-img"><img src="zen.png" width="480" height="681" alt="Zen, the Zenova Study mascot" loading="lazy"></span>
+          <span class="footer-zen-label">Meet Zen →</span>
+        </a>
       </div>
       <div>
         <h4>Quick Links</h4>
@@ -269,6 +305,7 @@
           <li><a href="/about/">About Us</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/about/#founder">Meet the Founder</a></li>
+          <li><a href="/meet-zen/">Meet Zen</a></li>
           <li><a href="/support/">Support Zenova</a></li>
           <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
         </ul>
@@ -317,3 +354,4 @@
 
 </body>
 </html>
+
