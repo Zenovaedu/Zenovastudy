@@ -152,6 +152,48 @@
   @media (max-width:520px){
     .footer-grid{grid-template-columns:1fr;}
   }
+
+  /* ---------- Zen mascot + hub features ---------- */
+  .hub-grid{display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:36px;max-width:1040px;margin:0 auto;position:relative;z-index:1;}
+  .hub-grid .hub-card{margin:0;max-width:none;}
+  .hub-zen{position:relative;display:flex;justify-content:center;}
+  .hub-zen::before{
+    content:"";position:absolute;inset:6% 0;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.16), transparent 75%);
+  }
+  .hub-zen img{position:relative;width:min(320px,100%);height:auto;filter:drop-shadow(0 22px 22px rgba(10,22,40,0.16));animation:zenFloat 5s ease-in-out infinite;}
+  @keyframes zenFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @media (prefers-reduced-motion:reduce){.hub-zen img{animation:none;}}
+
+  .hub-card p.hub-more{margin:0 0 18px;font-size:0.95rem;}
+  .hub-features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 34px;}
+  .hub-feat{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 10px;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    font-family:var(--sora);font-weight:700;font-size:0.84rem;color:var(--navy-deep);
+  }
+  .hub-feat-icon{width:40px;height:40px;border-radius:12px;background:#EAF0FF;display:flex;align-items:center;justify-content:center;}
+  .hub-feat-icon svg{width:21px;height:21px;stroke:var(--blue-bright);}
+
+  @media (max-width:860px){
+    .hub-grid{grid-template-columns:1fr;gap:20px;}
+    .hub-zen{order:-1;}
+    .hub-zen img{width:min(190px,55%);}
+  }
+  @media (max-width:520px){
+    .hub-features{grid-template-columns:1fr;}
+    .hub-feat{flex-direction:row;justify-content:flex-start;padding:12px 16px;}
+  }
+
+  .footer-zen{display:inline-flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px;}
+  .footer-zen-img{position:relative;display:block;}
+  .footer-zen-img::before{
+    content:"";position:absolute;inset:-6%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.40), rgba(143,176,255,0.08) 70%, transparent 100%);
+  }
+  .footer-zen-img img{position:relative;width:130px;height:auto;}
+  .footer-zen-label{font-family:var(--sora);font-weight:700;font-size:0.86rem;color:#fff;transition:color .15s ease;}
+  .footer-zen:hover .footer-zen-label{color:var(--amber);}
 </style>
 <body>
 
@@ -189,12 +231,22 @@
 <!-- MAIN -->
 <section class="hub-section" id="top">
   <div class="wrap">
+    <div class="hub-grid">
     <div class="hub-card">
       <span class="hub-tag">Beta</span>
       <h1>Do You Want to Practice for UTME/JAMB?</h1>
-      <p>Take a time-based practice test built to reflect the real UTME experience. Work through timed questions across your subjects, get instant feedba
-    ck, and track how your speed and accuracy improve with every attempt — helping you walk into the CBT centre fully prepared.</p>
-      <a href="https://test.zenovastudy.com.ng" class="cta-btn">Practice Now →</a>
+      <p>Take a time-based practice test built to reflect the real UTME experience. Work through timed questions across your subjects, get instant feedback, and track how your speed and accuracy improve with every attempt — helping you walk into the CBT centre fully prepared.</p>
+      <p class="hub-more">Beyond practice tests, you can also read summaries, listen to audio, and take quizzes on the Study Hub.</p>
+      <div class="hub-features">
+        <div class="hub-feat"><span class="hub-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>Read summaries</div>
+        <div class="hub-feat"><span class="hub-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2z"/><path d="M3 15a2 2 0 0 0 2 2h1v-5H5a2 2 0 0 0-2 2z"/></svg></span>Listen to audio</div>
+        <div class="hub-feat"><span class="hub-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span>Take quizzes</div>
+      </div>
+      <a href="https://hub.zenovastudy.com.ng/index.html" class="cta-btn">Practice Now →</a>
+    </div>
+    <div class="hub-zen">
+      <img src="zen-lekki.png" width="560" height="781" alt="Zen wearing headphones and reading a book" fetchpriority="high">
+    </div>
     </div>
   </div>
 </section>
@@ -205,6 +257,10 @@
       <div>
         <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
         <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+        <a href="/meet-zen/" class="footer-zen">
+          <span class="footer-zen-img"><img src="zen.png" width="480" height="681" alt="Zen, the Zenova Study mascot" loading="lazy"></span>
+          <span class="footer-zen-label">Meet Zen →</span>
+        </a>
       </div>
       <div>
         <h4>Quick Links</h4>
@@ -212,6 +268,7 @@
           <li><a href="/about/">About Us</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/about/#founder">Meet the Founder</a></li>
+          <li><a href="/meet-zen/">Meet Zen</a></li>
           <li><a href="/support/">Support Zenova</a></li>
           <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
         </ul>
@@ -219,19 +276,19 @@
       <div>
         <h4>Follow Us</h4>
         <ul class="social-list">
-          <li><a href="#">TikTok</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">YouTube</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">WhatsApp</a></li>
-          <li><a href="#">Telegram</a></li>
+          <li><a href="https://www.tiktok.com/@zenova.study">TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy">YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813">Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I">WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9">Classes</a></li>
         </ul>
       </div>
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="/terms-of-service/">Terms of Service</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -260,3 +317,4 @@
 
 </body>
 </html>
+
