@@ -366,6 +366,53 @@
     .why-grid-5{grid-template-columns:1fr;}
     .step-row-6{grid-template-columns:1fr;}
   }
+
+  /* ---------- Zen mascot ---------- */
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px;max-width:1040px;}
+  .hero-grid .hero-inner{margin:0;max-width:none;text-align:left;}
+  .hero-grid .hero-inner p.lead{margin-left:0;margin-right:0;}
+  .hero-grid .hero-ctas{justify-content:flex-start;}
+  .hero-zen{position:relative;display:flex;justify-content:center;z-index:1;}
+  .hero-zen::before{
+    content:"";position:absolute;inset:6% 4%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.16), transparent 75%);
+  }
+  .hero-zen img{position:relative;width:min(340px,100%);height:auto;filter:drop-shadow(0 22px 22px rgba(10,22,40,0.16));animation:zenFloat 5s ease-in-out infinite;}
+  @keyframes zenFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @media (prefers-reduced-motion:reduce){.hero-zen img{animation:none;}}
+
+  .final-cta.has-zen{display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:32px;text-align:left;}
+  .final-cta.has-zen p{margin-left:0;margin-right:0;}
+  .final-cta.has-zen .cta-row{justify-content:flex-start;}
+  .final-zen{position:relative;display:flex;justify-content:center;}
+  .final-zen::before{
+    content:"";position:absolute;inset:4%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.55), rgba(143,176,255,0.12) 70%, transparent 100%);
+  }
+  .final-zen img{position:relative;width:min(250px,100%);height:auto;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:24px;}
+    .hero-grid .hero-inner{text-align:center;}
+    .hero-grid .hero-inner p.lead{margin-left:auto;margin-right:auto;}
+    .hero-grid .hero-ctas{justify-content:center;}
+    .hero-zen img{width:min(220px,60%);}
+    .final-cta.has-zen{grid-template-columns:1fr;text-align:center;gap:24px;}
+    .final-cta.has-zen p{margin-left:auto;margin-right:auto;}
+    .final-cta.has-zen .cta-row{justify-content:center;}
+    .final-zen{order:-1;}
+    .final-zen img{width:min(170px,50%);}
+  }
+
+  .footer-zen{display:inline-flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px;}
+  .footer-zen-img{position:relative;display:block;}
+  .footer-zen-img::before{
+    content:"";position:absolute;inset:-6%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.40), rgba(143,176,255,0.08) 70%, transparent 100%);
+  }
+  .footer-zen-img img{position:relative;width:130px;height:auto;}
+  .footer-zen-label{font-family:var(--sora);font-weight:700;font-size:0.86rem;color:#fff;transition:color .15s ease;}
+  .footer-zen:hover .footer-zen-label{color:var(--amber);}
 </style>
 <body>
 
@@ -396,13 +443,14 @@
     <a href="/competition/">Competition</a>
     <a href="/study-hub/">Study Hub</a>
     <a href="/about/">About</a>
-    <a href="https://chat.whatsapp.com/CPx43dsHQmAGplm7Q0XU2H" class="cta-btn">Join Zenova</a>
+    <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap hero-inner">
+  <div class="wrap hero-grid">
+    <div class="hero-inner">
     <div class="eyebrow"><span class="dot"></span>Resources</div>
     <h1>Everything You Need to Study Smarter</h1>
     <p class="lead">Free study resources to help you stay organized, understand your subjects, and prepare with confidence — schemes of work, ebooks, handbooks, and more.</p>
@@ -411,6 +459,10 @@
       <a href="#scheme-of-work" class="cta-btn outline">View Scheme of Work</a>
     </div>
     <div class="badge-row">Free Resources <span class="sep">·</span> Easy to Access <span class="sep">·</span> Built for Students</div>
+    </div>
+    <div class="hero-zen">
+      <img src="zen-lekki.png" width="560" height="781" alt="Zen wearing headphones and reading a book" fetchpriority="high">
+    </div>
   </div>
 </section>
 
@@ -474,116 +526,21 @@
   </div>
 </section>
 
-<!-- SCHEME OF WORK INTRO -->
-<section class="paper">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Scheme of Work</span>
-      <h2>Plan Your Study. Stay on Track.</h2>
-      <p>Not sure what to study next? The Zenova Study Schemes of Work help you organize your preparation by giving you a structured overview of the topics you need to cover. Instead of studying randomly, use the scheme of work to understand what you need to learn, plan your study sessions, and track your progress.</p>
-    </div>
-    <div class="section-head">
-      <span class="section-eyebrow">Why Use a Scheme of Work?</span>
-    </div>
-    <div class="why-grid-5">
-      <div class="why-item"><div class="why-num">01</div><h3>Know What to Study</h3><p>See the topics you need to cover across your subjects.</p></div>
-      <div class="why-item"><div class="why-num">02</div><h3>Stay Organized</h3><p>Follow a structured learning path instead of studying randomly.</p></div>
-      <div class="why-item"><div class="why-num">03</div><h3>Track Your Progress</h3><p>Mark topics as you complete them and see how far you've come.</p></div>
-      <div class="why-item"><div class="why-num">04</div><h3>Plan Your Revision</h3><p>Identify topics you've completed and areas you still need to revise.</p></div>
-      <div class="why-item"><div class="why-num">05</div><h3>Prepare Consistently</h3><p>Break your preparation into manageable topics and study sessions.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW TO USE THE SCHEME -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">How to Use the Scheme of Work</span>
-      <h2>Turn Your Scheme Into a Study Plan</h2>
-      <p>Downloading the PDF is only the first step.</p>
-    </div>
-    <div class="step-row-6">
-      <div class="step-card"><div class="why-num">01</div><h3>Download</h3><p>Get the scheme of work for your academic category.</p></div>
-      <div class="step-card"><div class="why-num">02</div><h3>Review</h3><p>Look through the subjects and topics you need to cover.</p></div>
-      <div class="step-card"><div class="why-num">03</div><h3>Plan</h3><p>Create a realistic study schedule around the topics.</p></div>
-      <div class="step-card"><div class="why-num">04</div><h3>Study</h3><p>Use Zenova classes, notes, and other resources to learn each topic.</p></div>
-      <div class="step-card"><div class="why-num">05</div><h3>Practise</h3><p>Test your understanding with questions and assessments.</p></div>
-      <div class="step-card"><div class="why-num">06</div><h3>Track</h3><p>Mark completed topics and return to areas where you need more practice.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- STUDY GUIDES -->
-<section class="paper">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Study Guides</span>
-      <h2>Make Your Preparation More Organized</h2>
-      <p>Not sure how to structure your study time? Access helpful guides covering topics such as:</p>
-    </div>
-    <ul class="guide-list">
-      <li>How to create a study timetable</li>
-      <li>How to study effectively</li>
-      <li>How to prepare for JAMB</li>
-      <li>How to use past questions</li>
-      <li>How to revise effectively</li>
-      <li>How to avoid last-minute preparation</li>
-    </ul>
-    <div style="text-align:center;margin-top:28px;">
-      <a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU" class="section-link">Explore Study Guides
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">FAQ</span>
-      <h2>Frequently Asked Questions</h2>
-    </div>
-    <div class="faq-wrap">
-      <div class="faq-item">
-        <button class="faq-q">Are the Zenova Study resources free?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. The resources featured on this page are provided free of charge unless otherwise stated.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I download the Scheme of Work?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. Each available Scheme of Work has a download option.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Which Scheme of Work should I download?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Choose the scheme that matches your academic category: Science, Arts, or Commercial.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I view the PDF before downloading it?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. The PDF preview image allows you to see the resource before opening or downloading it.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I use the Scheme of Work with Zenova Classes?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Absolutely. Use the Scheme of Work to know what to study, then use Zenova Classes to learn the topics.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I use the resources with the Study Hub?<span class="plus">+</span></button>
-        <div class="faq-a"><p>Yes. The resources are designed to work alongside the wider Zenova learning ecosystem.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FINAL CTA -->
 <section class="paper">
   <div class="wrap">
-    <div class="final-cta">
+    <div class="final-cta has-zen">
+      <div class="final-copy">
       <h2>Ready to Start Studying?</h2>
       <p>Choose a resource, download what you need, and start preparing today.</p>
       <div class="cta-row">
         <a href="#scheme-of-work" class="cta-btn">Explore Resources →</a>
         <a href="#scheme-of-work" class="cta-btn outline">Download Scheme of Work →</a>
         <a href="/classes/" class="cta-btn outline">Start Learning Free →</a>
+      </div>
+      </div>
+      <div class="final-zen">
+        <img src="zen-wave.png" width="560" height="806" alt="Zen, the Zenova Study mascot, waving" loading="lazy">
       </div>
     </div>
   </div>
@@ -595,6 +552,10 @@
       <div>
         <div class="footer-logo"><img src="logo-white.png" alt="Zenova Study" class="footer-logo-img">Zenova Study</div>
         <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+        <a href="/meet-zen/" class="footer-zen">
+          <span class="footer-zen-img"><img src="zen.png" width="480" height="681" alt="Zen, the Zenova Study mascot" loading="lazy"></span>
+          <span class="footer-zen-label">Meet Zen →</span>
+        </a>
       </div>
       <div>
         <h4>Quick Links</h4>
@@ -602,6 +563,7 @@
           <li><a href="/about/">About Us</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/about/#founder">Meet the Founder</a></li>
+          <li><a href="/meet-zen/">Meet Zen</a></li>
           <li><a href="/support/">Support Zenova</a></li>
           <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
         </ul>
@@ -609,19 +571,19 @@
       <div>
         <h4>Follow Us</h4>
         <ul class="social-list">
-         <li><a href="https://www.tiktok.com/@zenova.study"><span class="icon">🎵</span>TikTok</a></li>
-          <li><a href="https://www.instagram.com/zenovastudy/"><span class="icon">📷</span>Instagram</a></li>
-          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶️</span>YouTube</a></li>
-          <li><a href="https://web.facebook.com/profile.php?id=61588573439813"><span class="icon">👍</span>Facebook</a></li>
-          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I"><span class="icon">💬</span>WhatsApp</a></li>
-          <li><a href="https://chat.whatsapp.com/BfcrVxEJ8tM1BKPXaQGRJU"><span class="icon">✈️</span>Classes</a></li>
+         <li><a href="https://www.tiktok.com/@zenova.study">TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy"><span class="icon">▶</span>YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813">Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I">WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9">Classes</a></li>
         </ul>
       </div>
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="/terms-of-service/">Terms of Service</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -672,3 +634,4 @@
 
 </body>
 </html>
+
