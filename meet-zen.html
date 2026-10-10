@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Zen — Zenova Study</title>
+<meta name="description" content="Meet Zen, the Zenova Study mascot. Your study buddy for JAMB and beyond. Follow Zen on TikTok.">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1628;
+    --navy:#0B1D3A;
+    --blue:#2563EB;
+    --blue-bright:#1E5FFF;
+    --amber:#F5A524;
+    --white:#FFFFFF;
+    --paper:#F7F9FC;
+    --ink:#0A1628;
+    --ink-soft:#54607C;
+    --ink-faint:#8592AD;
+    --line:#E6EAF3;
+    --radius:18px;
+    --sora:'Sora', sans-serif;
+    --dm:'DM Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--dm);
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .logo{
+    font-family:var(--sora);font-weight:800;font-size:1.1rem;
+    letter-spacing:0.01em;color:var(--navy-deep);
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark-img{width:32px;height:32px;object-fit:contain;}
+  .footer-logo-img{width:34px;height:34px;object-fit:contain;}
+  .social-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .social-list a{display:flex;align-items:center;gap:10px;font-size:0.89rem;}
+  nav.desktop-nav{display:flex;align-items:center;gap:32px;}
+  nav.desktop-nav a{
+    font-family:var(--sora);font-weight:600;font-size:0.9rem;
+    color:var(--ink-soft);transition:color .15s ease;
+  }
+  nav.desktop-nav a:hover{color:var(--blue-bright);}
+  .cta-btn{
+    font-family:var(--sora);font-weight:700;font-size:0.86rem;
+    background:var(--blue-bright);color:#fff;
+    padding:10px 20px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .cta-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(30,95,255,0.6);}
+  .cta-btn.outline{background:transparent;color:var(--navy-deep);border:1px solid var(--line);}
+  .cta-btn.outline:hover{border-color:var(--blue-bright);color:var(--blue-bright);box-shadow:none;}
+  .header-actions{display:flex;align-items:center;gap:16px;}
+
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;
+  }
+  .hamburger span{width:21px;height:2px;background:var(--navy-deep);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-panel{
+    display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .mobile-panel.open{max-height:520px;}
+  .mobile-panel a{
+    font-family:var(--sora);font-weight:600;font-size:1rem;color:var(--navy-deep);
+    padding:15px 24px;border-bottom:1px solid var(--line);
+  }
+  .mobile-panel .cta-btn{margin:16px 24px 20px;text-align:center;}
+
+  @media (max-width:860px){
+    nav.desktop-nav{display:none;}
+    .header-actions .cta-btn{display:none;}
+    .hamburger{display:flex;}
+    .mobile-panel{display:flex;}
+  }
+
+
+  /* ---------- MEET ZEN ---------- */
+  .eyebrow{
+    font-family:var(--sora);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue-bright);
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .section-eyebrow{
+    font-family:var(--sora);font-weight:700;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-bright);
+    display:inline-block;margin-bottom:12px;
+  }
+  section{padding:84px 0;}
+  section.paper{background:var(--paper);}
+  .section-head{max-width:560px;margin:0 auto 44px;text-align:center;}
+  .section-head h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 10px;color:var(--navy-deep);letter-spacing:-0.01em;}
+  .section-head p{font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0;}
+
+  .hero{padding:88px 0 72px;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:520px;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.10), transparent 72%);pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;max-width:1040px;margin:0 auto;position:relative;z-index:1;}
+  .hero h1{font-family:var(--sora);font-weight:800;font-size:clamp(2.3rem,5.4vw,3.6rem);line-height:1.08;margin:0 0 18px;letter-spacing:-0.02em;color:var(--navy-deep);}
+  .hero p.lead{font-size:1.08rem;line-height:1.7;color:var(--ink-soft);max-width:500px;margin:0 0 28px;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-zen{position:relative;display:flex;justify-content:center;}
+  .hero-zen::before{
+    content:"";position:absolute;inset:4% 2%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(37,99,235,0.18), transparent 75%);
+  }
+  .hero-zen img{position:relative;width:min(380px,100%);height:auto;filter:drop-shadow(0 26px 26px rgba(10,22,40,0.18));animation:zenFloat 5s ease-in-out infinite;}
+  @keyframes zenFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  @media (prefers-reduced-motion:reduce){.hero-zen img{animation:none;}}
+
+  .about-zen{max-width:720px;margin:0 auto;text-align:center;}
+  .about-zen h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 14px;color:var(--navy-deep);letter-spacing:-0.01em;}
+  .about-zen p{font-size:1.05rem;line-height:1.75;color:var(--ink-soft);margin:0;}
+
+  .how-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;max-width:1040px;margin:0 auto;}
+  .how-zen{position:relative;display:flex;justify-content:center;}
+  .how-zen::before{content:"";position:absolute;inset:4% 0;border-radius:50%;background:radial-gradient(closest-side, rgba(37,99,235,0.14), transparent 75%);}
+  .how-zen img{position:relative;width:min(480px,100%);height:auto;filter:drop-shadow(0 22px 22px rgba(10,22,40,0.14));}
+  .how-copy h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.6rem,3vw,2.15rem);margin:0 0 8px;color:var(--navy-deep);letter-spacing:-0.01em;}
+  .how-copy > p{font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0;}
+  .steps{list-style:none;counter-reset:step;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:18px;}
+  .steps li{counter-increment:step;display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start;}
+  .steps li::before{
+    content:counter(step);width:38px;height:38px;border-radius:11px;background:#EAF0FF;color:var(--blue-bright);
+    display:flex;align-items:center;justify-content:center;font-family:var(--sora);font-weight:800;font-size:0.95rem;
+  }
+  .steps h3{font-family:var(--sora);font-weight:700;font-size:1rem;margin:0 0 4px;color:var(--navy-deep);}
+  .steps p{font-size:0.9rem;line-height:1.6;color:var(--ink-soft);margin:0;}
+
+  .pose-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1040px;margin:0 auto;}
+  .pose-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px 16px 20px;text-align:center;transition:transform .18s ease, box-shadow .18s ease;}
+  .pose-card:hover{transform:translateY(-4px);box-shadow:0 24px 40px -26px rgba(10,22,40,0.25);}
+  .pose-img{height:230px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .pose-img img{max-height:100%;width:auto;max-width:100%;object-fit:contain;}
+  .pose-card h3{font-family:var(--sora);font-weight:700;font-size:0.98rem;margin:0;color:var(--navy-deep);}
+
+  .follow-card{
+    max-width:1000px;margin:0 auto;background:linear-gradient(135deg,var(--navy-deep),#12275A);color:#fff;border-radius:28px;
+    padding:48px 52px;display:grid;grid-template-columns:.75fr 1.25fr;gap:32px;align-items:center;
+  }
+  .follow-zen{position:relative;display:flex;justify-content:center;}
+  .follow-zen::before{
+    content:"";position:absolute;inset:4%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.55), rgba(143,176,255,0.12) 70%, transparent 100%);
+  }
+  .follow-zen img{position:relative;width:min(230px,100%);height:auto;}
+  .follow-card h2{font-family:var(--sora);font-weight:800;font-size:clamp(1.5rem,3vw,2rem);margin:0 0 10px;}
+  .follow-card .handle{font-family:var(--sora);font-weight:700;color:#8FB0FF;margin:0 0 12px;font-size:1.05rem;}
+  .follow-card p.txt{color:#C4D2F0;font-size:1rem;line-height:1.65;margin:0 0 24px;max-width:440px;}
+  .follow-card .cta-btn{background:#fff;color:var(--navy-deep);}
+  .find-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:34px auto 0;max-width:1000px;}
+  .find-links a{font-family:var(--sora);font-weight:600;font-size:0.86rem;color:var(--navy-deep);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;transition:border-color .15s ease,color .15s ease;}
+  .find-links a:hover{border-color:var(--blue-bright);color:var(--blue-bright);}
+  .find-label{text-align:center;font-size:0.9rem;color:var(--ink-soft);margin:34px 0 0;}
+  .find-label + .find-links{margin-top:14px;}
+
+  @media (max-width:860px){
+    section{padding:60px 0;}
+    .hero{padding:48px 0 48px;}
+    .hero-grid{grid-template-columns:1fr;gap:24px;text-align:center;}
+    .hero p.lead{margin-left:auto;margin-right:auto;}
+    .hero-ctas{justify-content:center;}
+    .hero-zen{order:-1;}
+    .hero-zen img{width:min(250px,64%);}
+    .how-grid{grid-template-columns:1fr;gap:28px;}
+    .how-zen img{width:min(320px,90%);}
+    .pose-grid{grid-template-columns:1fr 1fr;gap:14px;}
+    .pose-img{height:190px;}
+    .follow-card{grid-template-columns:1fr;text-align:center;padding:36px 24px;gap:22px;}
+    .follow-zen{order:-1;}
+    .follow-zen img{width:min(170px,50%);}
+    .follow-card p.txt{margin-left:auto;margin-right:auto;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#8FA3CC;padding:56px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
+  .footer-logo{font-family:var(--sora);font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  footer p.desc{font-size:0.88rem;line-height:1.6;max-width:280px;}
+  footer h4{font-family:var(--sora);font-weight:700;font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:#fff;margin:0 0 16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{font-size:0.89rem;transition:color .15s ease;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.82rem;
+  }
+  @media (max-width:860px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .footer-grid{grid-template-columns:1fr;}
+  }
+  .footer-zen{display:inline-flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px;}
+  .footer-zen-img{position:relative;display:block;}
+  .footer-zen-img::before{
+    content:"";position:absolute;inset:-6%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(143,176,255,0.40), rgba(143,176,255,0.08) 70%, transparent 100%);
+  }
+  .footer-zen-img img{position:relative;width:130px;height:auto;}
+  .footer-zen-label{font-family:var(--sora);font-weight:700;font-size:0.86rem;color:#fff;transition:color .15s ease;}
+  .footer-zen:hover .footer-zen-label{color:var(--amber);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="/" class="logo"><img src="logo.webp" width="32" height="32" alt="Zenova Study" class="logo-mark-img" fetchpriority="high">Zenova Study</a>
+    <nav class="desktop-nav">
+      <a href="/">Home</a>
+      <a href="/jamb-2027/">JAMB 2027</a>
+      <a href="/classes/">Classes</a>
+      <a href="/resources/">Resources</a>
+      <a href="/competition/">Competition</a>
+      <a href="/study-hub/">Study Hub</a>
+      <a href="/about/">About</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="/">Home</a>
+    <a href="/jamb-2027/">JAMB 2027</a>
+    <a href="/classes/">Classes</a>
+    <a href="/resources/">Resources</a>
+    <a href="/competition/">Competition</a>
+    <a href="/study-hub/">Study Hub</a>
+    <a href="/about/">About</a>
+    <a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9" class="cta-btn">Join Zenova</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Meet the Mascot</div>
+        <h1>Hi, I'm Zen.</h1>
+        <p class="lead">I'm the Zenova Study mascot, your study buddy for JAMB and beyond. I'm here to help you study smarter, stay consistent, and win bigger.</p>
+        <div class="hero-ctas">
+          <a href="https://www.tiktok.com/@meetzen_" class="cta-btn">Follow Zen on TikTok →</a>
+          <a href="/classes/" class="cta-btn outline">Start Learning</a>
+        </div>
+      </div>
+      <div class="hero-zen">
+        <img src="zen.webp" decoding="async" width="480" height="681" alt="Zen, the Zenova Study mascot, giving a thumbs up" fetchpriority="high">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ZEN -->
+<section class="paper">
+  <div class="wrap">
+    <div class="about-zen">
+      <span class="section-eyebrow">About Zen</span>
+      <h2>Your Study Buddy at Zenova</h2>
+      <p>Zen is the official mascot of Zenova Study. You'll find him in our classes, resources, and competitions, cheering students on as they prepare for their exams. Look out for the glasses, the navy Z hoodie, and the backpack full of books.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY MOTTO -->
+<section>
+  <div class="wrap">
+    <div class="how-grid">
+      <div class="how-zen">
+        <img src="zen-class.webp" decoding="async" width="560" height="514" alt="Zen pointing at a whiteboard that reads Study Smarter, Win Bigger" loading="lazy">
+      </div>
+      <div class="how-copy">
+        <h2>Study Smarter, Win Bigger</h2>
+        <p>Zen's four habits for exam success.</p>
+        <ol class="steps">
+          <li><div><h3>Set Goals</h3><p>Decide what score you are aiming for and what you need to do to reach it.</p></div></li>
+          <li><div><h3>Stay Focused</h3><p>Cut the distractions and give every study session one clear task.</p></div></li>
+          <li><div><h3>Learn Daily</h3><p>Short, regular study beats last-minute cramming.</p></div></li>
+          <li><div><h3>Keep Improving</h3><p>Check your results, find your weak spots, and work on them.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSES -->
+<section class="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Zen's Moods</span>
+      <h2>Zen Is Always Ready</h2>
+      <p>Whatever you're doing, Zen is right there with you.</p>
+    </div>
+    <div class="pose-grid">
+      <div class="pose-card"><div class="pose-img"><img src="zen.webp" decoding="async" width="480" height="681" alt="Zen giving a thumbs up" loading="lazy"></div><h3>Cheering you on</h3></div>
+      <div class="pose-card"><div class="pose-img"><img src="zen-wave.webp" decoding="async" width="560" height="806" alt="Zen waving hello" loading="lazy"></div><h3>Saying hello</h3></div>
+      <div class="pose-card"><div class="pose-img"><img src="zen-class.webp" decoding="async" width="560" height="514" alt="Zen teaching at a whiteboard" loading="lazy"></div><h3>Class is in session</h3></div>
+      <div class="pose-card"><div class="pose-img"><img src="zen-lekki.webp" decoding="async" width="560" height="781" alt="Zen reading with headphones on" loading="lazy"></div><h3>Reading and listening</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLLOW ZEN -->
+<section>
+  <div class="wrap">
+    <div class="follow-card">
+      <div class="follow-zen">
+        <img src="zen-wave.webp" decoding="async" width="560" height="806" alt="Zen waving" loading="lazy">
+      </div>
+      <div>
+        <h2>Follow Zen</h2>
+        <p class="handle">@meetzen_ on TikTok</p>
+        <p class="txt">Follow Zen on TikTok and keep up with him.</p>
+        <a href="https://www.tiktok.com/@meetzen_" class="cta-btn">Follow on TikTok →</a>
+      </div>
+    </div>
+    <p class="find-label">Find Zen around Zenova</p>
+    <div class="find-links">
+      <a href="/classes/">Classes</a>
+      <a href="/resources/">Resources</a>
+      <a href="/competition/">Competition</a>
+      <a href="/study-hub/">Study Hub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="logo-white.webp" width="34" height="34" alt="Zenova Study" class="footer-logo-img" loading="lazy">Zenova Study</div>
+        <p class="desc">Helping students learn, practice, and prepare with confidence.</p>
+        <a href="/meet-zen/" class="footer-zen">
+          <span class="footer-zen-img"><img src="zen-sm.webp" decoding="async" width="260" height="369" alt="Zen, the Zenova Study mascot" loading="lazy"></span>
+          <span class="footer-zen-label">Meet Zen →</span>
+        </a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/about/#founder">Meet the Founder</a></li>
+          <li><a href="/meet-zen/">Meet Zen</a></li>
+          <li><a href="/support/">Support Zenova</a></li>
+          <li><a href="mailto:zenovaofficial188@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <ul class="social-list">
+          <li><a href="https://www.tiktok.com/@zenova.study">TikTok</a></li>
+          <li><a href="https://www.instagram.com/zenovastudy/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@zenovastudy">YouTube</a></li>
+          <li><a href="https://web.facebook.com/profile.php?id=61588573439813">Facebook</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbCH1j60wak1HKVmfG3I">WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/GKox4rCMx4lAlGcWTOPkB9">Classes</a></li>
+          <li><a href="https://www.tiktok.com/@meetzen_">Zen on TikTok</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zenova Study. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
