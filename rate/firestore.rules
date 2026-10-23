@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Replace with the email of the admin account you create in Firebase Auth
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "emmanueloluwadamijohn18@gmail.com";
+    }
+
+    match /study_feedback/{id} {
+      // Feedback wall is public
+      allow read: if true;
+
+      // Anyone can submit, but only valid fields, sane sizes, no fake replies
+      allow create: if request.resource.data.keys().hasOnly(
+            ['name','level','t1','t2','t3','r1','r2','createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 40
+        && request.resource.data.level is string && request.resource.data.level.size() <= 30
+        && request.resource.data.t1 is string && request.resource.data.t1.size() <= 800
+        && request.resource.data.t2 is string && request.resource.data.t2.size() <= 800
+        && request.resource.data.t3 is string && request.resource.data.t3.size() <= 800
+        && request.resource.data.r1 is int && request.resource.data.r1 >= 0 && request.resource.data.r1 <= 5
+        && request.resource.data.r2 is int && request.resource.data.r2 >= 0 && request.resource.data.r2 <= 5
+        && request.resource.data.createdAt == request.time;
+
+      // Only admin can reply (update) or delete
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reply','repliedAt'])
+        && request.resource.data.reply is string && request.resource.data.reply.size() <= 800;
+      allow delete: if isAdmin();
+    }
+  }
+}
