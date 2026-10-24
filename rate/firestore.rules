@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "emmanueloluwadamijohn18@gmail.com";
+    }
+
+    match /study_feedback/{id} {
+      // Feedback wall is public
+      allow read: if true;
+
+      // Anyone can post, but only valid-shaped feedback (no likes/replies on create)
+      allow create: if request.resource.data.keys().hasOnly(
+            ['name','level','t1','t2','t3','r1','r2','createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 40
+        && request.resource.data.level is string && request.resource.data.level.size() <= 30
+        && request.resource.data.t1 is string && request.resource.data.t1.size() <= 800
+        && request.resource.data.t2 is string && request.resource.data.t2.size() <= 800
+        && request.resource.data.t3 is string && request.resource.data.t3.size() <= 800
+        && request.resource.data.r1 is int && request.resource.data.r1 >= 0 && request.resource.data.r1 <= 5
+        && request.resource.data.r2 is int && request.resource.data.r2 >= 0 && request.resource.data.r2 <= 5
+        && request.resource.data.createdAt == request.time;
+
+      allow update: if
+        // Students: like / unlike (only the likes counter, +1 or -1, never below 0)
+        ( request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes'])
+          && request.resource.data.likes is int
+          && request.resource.data.likes >= 0
+          && ( request.resource.data.likes == resource.data.get('likes', 0) + 1
+            || request.resource.data.likes == resource.data.get('likes', 0) - 1 ) )
+        // Students: bump the reply counter by exactly +1 when they post a reply
+        || ( request.resource.data.diff(resource.data).affectedKeys().hasOnly(['replyCount'])
+          && request.resource.data.replyCount is int
+          && request.resource.data.replyCount == resource.data.get('replyCount', 0) + 1 )
+        // Admin: fix reply counter after deleting a student reply
+        || ( isAdmin()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['replyCount'])
+          && request.resource.data.replyCount is int
+          && request.resource.data.replyCount >= 0 )
+        // Admin: reply
+        || ( isAdmin()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reply','repliedAt'])
+          && request.resource.data.reply is string
+          && request.resource.data.reply.size() <= 800 )
+        // Admin: "Liked by Zenova"
+        || ( isAdmin()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['adminLiked'])
+          && request.resource.data.adminLiked is bool );
+
+      // Only admin can delete
+      allow delete: if isAdmin();
+
+      // Student replies to a feedback
+      match /comments/{cid} {
+        allow read: if true;
+        allow create: if request.resource.data.keys().hasOnly(['name','text','createdAt'])
+          && request.resource.data.name is string && request.resource.data.name.size() <= 40
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1 && request.resource.data.text.size() <= 400
+          && request.resource.data.createdAt == request.time;
+        allow update: if false;
+        allow delete: if isAdmin();
+      }
+    }
+  }
+}
