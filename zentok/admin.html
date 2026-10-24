@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Zen Tok Admin</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#fff;--surf:#f5f7fb;--line:#e6eaf2;--ink:#0e1a33;--mute:#6b7894;--blue:#0b2a6f;--acc:#2456d6;--on:#fff;--desk:#eaeff7}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1020;--surf:#131a30;--line:#222c4a;--ink:#eef2fb;--mute:#93a0c0;--blue:#7ea2ff;--acc:#7ea2ff;--on:#0b1020;--desk:#060912}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ink);font:14.5px/1.45 Inter,system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.mark{width:34px;height:34px;border-radius:10px;background:var(--blue);color:var(--on);display:grid;place-items:center;font-weight:800;font-size:19px}
+.top h1{margin:0;font-size:18px;letter-spacing:-.3px}.top small{display:block;color:var(--mute);font-size:12px;font-weight:500}
+.top button{margin-left:auto}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 1px 2px rgba(11,42,111,.06),0 6px 20px rgba(11,42,111,.05)}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:999px;padding:8px 16px;background:var(--surf);color:var(--ink)}
+button.pri{background:var(--blue);color:var(--on)}button.line{background:none;border:1px solid var(--line)}button.danger{background:none;border:1px solid #e5484d;color:#e5484d}
+input{font:inherit;width:100%;border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:12px;padding:11px 13px;margin-bottom:10px;outline:none}
+input:focus{border-color:var(--acc)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}.stat b{display:block;font-size:22px}.stat span{font-size:12px;color:var(--mute)}
+.bar{display:flex;gap:8px;margin-bottom:12px}.bar input{margin:0}.bar button.on{background:var(--blue);color:var(--on)}
+.u{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.av{width:44px;height:44px;border-radius:50%;background:var(--blue);color:var(--on);display:grid;place-items:center;font-weight:700;flex:none;object-fit:cover}
+.n{flex:1;min-width:0}.n b{display:flex;align-items:center;gap:5px}.n span{display:block;font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vb{width:16px;height:16px;flex:none}
+code{background:var(--surf);padding:2px 8px;border-radius:8px;word-break:break-all;display:inline-block;margin:6px 0;user-select:all}
+.err{color:#d23b3b;font-size:13px;min-height:18px;margin-bottom:6px}.sub{color:var(--mute);font-size:13px}
+ol{padding-left:20px;line-height:1.8}
+</style></head><body><div class="wrap"><div class="top"><div class="mark">Z</div><h1>Zen Tok Admin<small>Zenova Study · verification badges</small></h1><span id="out"></span></div><div id="app"><div class="sub">Loading…</div></div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,collection,doc,getDoc,updateDoc,onSnapshot} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const fb=initializeApp({
+  apiKey:"AIzaSyAYsGEsUtc_Id2WhqNRSB1qIh0lL4ydVqM",
+  authDomain:"zenova-study-utme-challenge.firebaseapp.com",
+  projectId:"zenova-study-utme-challenge",
+  storageBucket:"zenova-study-utme-challenge.firebasestorage.app",
+  messagingSenderId:"476080717753",
+  appId:"1:476080717753:web:d69e2ae6b7df681bfcc068"});
+const auth=getAuth(fb),db=getFirestore(fb),app=document.getElementById('app'),outEl=document.getElementById('out');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const BADGE='<svg class="vb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1d6bff"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+let users=[],filter='all',q='',unsub=null,err='',uid=null;
+
+onAuthStateChanged(auth,async u=>{
+  if(unsub){unsub();unsub=null}
+  uid=u?u.uid:null;
+  outEl.innerHTML=u?'<button class="line" id="so">Log out</button>':'';
+  if(u)document.getElementById('so').onclick=()=>signOut(auth);
+  if(!u)return login();
+  let admin=false;
+  try{admin=(await getDoc(doc(db,'zenAdmins',u.uid))).exists()}catch(e){}
+  if(!admin)return denied(u);
+  unsub=onSnapshot(collection(db,'users'),s=>{users=s.docs.map(d=>({id:d.id,...d.data()}));list()},e=>{err='Could not load users. Check your Firestore rules.';list()});
+  list();
+});
+function login(){
+  app.innerHTML=`<div class="card"><h3 style="margin:0 0 12px">Admin sign in</h3><input id="em" type="email" placeholder="Email"><input id="pw" type="password" placeholder="Password"><div class="err">${esc(err)}</div>
+  <div style="display:flex;gap:8px"><button class="pri" id="go" style="flex:1">Log in</button><button class="line" id="gg">Google</button></div></div>`;
+  const fail=e=>{err=e.code==='auth/popup-closed-by-user'?'':'Could not sign in. Check your details.';login()};
+  document.getElementById('go').onclick=()=>signInWithEmailAndPassword(auth,document.getElementById('em').value.trim(),document.getElementById('pw').value).then(()=>err='').catch(fail);
+  document.getElementById('gg').onclick=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(fail);
+}
+function denied(u){
+  app.innerHTML=`<div class="card"><h3 style="margin:0 0 6px">You are not an admin yet</h3><p class="sub">Signed in as ${esc(u.email||u.displayName||'')}. To make this account an admin:</p>
+  <ol><li>Open the Firebase Console → Firestore Database.</li><li>Create a collection called <b>zenAdmins</b>.</li><li>Add a document whose <b>Document ID</b> is your UID below (add any field, e.g. <b>role</b> = admin).</li><li>Refresh this page.</li></ol>
+  <div class="sub">Your UID:</div><code>${esc(u.uid)}</code></div>`;
+}
+function list(){
+  if(!uid)return;
+  const t=q.toLowerCase(),vc=users.filter(x=>x.verified).length;
+  const l=users.filter(x=>(filter==='all'||(filter==='ver'?x.verified:!x.verified))&&((x.name||'').toLowerCase().includes(t)||(x.bio||'').toLowerCase().includes(t)))
+    .sort((a,b)=>(b.verified?1:0)-(a.verified?1:0)||(a.name||'').localeCompare(b.name||''));
+  const keep=document.getElementById('s');
+  if(!keep){
+    app.innerHTML=`<div class="stats"><div class="stat"><b id="n1"></b><span>Creators</span></div><div class="stat"><b id="n2"></b><span>Verified</span></div><div class="stat"><b id="n3"></b><span>Not verified</span></div></div>
+    <div class="card"><div class="bar"><input id="s" placeholder="Search by name or bio…"><button data-f="all">All</button><button data-f="ver">Verified</button><button data-f="no">Not</button></div><div id="l"></div><div class="err" id="e"></div></div>`;
+    document.getElementById('s').oninput=e=>{q=e.target.value;list()};
+    app.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{filter=b.dataset.f;list()});
+  }
+  document.getElementById('n1').textContent=users.length;document.getElementById('n2').textContent=vc;document.getElementById('n3').textContent=users.length-vc;
+  app.querySelectorAll('[data-f]').forEach(b=>b.classList.toggle('on',b.dataset.f===filter));
+  document.getElementById('e').textContent=err;
+  document.getElementById('l').innerHTML=l.map(x=>`<div class="u">${x.photo?`<img class="av" src="${esc(x.photo)}" alt="">`:`<div class="av">${esc((x.name||'Z')[0].toUpperCase())}</div>`}
+    <div class="n"><b>${esc(x.name||'Creator')}${x.verified?BADGE:''}</b><span>${esc(x.bio||'No bio')}</span></div>
+    <button class="${x.verified?'danger':'pri'}" data-v="${esc(x.id)}">${x.verified?'Remove badge':'Give badge'}</button></div>`).join('')||'<div class="sub" style="padding:30px 0;text-align:center">No creators found.</div>';
+  document.querySelectorAll('[data-v]').forEach(b=>b.onclick=async()=>{
+    const u=users.find(x=>x.id===b.dataset.v);b.disabled=true;err='';
+    try{await updateDoc(doc(db,'users',u.id),{verified:!u.verified})}catch(e){err='Not allowed. Make sure your admin document and the new rules are published.';list()}
+  });
+}
+</script></body></html>
