@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zenova Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8fc; --surface:#ffffff; --ink:#14233f; --muted:#5d6b85; --line:#e2e8f2;
+  --navy:#16305c; --navy-soft:#e8eef9; --on-navy:#ffffff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1626; --surface:#15213a; --ink:#eaf0fb; --muted:#9aa8c4; --line:#243456;
+    --navy:#2f5bb0; --navy-soft:#1b2c4d; --on-navy:#ffffff; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1626; --surface:#15213a; --ink:#eaf0fb; --muted:#9aa8c4; --line:#243456;
+  --navy:#2f5bb0; --navy-soft:#1b2c4d; --on-navy:#ffffff; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Sora',system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.5}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,48px);background:var(--navy);color:var(--on-navy)}
+.brand{font-weight:700;font-size:1.15rem;letter-spacing:.2px}
+.profile{width:42px;height:42px;border-radius:50%;background:var(--on-navy);color:var(--navy);border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;cursor:pointer;padding:0}
+.profile:focus-visible,.card:focus-visible{outline:3px solid #7fa6ee;outline-offset:3px}
+.profile svg{width:22px;height:22px}
+main{max-width:1000px;margin:0 auto;padding:36px clamp(16px,4vw,48px) 56px}
+h1{font-size:clamp(1.5rem,3.5vw,2.1rem);margin:0 0 6px;color:var(--ink)}
+.sub{margin:0 0 28px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{text-decoration:none;display:flex;flex-direction:column;gap:14px;text-align:left;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px);border-color:var(--navy)}
+.icon{width:46px;height:46px;border-radius:12px;background:var(--navy-soft);color:var(--navy);display:grid;place-items:center}
+:root[data-theme="dark"] .icon,:root:not([data-theme="light"]) .icon{color:#bcd0f5}
+.icon svg{width:24px;height:24px}
+.card h2{margin:0;font-size:1.1rem}
+.card p{margin:0;color:var(--muted);font-size:.9rem}
+.card.featured{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
+.card.featured p{color:#cfdcf5}
+.card.featured .icon{background:rgba(255,255,255,.16);color:#fff}
+
+.view[hidden]{display:none}
+.back{background:none;border:0;color:var(--navy);font:inherit;font-weight:600;cursor:pointer;padding:0;margin-bottom:18px}
+:root[data-theme="dark"] .back,:root:not([data-theme="light"]) .back{color:#bcd0f5}
+.auth{max-width:420px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.tabs{display:flex;background:var(--navy-soft);border-radius:10px;padding:4px;margin-bottom:20px}
+.tabs button{flex:1;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:9px;border-radius:8px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+label{display:block;font-size:.85rem;font-weight:600;margin:14px 0 6px}
+input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+input:focus-visible{outline:3px solid #7fa6ee;outline-offset:1px}
+.btn{width:100%;margin-top:20px;border:0;border-radius:10px;background:var(--navy);color:#fff;font:inherit;font-weight:600;padding:12px;cursor:pointer}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin-top:12px}
+.link{background:none;border:0;color:var(--navy);font:inherit;font-size:.85rem;cursor:pointer;margin-top:12px;padding:0}
+:root[data-theme="dark"] .link,:root:not([data-theme="light"]) .link{color:#bcd0f5}
+.msg{margin-top:14px;font-size:.88rem;min-height:1.2em}
+.msg.err{color:#c0392b}.msg.ok{color:#1e8449}
+.me{text-align:center}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:1.8rem;font-weight:700;margin:0 auto 12px}
+.me h2{margin:0}.me p{margin:4px 0 0;color:var(--muted)}
+.profile .ini{font-weight:700;font-size:1rem}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:.2s}
+#toast.show{opacity:1;transform:translateX(-50%)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">My Dashboard</span>
+  <button class="profile" id="profile-btn" aria-label="Open profile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+  </button>
+</header>
+<main>
+<section class="view" id="view-home">
+  <h1 id="hello">Welcome back</h1>
+  <p class="sub">Choose where you want to go.</p>
+  <div class="grid">
+    <a class="card featured" href="https://zenovastudy.com.ng/welcome/">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
+      <h2>Welcome</h2><p>New here? Start with an introduction to Zenova.</p>
+    </a>
+    <a class="card" href="https://hub.zenovastudy.com.ng/#/practice">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>
+      <h2>Practice Test</h2><p>Sharpen your skills with unlimited practice questions.</p>
+    </a>
+    <a class="card" href="https://hub.zenovastudy.com.ng/weekly/#/weekly">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+      <h2>Weekly and Monthly Test</h2><p>Scheduled tests to track your progress over time.</p>
+    </a>
+    <a class="card" href="https://hub.zenovastudy.com.ng/novel/">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.500 6-3v-4.500"/></svg></span>
+      <h2>Lekki Headmaster</h2><p>Lessons and guidance from your headmaster.</p>
+    </a>
+    <a class="card" href="https://zenovastudy.com.ng/rate/">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.900 1-6.100L3.200 9.500l6.100-.9z"/></svg></span>
+      <h2>Rate</h2><p>Tell us how we are doing and share feedback.</p>
+    </a>
+    <a class="card" href="https://zenovastudy.com.ng/zentok/">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
+      <h2>Zentok</h2><p>Open Zentok and keep learning.</p>
+    </a>
+  </div>
+</section>
+<section class="view" id="view-profile" hidden>
+  <button class="back" id="back">&larr; Back to dashboard</button>
+  <div class="auth" id="signed-out">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-login" aria-selected="true">Log in</button>
+      <button role="tab" id="tab-signup" aria-selected="false">Sign up</button>
+    </div>
+    <form id="form" novalidate>
+      <div id="name-wrap" hidden><label for="name">Full name</label><input id="name" autocomplete="name"></div>
+      <label for="email">Email</label><input id="email" type="email" autocomplete="email" required>
+      <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required minlength="6">
+      <button class="btn" id="submit" type="submit">Log in</button>
+    </form>
+    <button class="btn alt" id="google" type="button">Continue with Google</button>
+    <button class="link" id="reset" type="button">Forgot your password?</button>
+    <div class="msg" id="msg" role="alert"></div>
+  </div>
+  <div class="auth me" id="signed-in" hidden>
+    <div class="avatar" id="avatar">?</div>
+    <h2 id="me-name"></h2><p id="me-email"></p>
+    <button class="btn" id="logout" type="button">Log out</button>
+  </div>
+</section>
+</main>
+<div id="toast" role="status"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, updateProfile, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBWYdeKlijVJUHUjzcCoPgZDumsgJFMDaw",
+  authDomain: "zenova-4342f.firebaseapp.com",
+  databaseURL: "https://zenova-4342f-default-rtdb.firebaseio.com",
+  projectId: "zenova-4342f",
+  storageBucket: "zenova-4342f.firebasestorage.app",
+  messagingSenderId: "132378238032",
+  appId: "1:132378238032:web:6fe0055d9d5b50b3050555"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const $ = id => document.getElementById(id);
+
+// views
+function show(v){ $('view-home').hidden = v !== 'home'; $('view-profile').hidden = v !== 'profile'; window.scrollTo(0,0); }
+$('profile-btn').onclick = () => show('profile');
+$('back').onclick = () => show('home');
+
+// tabs
+let mode = 'login';
+function setMode(m){
+  mode = m;
+  $('tab-login').setAttribute('aria-selected', m === 'login');
+  $('tab-signup').setAttribute('aria-selected', m === 'signup');
+  $('name-wrap').hidden = m === 'login';
+  $('submit').textContent = m === 'login' ? 'Log in' : 'Create account';
+  $('password').autocomplete = m === 'login' ? 'current-password' : 'new-password';
+  $('reset').hidden = m === 'signup';
+  msg('');
+}
+$('tab-login').onclick = () => setMode('login');
+$('tab-signup').onclick = () => setMode('signup');
+
+function msg(text, ok){ const m = $('msg'); m.textContent = text; m.className = 'msg ' + (text ? (ok ? 'ok' : 'err') : ''); }
+function friendly(e){
+  const c = e.code || '';
+  if (c.includes('invalid-credential') || c.includes('wrong-password') || c.includes('user-not-found')) return 'Email or password is incorrect.';
+  if (c.includes('email-already-in-use')) return 'An account with this email already exists. Log in instead.';
+  if (c.includes('weak-password')) return 'Password must be at least 6 characters.';
+  if (c.includes('invalid-email')) return 'Enter a valid email address.';
+  if (c.includes('too-many-requests')) return 'Too many attempts. Try again later.';
+  if (c.includes('popup-closed')) return 'Google sign-in was closed before finishing.';
+  if (c.includes('operation-not-allowed')) return 'This sign-in method is not enabled in Firebase yet.';
+  if (c.includes('unauthorized-domain')) return 'This domain is not authorized in Firebase Authentication settings.';
+  if (c.includes('operation-not-supported')) return 'Open this page from a web address (https or localhost), not as a local file.';
+  return 'Something went wrong. Please try again.';
+}
+async function run(fn){
+  $('submit').disabled = true; msg('');
+  try { await fn(); } catch(e){ msg(friendly(e)); }
+  $('submit').disabled = false;
+}
+
+$('form').addEventListener('submit', ev => {
+  ev.preventDefault();
+  const email = $('email').value.trim(), pw = $('password').value, name = $('name').value.trim();
+  if (!email || !pw) return msg('Enter your email and password.');
+  if (mode === 'signup' && !name) return msg('Enter your full name.');
+  run(async () => {
+    if (mode === 'signup'){
+      const cred = await createUserWithEmailAndPassword(auth, email, pw);
+      await updateProfile(cred.user, { displayName: name });
+      render(auth.currentUser);
+    } else {
+      await signInWithEmailAndPassword(auth, email, pw);
+    }
+    $('form').reset();
+  });
+});
+$('google').onclick = () => run(() => signInWithPopup(auth, new GoogleAuthProvider()));
+$('reset').onclick = async () => {
+  const email = $('email').value.trim();
+  if (!email) return msg('Enter your email above, then select "Forgot your password?".');
+  try { await sendPasswordResetEmail(auth, email); msg('Password reset email sent. Check your inbox.', true); }
+  catch(e){ msg(friendly(e)); }
+};
+$('logout').onclick = () => signOut(auth);
+
+function render(user){
+  $('signed-out').hidden = !!user; $('signed-in').hidden = !user;
+  const pb = $('profile-btn');
+  if (user){
+    const name = user.displayName || user.email.split('@')[0];
+    $('me-name').textContent = name; $('me-email').textContent = user.email;
+    $('avatar').textContent = name[0].toUpperCase();
+    $('hello').textContent = 'Welcome back, ' + name.split(' ')[0];
+    pb.innerHTML = '<span class="ini">' + name[0].toUpperCase() + '</span>';
+    pb.setAttribute('aria-label', 'Open profile for ' + name);
+  } else {
+    $('hello').textContent = 'Welcome back';
+    pb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>';
+    pb.setAttribute('aria-label', 'Open profile');
+  }
+}
+onAuthStateChanged(auth, render);
+setMode('login');
+</script>
+</body>
+</html>
