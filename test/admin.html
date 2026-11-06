@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Zenova Study · Admin</title>
+<style>
+:root{--navy:#0a2463;--navy2:#143a8f;--soft:#e8eefb;--bd:#d5ddf0;--tx:#0d1b3d;--mu:#5b6b91;--bad:#c93a3a}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:16px;text-align:center;font-weight:800;letter-spacing:.5px;font-size:1.2rem}
+#app{max-width:680px;margin:0 auto;padding:20px 16px 40px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 2px 10px rgba(10,36,99,.06)}
+h1{font-size:1.5rem;margin:0 0 6px;color:var(--navy)}h2{font-size:1.15rem;margin:0 0 12px;color:var(--navy)}
+.mu{color:var(--mu);font-size:.92rem}
+input,textarea{width:100%;padding:12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--tx);font:inherit;margin:6px 0 12px}
+input:focus,textarea:focus{outline:2px solid var(--navy2);border-color:var(--navy2)}
+textarea{min-height:70px;resize:vertical}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;border-radius:12px;padding:14px;font:inherit;font-weight:600;background:var(--navy);color:#fff;cursor:pointer;margin-top:10px}
+.btn:hover{background:var(--navy2)}
+.btn.sec{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.btn.sm{display:inline-block;width:auto;padding:8px 14px;font-size:.9rem;margin:0}
+.btn:disabled{opacity:.5}
+.opt{display:block;width:100%;text-align:left;padding:13px 14px;margin:8px 0;border:1px solid var(--bd);border-radius:12px;background:#fff;color:var(--tx);font:inherit;cursor:pointer}
+.opt.on{border-color:var(--navy);background:var(--soft);font-weight:600}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.timer{font-weight:700;font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:99px;background:var(--soft);color:var(--navy)}
+.timer.low{background:var(--bad);color:#fff}
+.bar{height:6px;background:var(--soft);border-radius:9px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--navy)}
+.score{font-size:3.4rem;font-weight:800;text-align:center;margin:8px 0;color:var(--navy)}
+.row{display:flex;gap:8px;align-items:center}.row input[type=radio],.chk{width:auto;margin:0}.row input[type=text]{margin:4px 0}
+.err{color:var(--bad);font-size:.9rem;margin:8px 0}.ok{color:#127a4b;font-size:.9rem;margin:8px 0}
+.lnk{color:var(--mu);background:none;border:0;cursor:pointer;text-decoration:underline;font:inherit;font-size:.85rem}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 8px;font-weight:600}
+td{padding:9px 8px;border-bottom:1px solid var(--bd)}
+tr.me td{background:var(--soft);font-weight:700}
+.wrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<header>ZENOVA STUDY · ADMIN</header>
+<div id="app"><p class="mu" style="text-align:center">Loading…</p></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,doc,getDoc,setDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyC9bPDUJjEsI-pFg-EzA1yLpKjtKXhK1Yo",
+  authDomain:"zenova-study.firebaseapp.com",
+  projectId:"zenova-study",
+  storageBucket:"zenova-study.firebasestorage.app",
+  messagingSenderId:"518862708637",
+  appId:"1:518862708637:web:dc8471c2000094c49f9974"
+};
+const fb=initializeApp(firebaseConfig),db=getFirestore(fb),auth=getAuth(fb);
+const L=['A','B','C','D'];
+const app=document.getElementById('app');
+let cfg=null,draft=null,user=null,msg='',bulkText='';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=id=>document.getElementById(id);
+async function loadCfg(){
+  try{const s=await getDoc(doc(db,'config','test'));cfg=s.exists()?s.data():null;}
+  catch(e){cfg=null;msg='Could not load the test: '+e.code}
+}
+/* ---------- Admin ---------- */
+function adminEntry(){
+  if(user){draft=JSON.parse(JSON.stringify(cfg||{title:'Zenova Study Test',minutes:10,questions:[],version:'v'+Date.now()}));admin();return}
+  app.innerHTML='<div class="card"><h1>Admin login</h1><label>Email<input id="em" type="email" autocomplete="username"></label>'+
+  '<label>Password<input id="pw" type="password" autocomplete="current-password"></label><div class="err" id="er"></div>'+
+  '<button class="btn" id="in">Sign in</button></div><div style="text-align:center"><button class="lnk" id="bk">Back</button></div>';
+  $('bk').onclick=()=>{location.href='index.html'};
+  $('in').onclick=async()=>{
+    try{await signInWithEmailAndPassword(auth,$('em').value.trim(),$('pw').value);}
+    catch(e){$('er').textContent='Login failed ('+e.code+').'}
+  };
+}
+function parseBulk(t){
+  const out=[],errs=[];
+  t.replace(/\r/g,'').split(/\n\s*\n/).forEach((b,bi)=>{
+    const lines=b.split('\n').map(s=>s.trim()).filter(Boolean);if(!lines.length)return;
+    let q=null,a=-1;const o=['','','',''];
+    lines.forEach(l=>{
+      let m;
+      if(m=l.match(/^answer\s*[:\-]?\s*([A-D])\b/i)){a='ABCD'.indexOf(m[1].toUpperCase())}
+      else if(m=l.match(/^([A-D])\s*[\)\.:]\s*(.+)$/i)){
+        const i='ABCD'.indexOf(m[1].toUpperCase());let tx=m[2].trim();
+        if(/\*$/.test(tx)){tx=tx.replace(/\s*\*$/,'');a=i}
+        o[i]=tx;
+      }
+      else if(q===null)q=l.replace(/^(\d+\s*[\.\)]|q\s*\d*\s*[:\.\)])\s*/i,'');
+      else q+=' '+l;
+    });
+    const filled=o.filter(Boolean).length;
+    if(!q)errs.push('Block '+(bi+1)+': no question text');
+    else if(filled<2)errs.push('Block '+(bi+1)+': needs at least 2 options (A. B. C. D.)');
+    else if(a<0||!o[a])errs.push('Block '+(bi+1)+': missing "Answer: X" line');
+    else out.push({q,o,a});
+  });
+  return {out,errs};
+}
+function admin(){
+  let h='<div class="card"><h1>Admin</h1><p class="mu">Signed in as '+esc(user.email)+'. Changes go live the moment you save.</p>'+
+  '<label>Test title<input data-f="title" value="'+esc(draft.title)+'"></label>'+
+  '<label>Time limit (minutes)<input data-f="minutes" type="number" min="1" value="'+draft.minutes+'"></label>'+
+  '<label class="row"><input type="checkbox" class="chk" id="nv"> <span>This is a new test: start a fresh leaderboard</span></label></div>'+
+  '<div class="card"><h2>Add questions in bulk</h2><p class="mu">Paste questions in this format, with a blank line between each. Mark the answer with an Answer line (or put * after the correct option).</p>'+
+  '<textarea readonly style="min-height:120px;font-size:.85rem">1. What is the capital of Nigeria?\nA. Lagos\nB. Abuja\nC. Kano\nD. Ibadan\nAnswer: B\n\n2. 5 + 7 = ?\nA. 10\nB. 11\nC. 12*\nD. 13</textarea>'+
+  '<textarea id="bulk" style="min-height:140px" placeholder="Paste your questions here">'+esc(bulkText)+'</textarea>'+
+  '<input type="file" id="bf" accept=".txt,.csv,text/plain"><div id="bm"></div><button class="btn" id="ba">Add these questions</button></div>';
+  h+='<h2 style="margin-top:20px">Questions ('+draft.questions.length+')</h2>';
+  draft.questions.forEach((q,i)=>{
+    h+='<div class="card"><div class="top"><b>Question '+(i+1)+'</b><button class="btn sec sm" data-del="'+i+'">Delete</button></div>'+
+    '<textarea data-q="'+i+'" placeholder="Type the question">'+esc(q.q)+'</textarea>';
+    for(let k=0;k<4;k++)h+='<div class="row"><input type="radio" name="c'+i+'" data-c="'+i+','+k+'"'+(q.a===k?' checked':'')+'><input type="text" data-o="'+i+','+k+'" placeholder="Option '+L[k]+'" value="'+esc(q.o[k]||'')+'"></div>';
+    h+='</div>';
+  });
+  h+='<button class="btn sec" id="add">+ Add one question</button><button class="btn sec" id="clr">Delete all questions</button><div class="err" id="er">'+esc(msg)+'</div>'+
+  '<button class="btn" id="sv">Save &amp; make live</button>'+
+  '<div style="text-align:center;margin-top:14px"><button class="lnk" id="so">Sign out</button> · <button class="lnk" id="bk">Open student page</button></div>';
+  app.innerHTML=h;msg='';
+  app.querySelectorAll('[data-f]').forEach(e=>e.oninput=()=>{draft[e.dataset.f]=e.dataset.f==='minutes'?(parseInt(e.value)||1):e.value});
+  app.querySelectorAll('[data-q]').forEach(e=>e.oninput=()=>{draft.questions[+e.dataset.q].q=e.value});
+  app.querySelectorAll('[data-o]').forEach(e=>e.oninput=()=>{const p=e.dataset.o.split(',');draft.questions[+p[0]].o[+p[1]]=e.value});
+  app.querySelectorAll('[data-c]').forEach(e=>e.onchange=()=>{const p=e.dataset.c.split(',');draft.questions[+p[0]].a=+p[1]});
+  app.querySelectorAll('[data-del]').forEach(e=>e.onclick=()=>{draft.questions.splice(+e.dataset.del,1);admin()});
+  $('add').onclick=()=>{draft.questions.push({q:'',o:['','','',''],a:0});admin()};
+  $('clr').onclick=()=>{if(confirm('Delete all questions in the draft?')){draft.questions=[];admin()}};
+  $('bulk').oninput=e=>{
+    bulkText=e.target.value;const r=parseBulk(bulkText);
+    $('bm').innerHTML=bulkText.trim()?'<div class="'+(r.errs.length?'err':'ok')+'">'+r.out.length+' valid question(s) found.'+(r.errs.length?'<br>'+r.errs.map(esc).join('<br>'):'')+'</div>':'';
+  };
+  $('bf').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{bulkText=rd.result;admin()};rd.readAsText(f)};
+  $('ba').onclick=()=>{
+    const r=parseBulk(bulkText);
+    if(!r.out.length){$('bm').innerHTML='<div class="err">No valid questions found. Check the format above.</div>';return}
+    draft.questions=draft.questions.concat(r.out);bulkText='';msg=r.out.length+' question(s) added. Remember to Save.';admin();$('er').className='ok';
+  };
+  $('so').onclick=async()=>{await signOut(auth);};
+  $('bk').onclick=()=>{location.href='index.html'};
+  $('sv').onclick=save;
+}
+async function save(){
+  const er=$('er');er.className='err';er.textContent='';
+  if(!draft.questions.length){er.textContent='Add at least one question.';return}
+  for(let i=0;i<draft.questions.length;i++){
+    const q=draft.questions[i],f=q.o.filter(x=>x.trim()).length;
+    if(!q.q.trim()||f<2||!q.o[q.a]||!q.o[q.a].trim()){er.textContent='Question '+(i+1)+': add the question text, at least 2 options, and mark a filled option as correct.';return}
+  }
+  if($('nv').checked||!draft.version)draft.version='v'+Date.now();
+  try{
+    await setDoc(doc(db,'config','test'),{title:draft.title,minutes:draft.minutes,questions:draft.questions,version:draft.version});
+    cfg=JSON.parse(JSON.stringify(draft));er.className='ok';er.textContent='Saved. The test is live ✓';
+  }catch(e){er.textContent='Could not save ('+e.code+'). Check your Firestore rules and that you are signed in as the admin.'}
+}
+onAuthStateChanged(auth,async u=>{user=u;await loadCfg();adminEntry()});
+</script>
+</body>
+</html>
