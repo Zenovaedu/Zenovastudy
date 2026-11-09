@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student PDF Library</title>
+<style>
+:root{--navy:#0b2a5b;--navy2:#143d85;--bg:#fff;--soft:#f2f5fb;--text:#14213d;--muted:#5b6785;--line:#dbe2f0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:14px 20px}
+.bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:700;font-size:1.15rem}
+.hero{background:var(--navy);color:#fff;padding:10px 20px 36px}
+.hero div{max-width:960px;margin:auto}
+.hero h1{margin:0 0 6px;font-size:1.8rem}
+.hero p{margin:0;opacity:.85}
+main{max-width:960px;margin:auto;padding:22px 20px 60px}
+input,select,button{font:inherit}
+input[type=text],input[type=search],input[type=email],input[type=password],select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text);min-width:0;width:100%}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.tools input{flex:1 1 220px;width:auto}.tools select{width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--soft);display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;font-size:1.02rem;color:var(--navy)}
+.tag{align-self:flex-start;font-size:.72rem;background:var(--navy);color:#fff;padding:2px 10px;border-radius:999px}
+.meta{font-size:.8rem;color:var(--muted)}
+.btn{display:inline-block;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;text-decoration:none;font-weight:600;text-align:center}
+.btn:hover{background:var(--navy2)}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.btn.light{background:transparent;color:#fff;border:1px solid #fff;padding:6px 14px}
+.btn:disabled{opacity:.5;cursor:wait}
+.empty{color:var(--muted);text-align:center;padding:40px 10px;border:1px dashed var(--line);border-radius:12px}
+.panel{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--soft);margin-bottom:22px}
+.panel h2{margin:0 0 12px;color:var(--navy);font-size:1.1rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.row>*{flex:1 1 200px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.msg{margin-top:10px;font-size:.9rem}.err{color:#c0392b}.ok{color:#1e8449}
+.login{max-width:380px;margin:60px auto}
+progress{width:100%;height:8px;margin-top:10px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="brand">📘 Student PDF Library</div></div></header>
+<div class="hero"><div><h1>Download your study materials</h1><p>Find your course PDFs below and download them for free.</p></div></div>
+<main>
+  <div class="tools"><input id="q" type="search" placeholder="Search PDFs…"><select id="cat"><option value="All">All</option></select></div>
+  <div id="grid" class="grid"></div>
+</main>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { collection, query, orderBy, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyDCqvd1HIViceNTWY1k-06ziWaVjdE1A4c",
+  authDomain: "lifesync-pro-bb7db.firebaseapp.com",
+  projectId: "lifesync-pro-bb7db",
+  storageBucket: "lifesync-pro-bb7db.firebasestorage.app",
+  messagingSenderId: "433294460079",
+  appId: "1:433294460079:web:337f81165e1ba3ac9e405a"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+
+const grid = document.getElementById("grid"), q = document.getElementById("q"), sel = document.getElementById("cat");
+let files = [];
+const mb = n => n > 1048576 ? (n/1048576).toFixed(1)+" MB" : Math.max(1, Math.round(n/1024))+" KB";
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+
+function draw() {
+  const cur = sel.value;
+  const cats = [...new Set(files.map(f => f.category).filter(Boolean))];
+  sel.innerHTML = ""; ["All", ...cats].forEach(c => { const o = el("option", null, c); o.value = c; sel.appendChild(o); });
+  sel.value = ["All", ...cats].includes(cur) ? cur : "All";
+  const list = files.filter(f => (sel.value === "All" || f.category === sel.value) && f.title.toLowerCase().includes(q.value.toLowerCase()));
+  grid.innerHTML = "";
+  if (!list.length) { grid.style.display = "block"; grid.appendChild(el("div", "empty", files.length ? "No PDFs match your search." : "No PDFs have been uploaded yet. Please check back soon.")); return; }
+  grid.style.display = "";
+  list.forEach(f => {
+    const c = el("div", "card");
+    if (f.category) c.appendChild(el("span", "tag", f.category));
+    c.appendChild(el("h3", null, f.title));
+    c.appendChild(el("div", "meta", mb(f.size || 0) + (f.createdAt ? " · Added " + f.createdAt.toDate().toLocaleDateString() : "")));
+    const b = el("button", "btn", "Download PDF"); b.onclick = () => download(f, b);
+    c.appendChild(b); grid.appendChild(c);
+  });
+}
+async function download(f, b) {
+  b.disabled = true; b.textContent = "Preparing…";
+  try {
+    const snap = await getDocs(query(collection(db, "pdfs", f.id, "chunks"), orderBy("i")));
+    const blob = new Blob(snap.docs.map(d => d.data().data.toUint8Array()), { type: "application/pdf" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = f.name || (f.title + ".pdf");
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  } catch (e) { alert("Could not download this PDF. Please try again."); console.error(e); }
+  b.disabled = false; b.textContent = "Download PDF";
+}
+q.addEventListener("input", draw); sel.addEventListener("change", draw);
+
+onSnapshot(query(collection(db, "pdfs"), orderBy("createdAt", "desc")),
+  snap => { files = snap.docs.map(d => ({ id: d.id, ...d.data() })); draw(); },
+  err => { grid.innerHTML = ""; grid.appendChild(el("div", "empty", "Could not load PDFs. Please try again later.")); console.error(err); });
+</script>
+</body>
+</html>

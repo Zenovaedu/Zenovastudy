@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin – Student PDF Library</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--navy:#0b2a5b;--navy2:#143d85;--bg:#fff;--soft:#f2f5fb;--text:#14213d;--muted:#5b6785;--line:#dbe2f0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:14px 20px}
+.bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:700;font-size:1.15rem}
+.hero{background:var(--navy);color:#fff;padding:10px 20px 36px}
+.hero div{max-width:960px;margin:auto}
+.hero h1{margin:0 0 6px;font-size:1.8rem}
+.hero p{margin:0;opacity:.85}
+main{max-width:960px;margin:auto;padding:22px 20px 60px}
+input,select,button{font:inherit}
+input[type=text],input[type=search],input[type=email],input[type=password],select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text);min-width:0;width:100%}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.tools input{flex:1 1 220px;width:auto}.tools select{width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--soft);display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;font-size:1.02rem;color:var(--navy)}
+.tag{align-self:flex-start;font-size:.72rem;background:var(--navy);color:#fff;padding:2px 10px;border-radius:999px}
+.meta{font-size:.8rem;color:var(--muted)}
+.btn{display:inline-block;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;text-decoration:none;font-weight:600;text-align:center}
+.btn:hover{background:var(--navy2)}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.btn.light{background:transparent;color:#fff;border:1px solid #fff;padding:6px 14px}
+.btn:disabled{opacity:.5;cursor:wait}
+.empty{color:var(--muted);text-align:center;padding:40px 10px;border:1px dashed var(--line);border-radius:12px}
+.panel{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--soft);margin-bottom:22px}
+.panel h2{margin:0 0 12px;color:var(--navy);font-size:1.1rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.row>*{flex:1 1 200px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.msg{margin-top:10px;font-size:.9rem}.err{color:#c0392b}.ok{color:#1e8449}
+.login{max-width:380px;margin:60px auto}
+progress{width:100%;height:8px;margin-top:10px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="brand">🔒 Admin</div><button id="out" class="btn light hidden">Sign out</button></div></header>
+<main>
+  <div id="login" class="panel login hidden">
+    <h2>Admin sign in</h2>
+    <div class="row"><input id="email" type="email" placeholder="Email" autocomplete="username"></div>
+    <div class="row"><input id="pass" type="password" placeholder="Password" autocomplete="current-password"></div>
+    <button id="in" class="btn">Sign in</button>
+    <div id="lmsg" class="msg err"></div>
+  </div>
+
+  <div id="dash" class="hidden">
+    <div class="panel">
+      <h2>Upload a new PDF</h2>
+      <div class="row"><input id="title" type="text" placeholder="Title (e.g. Biology Week 3 Notes)"><input id="category" type="text" placeholder="Category (e.g. Biology)"></div>
+      <input id="file" type="file" accept="application/pdf,.pdf" style="margin-bottom:10px"><br>
+      <button id="up" class="btn">Upload PDF</button>
+      <progress id="prog" value="0" max="100" class="hidden"></progress>
+      <div id="umsg" class="msg"></div>
+    </div>
+    <div class="panel"><h2 id="count">Uploaded PDFs</h2><div id="list"></div></div>
+  </div>
+</main>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { collection, setDoc, getDocs, deleteDoc, doc, query, orderBy, onSnapshot, serverTimestamp, Bytes } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyDCqvd1HIViceNTWY1k-06ziWaVjdE1A4c",
+  authDomain: "lifesync-pro-bb7db.firebaseapp.com",
+  projectId: "lifesync-pro-bb7db",
+  storageBucket: "lifesync-pro-bb7db.firebasestorage.app",
+  messagingSenderId: "433294460079",
+  appId: "1:433294460079:web:337f81165e1ba3ac9e405a"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+
+const $ = id => document.getElementById(id);
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+const mb = n => n > 1048576 ? (n/1048576).toFixed(1)+" MB" : Math.max(1, Math.round(n/1024))+" KB";
+let unsub = null;
+
+$("in").onclick = async () => {
+  $("lmsg").textContent = "";
+  try { await signInWithEmailAndPassword(auth, $("email").value.trim(), $("pass").value); }
+  catch (e) { $("lmsg").textContent = "Sign in failed. Check your email and password."; }
+};
+$("pass").addEventListener("keydown", e => { if (e.key === "Enter") $("in").click(); });
+$("out").onclick = () => signOut(auth);
+
+onAuthStateChanged(auth, user => {
+  $("login").classList.toggle("hidden", !!user);
+  $("dash").classList.toggle("hidden", !user);
+  $("out").classList.toggle("hidden", !user);
+  if (unsub) { unsub(); unsub = null; }
+  if (user) unsub = onSnapshot(query(collection(db, "pdfs"), orderBy("createdAt", "desc")), snap => {
+    $("count").textContent = "Uploaded PDFs (" + snap.size + ")";
+    const list = $("list"); list.innerHTML = "";
+    if (!snap.size) list.appendChild(el("div", "meta", "Nothing uploaded yet."));
+    snap.docs.forEach(d => {
+      const f = d.data(), it = el("div", "item"), l = el("div");
+      l.appendChild(el("strong", null, f.title));
+      l.appendChild(el("div", "meta", (f.category || "No category") + " · " + mb(f.size || 0)));
+      const del = el("button", "btn ghost", "Delete");
+      del.onclick = async () => {
+        if (!confirm("Delete “" + f.title + "” permanently?")) return;
+        del.disabled = true;
+        try { const cs = await getDocs(collection(db, "pdfs", d.id, "chunks")); for (const c of cs.docs) await deleteDoc(c.ref); await deleteDoc(doc(db, "pdfs", d.id)); }
+        catch (e) { del.disabled = false; alert("Could not delete: " + e.message); }
+      };
+      it.appendChild(l); it.appendChild(del); list.appendChild(it);
+    });
+  });
+});
+
+const say = (t, k) => { $("umsg").textContent = t; $("umsg").className = "msg " + (k || ""); };
+$("up").onclick = async () => {
+  const f = $("file").files[0];
+  if (!f) return say("Choose a PDF file first.", "err");
+  if (f.type !== "application/pdf") return say("Only PDF files are allowed.", "err");
+  if (f.size > 10 * 1048576) return say("The file is larger than 10 MB.", "err");
+  const title = $("title").value.trim() || f.name.replace(/\.pdf$/i, "");
+  $("up").disabled = true; $("prog").value = 0; $("prog").classList.remove("hidden"); say("Uploading…");
+  try {
+    const buf = new Uint8Array(await f.arrayBuffer());
+    const SIZE = 900000, n = Math.ceil(buf.length / SIZE);
+    const main = doc(collection(db, "pdfs"));
+    for (let i = 0; i < n; i++) {
+      await setDoc(doc(db, "pdfs", main.id, "chunks", String(i).padStart(4, "0")), { i, data: Bytes.fromUint8Array(buf.slice(i * SIZE, (i + 1) * SIZE)) });
+      $("prog").value = ((i + 1) / n) * 100;
+    }
+    await setDoc(main, { title, category: $("category").value.trim(), name: f.name, size: f.size, chunks: n, createdAt: serverTimestamp() });
+    say("Uploaded. Students can download it now.", "ok");
+    $("title").value = ""; $("category").value = ""; $("file").value = "";
+  } catch (e) { say("Upload failed: " + e.message, "err"); }
+  $("up").disabled = false; $("prog").classList.add("hidden");
+};
+</script>
+</body>
+</html>
