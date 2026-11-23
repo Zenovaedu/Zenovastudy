@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — Zenova Study Beta Challenge 2.0</title>
+<link rel="icon" href="logo.png" type="image/png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{--navy:#0B2A6F;--navy-d:#071C4D;--tint:#F3F6FC;--ink:#0F1B3D;--soft:#5B6784;--line:#E1E7F2;--red:#C0392B;--green:#1B8A5A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{letter-spacing:-.01em;color:var(--navy)}
+.hidden{display:none!important}
+.gate{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:100}
+.spin{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--navy);font-size:15px;text-decoration:none}
+.logo img{width:28px;height:28px;object-fit:contain}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 60px}
+.narrow{max-width:560px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:600 14.5px 'Inter',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:background .15s}
+.btn:hover:not(:disabled){background:var(--navy-d)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.ghost:hover:not(:disabled){background:var(--tint)}
+.btn.red{background:var(--red)}
+.btn.sm{padding:8px 14px;font-size:13px}
+.btn.block{width:100%}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+input,select,textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font:14.5px 'Inter',sans-serif;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,42,111,.12)}
+.field{margin-bottom:14px}
+.alert{display:none;padding:11px 13px;border-radius:10px;font-size:13.5px;line-height:1.5;margin-bottom:14px}
+.alert.show{display:block}
+.alert.err{background:#FDECEA;color:#9B2C20;border:1px solid #F4C6BF}
+.alert.ok{background:#E8F6EF;color:#14683F;border:1px solid #BFE5D2}
+.muted{color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--tint);color:var(--navy);border:1px solid var(--line);padding:6px 13px;border-radius:100px;font-size:13px;font-weight:600}
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:28px;text-align:center}
+.hero .big{font-size:clamp(36px,9vw,48px);font-weight:700;line-height:1}
+.hero .big span{font-size:.45em;opacity:.7;font-weight:600}
+.hero p{opacity:.8;margin-top:8px;font-size:14px}
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border-bottom:0}
+.row b{color:var(--navy)}
+.good{color:var(--green)}.mid{color:#B7791F}.low{color:var(--red)}
+
+body{background:var(--tint)}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login .card{width:100%;max-width:380px}
+.tabsx{display:flex;gap:6px;margin-bottom:18px}
+.tabsx button{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 18px;font:600 14px 'Inter',sans-serif;color:var(--soft);cursor:pointer}
+.tabsx button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat b{display:block;font-size:22px;color:var(--navy)}.stat span{font-size:12px;color:var(--soft)}
+.tools{display:flex;gap:10px;margin-bottom:12px}
+.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:12px;color:var(--soft);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;background:#fff}
+tr:last-child td{border-bottom:0}
+.pill{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:100px}
+.pill.done{background:#E8F6EF;color:var(--green)}.pill.wait{background:var(--tint);color:var(--soft)}
+.qrow{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+.qrow:last-child{border-bottom:0}
+.qrow .t{font-weight:600;color:var(--navy);font-size:14px;margin-bottom:4px}
+.qrow .o{font-size:12.5px;color:var(--soft);line-height:1.6}
+.qrow .o b{color:var(--green)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.two{grid-template-columns:1fr}}
+
+.modal{position:fixed;inset:0;background:rgba(7,28,77,.55);z-index:80;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.mbox{background:#fff;border-radius:16px;padding:26px;max-width:380px;width:100%;text-align:center}
+.mbox p{font-size:14.5px;color:var(--ink);line-height:1.55;margin-bottom:20px}
+.mbox .acts{display:flex;gap:10px}.mbox .acts .btn{flex:1}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;z-index:90;display:none;max-width:90vw}
+#toast.err{background:var(--red)}
+</style></head><body>
+
+<div class="gate" id="gate"><div class="spin"></div></div>
+
+<div class="login hidden" id="loginView">
+  <div class="card">
+    <div class="logo" style="margin-bottom:16px"><img src="logo.png" alt="">ZENOVA STUDY</div>
+    <h2 style="font-size:21px;margin-bottom:4px">Admin login</h2>
+    <p class="muted" style="font-size:14px;margin-bottom:18px">Sign in to manage questions and see results.</p>
+    <div class="alert err" id="lErr"></div>
+    <form id="lForm" novalidate>
+      <div class="field"><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="email"></div>
+      <div class="field"><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password"></div>
+      <button class="btn block" id="lBtn" type="submit">Log in</button>
+    </form>
+    <p style="text-align:center;margin-top:16px;font-size:13px"><a href="index.html" style="color:var(--soft)">Back to student login</a></p>
+  </div>
+</div>
+
+<div id="panel" class="hidden">
+  <div class="top"><div class="top-in" style="max-width:1000px">
+    <span class="logo"><img src="logo.png" alt="">Admin</span>
+    <span style="display:flex;align-items:center;gap:12px"><span class="muted" id="who" style="font-size:12.5px"></span><button class="btn ghost sm" id="logout">Log out</button></span>
+  </div></div>
+  <div class="wrap" style="max-width:1000px">
+    <div class="tabsx"><button class="on" id="tR">Results</button><button id="tQ">Questions</button></div>
+
+    <div id="pR">
+      <div class="stats">
+        <div class="stat"><b id="s1">0</b><span>Registered</span></div>
+        <div class="stat"><b id="s2">0</b><span>Completed</span></div>
+        <div class="stat"><b id="s3">—</b><span>Average</span></div>
+        <div class="stat"><b id="s4">—</b><span>Top score</span></div>
+      </div>
+      <div class="tools"><input id="search" placeholder="Search name, email or phone"><button class="btn ghost" id="csv" style="white-space:nowrap">Export CSV</button></div>
+      <div class="tbl"><table>
+        <thead><tr><th data-k="name">Name</th><th data-k="email">Email</th><th data-k="phone">Phone</th><th data-k="status">Status</th><th data-k="score">Score</th><th data-k="score">%</th><th data-k="time">Submitted</th><th></th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table></div>
+    </div>
+
+    <div id="pQ" class="hidden">
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:16px;margin-bottom:4px">Test admin access</h3>
+        <p class="muted" style="font-size:13px;line-height:1.6;margin-bottom:12px">If adding or deleting fails, tap this and send me what it says.</p>
+        <button class="btn ghost" id="diag">Run test</button>
+        <pre id="diagOut" class="hidden" style="background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12.5px;line-height:1.7;margin-top:12px;white-space:pre-wrap;word-break:break-all;color:var(--navy)"></pre>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:16px;margin-bottom:12px">Add a question</h3>
+        <div class="alert err" id="qErr"></div><div class="alert ok" id="qOk"></div>
+        <div class="field"><label for="qSub">Subject</label><select id="qSub"></select></div>
+        <div class="field"><label for="qText">Question</label><textarea id="qText" rows="3"></textarea></div>
+        <div class="two">
+          <div class="field"><label>Option A</label><input class="oi"></div>
+          <div class="field"><label>Option B</label><input class="oi"></div>
+          <div class="field"><label>Option C</label><input class="oi"></div>
+          <div class="field"><label>Option D</label><input class="oi"></div>
+        </div>
+        <div class="field" style="max-width:200px"><label for="qCorrect">Correct answer</label><select id="qCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+        <button class="btn" id="qAdd">Add question</button>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:16px;margin-bottom:4px">Bulk add questions</h3>
+        <p class="muted" style="font-size:13px;line-height:1.6;margin-bottom:12px">Paste many questions at once (or load a .txt file). Leave one blank line between questions. Use this format:</p>
+        <pre style="background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12.5px;line-height:1.6;margin-bottom:14px;overflow-x:auto;color:var(--navy)">1. What is the capital of Nigeria?
+A. Lagos
+B. Abuja
+C. Kano
+D. Ibadan
+Answer: B
+
+2. Next question here?
+A. ...
+B. ...
+C. ...
+D. ...
+Answer: C</pre>
+        <div class="alert err" id="bErr"></div><div class="alert ok" id="bOk"></div>
+        <div class="two" style="margin-bottom:12px">
+          <div class="field" style="margin:0"><label for="bSub">Subject</label><select id="bSub"></select></div>
+          <div class="field" style="margin:0"><label for="bFile">Or load a .txt file</label><input id="bFile" type="file" accept=".txt,text/plain"></div>
+        </div>
+        <div class="field"><textarea id="bText" rows="10" placeholder="Paste your questions here..."></textarea></div>
+        <div id="bSummary" class="muted" style="font-size:13.5px;line-height:1.6;margin-bottom:12px"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn ghost" id="bCheck">Check questions</button>
+          <button class="btn" id="bUpload" disabled>Upload</button>
+        </div>
+      </div>
+      <div class="card"><h3 style="font-size:16px;margin-bottom:4px" id="qHead">Questions</h3><div id="qList"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="cModal"><div class="mbox"><p id="cText"></p><div class="acts"><button class="btn ghost" id="cNo">Cancel</button><button class="btn red" id="cYes">Delete</button></div></div></div>
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, collection, getDocs, query, limit, addDoc, deleteDoc, writeBatch, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyA4dDvnadXfwEH4LYOqh4eG1E8CTV0ZNE0",
+    authDomain: "study-hub-2b7cf.firebaseapp.com",
+    projectId: "study-hub-2b7cf",
+    storageBucket: "study-hub-2b7cf.firebasestorage.app",
+    messagingSenderId: "168027609491",
+    appId: "1:168027609491:web:56d682d82dd438f8803066"
+  };
+const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
+// Keep the admin signed in across reloads (falls back to per-tab if the browser blocks it)
+const persistReady=setPersistence(auth,browserLocalPersistence).catch(()=>setPersistence(auth,browserSessionPersistence)).catch(()=>{});
+const $=id=>document.getElementById(id);
+const SUBJECTS=[["english","English"],["maths","Mathematics"],["physics","Physics"],["biology","Biology"],["chemistry","Chemistry"],["geography","Geography"],["economics","Economics"],["literature","Literature in English"],["government","Government"],["history","History"],["agric","Agricultural Science"],["crs","Christian Religious Studies"],["commerce","Commerce"],["irk","Islamic Religious Knowledge"],["accounting","Accounting"]];
+const esc=s=>{ const d=document.createElement('div'); d.textContent=s==null?'':String(s); return d.innerHTML; };
+function askConfirm(msg,yes){
+  return new Promise(res=>{
+    $('cText').textContent=msg; $('cYes').textContent=yes||'Delete'; $('cModal').classList.add('show');
+    const done=v=>{ $('cModal').classList.remove('show'); $('cYes').onclick=null; $('cNo').onclick=null; res(v); };
+    $('cYes').onclick=()=>done(true); $('cNo').onclick=()=>done(false);
+  });
+}
+let toastT;
+function toast(msg,isErr){ const t=$('toast'); t.textContent=msg; t.className=isErr?'err':''; t.style.display='block'; clearTimeout(toastT); toastT=setTimeout(()=>t.style.display='none',5000); }
+let loggingIn=false, loaded=false, users=[], sortKey='name', sortDir=1;
+
+function lErr(t){ $('lErr').textContent=t; $('lErr').classList.add('show'); }
+function showLogin(){ $('gate').classList.add('hidden'); $('panel').classList.add('hidden'); $('loginView').classList.remove('hidden'); }
+
+let wasIn=false;
+onAuthStateChanged(auth,async u=>{
+  if(!u){
+    console.warn('Auth state: signed out');
+    showLogin();
+    if(wasIn){ lErr('You were signed out. Log in again.'); }
+    wasIn=false; loaded=false; return;
+  }
+  try{
+    // Admin check: the rules only let admins list users, so this read succeeds only for admins.
+    await getDocs(query(collection(db,"users"),limit(1)));
+  }catch(e){
+    console.error(e);
+    showLogin();
+    if(e.code==='permission-denied'){
+      lErr("Signed in as "+u.email+", but Firestore says this account is not an admin. Check that this email is in your published Firestore rules (code: permission-denied).");
+      await signOut(auth);
+    }else{
+      lErr('Could not verify admin access ('+(e.code||e.message)+'). Check your connection and try again.');
+    }
+    return;
+  }
+  wasIn=true;
+  $('who').textContent=u.email;
+  $('gate').classList.add('hidden'); $('loginView').classList.add('hidden'); $('panel').classList.remove('hidden');
+  if(!loaded){ loaded=true; loadResults(); loadQuestions(); }
+});
+
+// Before any admin action, make sure the session is still alive
+function guard(){
+  if(auth.currentUser) return true;
+  toast('Your session ended. Log in again.',true);
+  showLogin(); lErr('Your session ended. Log in again.');
+  return false;
+}
+
+$('lForm').addEventListener('submit',async e=>{
+  e.preventDefault(); $('lErr').classList.remove('show');
+  const em=$('lEmail').value.trim(), pw=$('lPass').value;
+  if(!em||!pw) return lErr('Enter your email and password.');
+  $('lBtn').disabled=true;
+  try{ await persistReady; await signInWithEmailAndPassword(auth,em,pw); }
+  catch(err){ console.error(err); lErr('Incorrect email or password.'); }
+  $('lBtn').disabled=false;
+});
+$('logout').onclick=async()=>{ loaded=false; await signOut(auth); };
+
+// tabs
+$('tR').onclick=()=>{ $('tR').classList.add('on'); $('tQ').classList.remove('on'); $('pR').classList.remove('hidden'); $('pQ').classList.add('hidden'); };
+$('tQ').onclick=()=>{ $('tQ').classList.add('on'); $('tR').classList.remove('on'); $('pQ').classList.remove('hidden'); $('pR').classList.add('hidden'); };
+
+// ---------- results ----------
+async function loadResults(){
+  if(!guard()) return;
+  try{
+    const snap=await getDocs(collection(db,"users")); users=[];
+    snap.forEach(d=>{ const x=d.data(); users.push({uid:d.id,name:x.name||'—',email:x.email||'—',phone:x.phone||'—',r:x.examResult||null}); });
+    stats(); table();
+  }catch(e){ console.error(e); $('tbody').innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--soft)">Could not load students. Refresh and try again.</td></tr>'; }
+}
+const pctOf=u=>u.r&&u.r.totalMax?u.r.totalScore/u.r.totalMax:-1;
+function stats(){
+  const done=users.filter(u=>u.r);
+  $('s1').textContent=users.length; $('s2').textContent=done.length;
+  $('s3').textContent=done.length?Math.round(done.reduce((a,u)=>a+pctOf(u)*100,0)/done.length)+'%':'—';
+  const top=done.slice().sort((a,b)=>pctOf(b)-pctOf(a))[0];
+  $('s4').textContent=top?top.r.totalScore+'/'+top.r.totalMax:'—';
+}
+function when(u){
+  const t=u.r&&u.r.submittedAt; if(!t) return null;
+  return t.toDate?t.toDate():new Date(t);
+}
+function table(){
+  const q=$('search').value.trim().toLowerCase();
+  let rows=users.filter(u=>!q||[u.name,u.email,u.phone].some(v=>String(v).toLowerCase().includes(q)));
+  rows.sort((a,b)=>{
+    let x,y;
+    if(sortKey==='score'){ x=pctOf(a); y=pctOf(b); }
+    else if(sortKey==='status'){ x=a.r?1:0; y=b.r?1:0; }
+    else if(sortKey==='time'){ x=when(a)?when(a).getTime():0; y=when(b)?when(b).getTime():0; }
+    else { x=String(a[sortKey]).toLowerCase(); y=String(b[sortKey]).toLowerCase(); }
+    return x<y?-sortDir:x>y?sortDir:0;
+  });
+  const tb=$('tbody');
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--soft)">No students found.</td></tr>'; return; }
+  tb.innerHTML=rows.map(u=>{
+    const d=when(u), p=pctOf(u), cls=p>=.7?'good':p>=.4?'mid':'low';
+    return '<tr><td><b style="color:var(--navy)">'+esc(u.name)+'</b></td><td>'+esc(u.email)+'</td><td>'+esc(u.phone)+'</td>'
+      +'<td><span class="pill '+(u.r?'done':'wait')+'">'+(u.r?'Completed':'Not yet')+'</span></td>'
+      +'<td class="'+(u.r?cls:'')+'" style="font-weight:700">'+(u.r?u.r.totalScore+'/'+u.r.totalMax:'—')+'</td>'
+      +'<td class="'+(u.r?cls:'')+'" style="font-weight:700">'+(u.r?Math.round(p*100)+'%':'—')+'</td>'
+      +'<td>'+(d?d.toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—')+'</td>'
+      +'<td><button class="btn red sm" data-uid="'+esc(u.uid)+'" data-name="'+esc(u.name)+'">Delete</button></td></tr>';
+  }).join('');
+  tb.querySelectorAll('button[data-uid]').forEach(b=>b.onclick=()=>delStudent(b.dataset.uid,b.dataset.name));
+}
+async function delStudent(uid,name){
+  if(!guard()) return;
+  if(!(await askConfirm('Delete "'+name+'" permanently? This removes their profile and exam result.'))) return;
+  try{ await deleteDoc(doc(db,"users",uid)); try{ await deleteDoc(doc(db,"leaderboard",uid)); }catch(e){} users=users.filter(u=>u.uid!==uid); stats(); table(); toast('Deleted.'); }
+  catch(e){ console.error(e); toast('Could not delete: '+(e.code||e.message)+(e.code==='permission-denied'?'. Publish the latest Firestore rules and log in with an admin email.':''),true); }
+}
+$('search').addEventListener('input',table);
+document.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{ const k=th.dataset.k; if(sortKey===k) sortDir*=-1; else{ sortKey=k; sortDir=1; } table(); });
+$('csv').onclick=()=>{
+  const cell=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const lines=[['Name','Email','Phone','Status','Score','Max','Percent','Submitted'].map(cell).join(',')];
+  users.forEach(u=>{ const d=when(u); lines.push([u.name,u.email,u.phone,u.r?'Completed':'Not yet',u.r?u.r.totalScore:'',u.r?u.r.totalMax:'',u.r?Math.round(pctOf(u)*100)+'%':'',d?d.toISOString():''].map(cell).join(',')); });
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/csv'})); a.download='results.csv'; a.click();
+};
+
+// ---------- questions ----------
+SUBJECTS.forEach(([id,n])=>{ const o=document.createElement('option'); o.value=id; o.textContent=n; $('qSub').appendChild(o); });
+$('qSub').onchange=loadQuestions;
+async function loadQuestions(){
+  if(!guard()) return;
+  const sub=$('qSub').value, list=$('qList'); list.textContent='Loading...';
+  try{
+    const snap=await getDocs(collection(db,"questions",sub,"items")); const items=[];
+    snap.forEach(d=>items.push({id:d.id,...d.data()}));
+    $('qHead').textContent=(SUBJECTS.find(s=>s[0]===sub)[1])+' · '+items.length+' question'+(items.length===1?'':'s');
+    if(!items.length){ list.innerHTML='<p class="muted" style="font-size:14px;padding-top:12px">No questions yet.</p>'; return; }
+    list.innerHTML=items.map(q=>'<div class="qrow"><div><div class="t">'+esc(q.text)+'</div><div class="o">'
+      +(q.options||[]).map((o,i)=>(i===q.correctIndex?'<b>':'')+'ABCD'[i]+'. '+esc(o)+(i===q.correctIndex?'</b>':'')).join(' &nbsp;·&nbsp; ')
+      +'</div></div><button class="btn red sm" data-id="'+esc(q.id)+'">Delete</button></div>').join('');
+    list.querySelectorAll('button[data-id]').forEach(b=>b.onclick=async()=>{
+      if(!(await askConfirm('Delete this question?'))) return;
+      try{ await deleteDoc(doc(db,"questions",sub,"items",b.dataset.id)); loadQuestions(); }catch(e){ console.error(e); toast('Could not delete: '+(e.code||e.message),true); }
+    });
+  }catch(e){ console.error(e); list.textContent='Could not load questions ('+(e.code||e.message)+'). Make sure you are logged in and the latest rules are published.'; }
+}
+$('qAdd').onclick=async()=>{
+  if(!guard()) return;
+  $('qErr').classList.remove('show'); $('qOk').classList.remove('show');
+  const text=$('qText').value.trim(), opts=[...document.querySelectorAll('.oi')].map(i=>i.value.trim());
+  if(!text||opts.some(o=>!o)){ $('qErr').textContent='Fill in the question and all four options.'; $('qErr').classList.add('show'); return; }
+  $('qAdd').disabled=true;
+  try{
+    await addDoc(collection(db,"questions",$('qSub').value,"items"),{text,options:opts,correctIndex:parseInt($('qCorrect').value,10),createdAt:serverTimestamp()});
+    $('qText').value=''; document.querySelectorAll('.oi').forEach(i=>i.value='');
+    $('qOk').textContent='Question added.'; $('qOk').classList.add('show');
+    loadQuestions();
+  }catch(e){ console.error(e); $('qErr').textContent='Could not add the question ('+(e.code||e.message)+') while signed in as '+(auth.currentUser?auth.currentUser.email:'nobody')+'.'; $('qErr').classList.add('show'); }
+  $('qAdd').disabled=false;
+};
+
+// ---------- bulk add ----------
+SUBJECTS.forEach(([id,n])=>{ const o=document.createElement('option'); o.value=id; o.textContent=n; $('bSub').appendChild(o); });
+let parsed=[];
+function parseBulk(raw){
+  const blocks=raw.replace(/\r/g,'').split(/\n\s*\n/).map(b=>b.trim()).filter(Boolean);
+  const good=[], bad=[];
+  blocks.forEach((block,bi)=>{
+    const lines=block.split('\n').map(l=>l.trim()).filter(Boolean);
+    const qLines=[], opts={}; let ans=null, cur=null;
+    for(const line of lines){
+      const am=line.match(/^(?:answer|ans|correct(?:\s*answer)?)\s*[:=\-]\s*\(?([A-Da-d])\)?\b/i);
+      const om=line.match(/^\(?([A-Da-d])[\.\):]\s*(.+)$/);
+      if(am){ ans=am[1].toUpperCase(); cur=null; }
+      else if(om && (Object.keys(opts).length>0 || om[1].toUpperCase()==='A')){ cur=om[1].toUpperCase(); opts[cur]=om[2].trim(); }
+      else if(cur){ opts[cur]+=' '+line; }
+      else qLines.push(line);
+    }
+    const text=qLines.join('\n').replace(/^\s*(?:q(?:uestion)?\s*)?\d+\s*[\.\):\-]\s*/i,'').trim();
+    const missing=['A','B','C','D'].filter(k=>!opts[k]);
+    if(!text) bad.push('Question '+(bi+1)+': no question text found.');
+    else if(missing.length) bad.push('Question '+(bi+1)+': missing option '+missing.join(', ')+'.');
+    else if(!ans) bad.push('Question '+(bi+1)+': no "Answer: X" line.');
+    else good.push({text,options:['A','B','C','D'].map(k=>opts[k]),correctIndex:'ABCD'.indexOf(ans)});
+  });
+  return {good,bad,total:blocks.length};
+}
+function bReset(){ parsed=[]; $('bUpload').disabled=true; $('bSummary').textContent=''; $('bErr').classList.remove('show'); $('bOk').classList.remove('show'); }
+$('bText').addEventListener('input',bReset);
+$('bFile').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader(); r.onload=()=>{ $('bText').value=String(r.result); bReset(); }; r.readAsText(f);
+});
+$('bCheck').onclick=()=>{
+  bReset();
+  const raw=$('bText').value.trim();
+  if(!raw){ $('bErr').textContent='Paste your questions first.'; $('bErr').classList.add('show'); return; }
+  const r=parseBulk(raw); parsed=r.good;
+  const sum=$('bSummary'); sum.innerHTML='';
+  const line=document.createElement('div'); line.innerHTML='<b style="color:var(--green)">'+r.good.length+' ready</b> · <b style="color:'+(r.bad.length?'var(--red)':'var(--soft)')+'">'+r.bad.length+' with problems</b> · '+r.total+' found';
+  sum.appendChild(line);
+  r.bad.slice(0,15).forEach(m=>{ const d=document.createElement('div'); d.style.color='var(--red)'; d.textContent=m; sum.appendChild(d); });
+  if(r.bad.length>15){ const d=document.createElement('div'); d.textContent='...and '+(r.bad.length-15)+' more.'; sum.appendChild(d); }
+  $('bUpload').disabled=r.good.length===0;
+  $('bUpload').textContent=r.good.length?('Upload '+r.good.length+' question'+(r.good.length===1?'':'s')):'Upload';
+};
+$('bUpload').onclick=async()=>{
+  if(!guard()) return;
+  if(!parsed.length) return;
+  const sub=$('bSub').value, name=SUBJECTS.find(s=>s[0]===sub)[1];
+  if(!(await askConfirm('Add '+parsed.length+' question'+(parsed.length===1?'':'s')+' to '+name+'?','Upload'))) return;
+  $('bUpload').disabled=true; $('bCheck').disabled=true; $('bErr').classList.remove('show'); $('bOk').classList.remove('show');
+  let added=0;
+  try{
+    for(let i=0;i<parsed.length;i+=400){
+      const batch=writeBatch(db);
+      parsed.slice(i,i+400).forEach(q=>batch.set(doc(collection(db,"questions",sub,"items")),{...q,createdAt:serverTimestamp()}));
+      await batch.commit(); added+=Math.min(400,parsed.length-i);
+    }
+    $('bOk').textContent=added+' question'+(added===1?'':'s')+' added to '+name+'.'; $('bOk').classList.add('show');
+    $('bText').value=''; $('bFile').value=''; parsed=[]; $('bSummary').textContent=''; $('bUpload').textContent='Upload';
+    $('qSub').value=sub; loadQuestions();
+  }catch(e){
+    console.error(e);
+    const who=auth.currentUser?auth.currentUser.email:'nobody';
+    $('bErr').textContent=(added?added+' were added before it failed. ':'')+'Upload failed ('+(e.code||e.message)+') while signed in as '+who+'.'+(e.code==='permission-denied'?' Firestore is refusing this account. Publish the latest rules and make sure this email is in them.':' Check your connection and try again.');
+    $('bErr').classList.add('show'); $('bUpload').disabled=false;
+  }
+  $('bCheck').disabled=false;
+};
+
+// ---------- access test ----------
+$('diag').onclick=async()=>{
+  const out=$('diagOut'), lines=[]; out.classList.remove('hidden'); out.textContent='Testing...';
+  const u=auth.currentUser;
+  if(!u){ out.textContent='Not signed in. Log in again.'; return; }
+  try{
+    const t=await u.getIdTokenResult(true);
+    lines.push('Email: '+u.email);
+    lines.push('Sign-in method: '+t.signInProvider);
+    lines.push('UID: '+u.uid);
+  }catch(e){ lines.push('Token check failed: '+(e.code||e.message)); }
+  const step=async(label,fn)=>{ try{ await fn(); lines.push(label+': OK'); }catch(e){ lines.push(label+': FAILED ('+(e.code||e.message)+')'); } };
+  await step('Read questions',()=>getDocs(query(collection(db,"questions","english","items"),limit(1))));
+  await step('List students',()=>getDocs(query(collection(db,"users"),limit(1))));
+  await step('Write a question',async()=>{ const r=await addDoc(collection(db,"questions","_test","items"),{test:true}); await deleteDoc(r); });
+  out.textContent=lines.join('\n');
+};
+</script></body></html>
