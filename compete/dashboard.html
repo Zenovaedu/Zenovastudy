@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Zenova Study Beta Challenge 2.0</title>
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"><link rel="icon" href="logo.png" type="image/png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
+<style>:root{--navy:#0B2A6F;--navy-d:#071C4D;--tint:#F3F6FC;--ink:#0F1B3D;--soft:#5B6784;--line:#E1E7F2;--red:#C0392B;--green:#1B8A5A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{letter-spacing:-.01em;color:var(--navy)}
+.hidden{display:none!important}
+.gate{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:100}
+.spin{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--navy);font-size:15px;text-decoration:none}
+.logo img{width:28px;height:28px;object-fit:contain}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 60px}
+.narrow{max-width:560px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:600 14.5px 'Inter',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:background .15s}
+.btn:hover:not(:disabled){background:var(--navy-d)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.ghost:hover:not(:disabled){background:var(--tint)}
+.btn.red{background:var(--red)}
+.btn.sm{padding:8px 14px;font-size:13px}
+.btn.block{width:100%}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+input,select,textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font:14.5px 'Inter',sans-serif;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,42,111,.12)}
+.field{margin-bottom:14px}
+.alert{display:none;padding:11px 13px;border-radius:10px;font-size:13.5px;line-height:1.5;margin-bottom:14px}
+.alert.show{display:block}
+.alert.err{background:#FDECEA;color:#9B2C20;border:1px solid #F4C6BF}
+.alert.ok{background:#E8F6EF;color:#14683F;border:1px solid #BFE5D2}
+.muted{color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--tint);color:var(--navy);border:1px solid var(--line);padding:6px 13px;border-radius:100px;font-size:13px;font-weight:600}
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:28px;text-align:center}
+.hero .big{font-size:clamp(36px,9vw,48px);font-weight:700;line-height:1}
+.hero .big span{font-size:.45em;opacity:.7;font-weight:600}
+.hero p{opacity:.8;margin-top:8px;font-size:14px}
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border-bottom:0}
+.row b{color:var(--navy)}
+.good{color:var(--green)}.mid{color:#B7791F}.low{color:var(--red)}
+
+.hello h1{font-size:clamp(22px,4vw,28px);margin-bottom:6px}
+.stack{display:flex;flex-direction:column;gap:18px;margin-top:22px}
+.card h2{font-size:18px;margin-bottom:6px}
+.card p{font-size:14.5px;line-height:1.6}
+.card .btn{margin-top:16px}
+
+.promo{margin-top:18px;text-align:center}
+.promo h2{font-size:20px;margin-bottom:6px}
+.vid{position:relative;background:var(--navy-d);border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin:14px 0}
+.vid video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+.vid .miss{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;opacity:.8}
+.getready{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px;font-size:15px;color:var(--navy)}
+.getready b{font-size:20px;letter-spacing:.02em;display:block;margin-top:2px}
+.promo .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+</style></head><body>
+<div class="gate" id="gate"><div class="spin"></div></div>
+<div id="app" class="hidden">
+  <div class="top"><div class="top-in">
+    <a class="logo" href="dashboard.html"><img src="logo.png" alt="">ZENOVA STUDY</a>
+    <span style="display:flex;gap:8px"><a class="btn ghost sm" href="leaderboard.html">Leaderboard</a><button class="btn ghost sm" id="logout">Log out</button></span>
+  </div></div>
+  <div class="wrap">
+    <div class="hello"><h1 id="hello">Welcome</h1><p class="muted">Zenova Study Beta Challenge 2.0 · 4 subjects, 2 hours, one attempt.</p></div>
+    <div class="stack" id="stack"></div>
+  </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyA4dDvnadXfwEH4LYOqh4eG1E8CTV0ZNE0",
+    authDomain: "study-hub-2b7cf.firebaseapp.com",
+    projectId: "study-hub-2b7cf",
+    storageBucket: "study-hub-2b7cf.firebasestorage.app",
+    messagingSenderId: "168027609491",
+    appId: "1:168027609491:web:56d682d82dd438f8803066"
+  };
+const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
+const $=id=>document.getElementById(id);
+
+// ===== Exam day gate (all times are Lagos / WAT, UTC+1) =====
+// Exam opens 12 Dec 2026 at 12:00 AM and closes 11:59 PM that same day.
+const EXAM_START=Date.UTC(2026,11,11,23,0,0), EXAM_END=Date.UTC(2026,11,12,23,0,0);
+const EXAM_DAY_TEXT="Saturday, 12 December 2026";
+let clockOffset=0;
+async function syncClock(){
+  // Uses the host's clock (Date header) so a wrong phone clock can't open the exam early.
+  try{
+    const t0=Date.now(), r=await fetch(location.href,{method:'HEAD',cache:'no-store'}), d=r.headers.get('Date');
+    if(d){ const age=parseInt(r.headers.get('Age')||'0',10)||0; clockOffset=new Date(d).getTime()+age*1000-(t0+Date.now())/2; }
+  }catch(e){}
+}
+const nowMs=()=>Date.now()+clockOffset;
+const phaseOf=t=>t<EXAM_START?'before':(t<=EXAM_END?'live':'after');
+function cdText(ms){ const s=Math.max(0,Math.floor(ms/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60; return (d?d+'d ':'')+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(x).padStart(2,'0')+'s'; }
+const LABELS={english:"English",maths:"Mathematics",physics:"Physics",biology:"Biology",chemistry:"Chemistry",geography:"Geography",economics:"Economics",literature:"Literature in English",government:"Government",history:"History",agric:"Agricultural Science",crs:"Christian Religious Studies",commerce:"Commerce",irk:"Islamic Religious Knowledge",accounting:"Accounting"};
+
+$('logout').onclick=async()=>{ await signOut(auth); location.href="index.html"; };
+
+onAuthStateChanged(auth,async user=>{
+  if(!user){ location.href="index.html"; return; }
+  await syncClock();
+  let data=null;
+  try{ const s=await getDoc(doc(db,"users",user.uid)); data=s.exists()?s.data():null; }catch(e){ console.error(e); }
+  const name=(data&&data.name)||user.displayName||(user.email||'').split('@')[0]||'there';
+  $('hello').textContent='Welcome, '+name.split(' ')[0]+'.';
+  const stack=$('stack');
+  const card=document.createElement('div'); card.className='card';
+
+  if(data&&data.examResult){
+    const r=data.examResult, pct=r.totalMax?Math.round(r.totalScore/r.totalMax*100):0;
+    card.innerHTML='<h2>Your result</h2><p class="muted" style="margin-bottom:16px">Results are final. No re-attempts.</p>'
+      +'<div class="hero"><div class="big">'+r.totalScore+'<span> / '+r.totalMax+'</span></div><p>'+pct+'% overall</p></div>';
+    if(Array.isArray(r.breakdown)){
+      const rows=document.createElement('div'); rows.className='rows'; rows.style.marginTop='16px';
+      r.breakdown.forEach(b=>{
+        const p=b.max?b.score/b.max:0, cls=p>=.7?'good':p>=.4?'mid':'low';
+        const row=document.createElement('div'); row.className='row';
+        const l=document.createElement('b'); l.textContent=LABELS[b.subject]||b.subject;
+        const v=document.createElement('span'); v.className=cls; v.style.fontWeight='700'; v.textContent=b.score+' / '+b.max;
+        row.append(l,v); rows.appendChild(row);
+      });
+      card.appendChild(rows);
+    }
+  }else{
+    const inProgress=!!localStorage.getItem('zs_exam_'+user.uid);
+    const hasSubjects=data&&Array.isArray(data.subjects)&&data.subjects.length===4;
+    const phase=phaseOf(nowMs());
+    if(inProgress||phase==='live'){
+      const hasSubjects=data&&Array.isArray(data.subjects)&&data.subjects.length===4;
+      card.innerHTML='<h2>'+(inProgress?'Exam in progress':'Take the exam')+'</h2>'
+        +'<p class="muted">'+(inProgress?'Your timer is still running. Jump back in.':'English plus 3 subjects of your choice. You get 2 hours and one attempt, so start when you are ready.')+'</p>';
+      const a=document.createElement('a'); a.className='btn';
+      a.href=inProgress?'exam.html':(hasSubjects?'exam.html':'subjects.html');
+      a.textContent=inProgress?'Resume exam':(hasSubjects?'Start exam':'Choose subjects');
+      card.appendChild(a);
+      if(hasSubjects&&!inProgress){
+        const b=document.createElement('a'); b.className='btn ghost'; b.href='subjects.html'; b.textContent='Change subjects'; b.style.marginLeft='10px';
+        card.appendChild(b);
+      }
+
+    }else if(phase==='before'){
+      card.innerHTML='<h2>You are registered &#10003;</h2>'
+        +'<p class="muted">The exam can only be taken on <b>'+EXAM_DAY_TEXT+'</b> (Lagos time). It opens at 12:00 AM and closes at 11:59 PM. Until then, pick your subjects so you are ready.</p>'
+        +'<div class="getready" style="margin-top:16px;text-align:center">Exam opens in<b id="cd"></b></div>';
+      if(hasSubjects){
+        const ch=document.createElement('div'); ch.className='chips'; ch.style.marginBottom='4px';
+        data.subjects.forEach(id=>{ const c=document.createElement('span'); c.className='chip'; c.textContent=LABELS[id]||id; ch.appendChild(c); });
+        card.appendChild(ch);
+      }
+      const a=document.createElement('a'); a.className='btn ghost'; a.href='subjects.html'; a.textContent=hasSubjects?'Change subjects':'Choose subjects';
+      card.appendChild(a);
+      const cd=card.querySelector('#cd'), tick=()=>{ const left=EXAM_START-nowMs(); if(left<=0){ location.reload(); return; } cd.textContent=cdText(left); };
+      tick(); setInterval(tick,1000);
+    }else{
+      card.innerHTML='<h2>The exam has ended</h2><p class="muted">The exam window closed on 12 December 2026, so you can no longer take it. Thank you for registering.</p>';
+    }
+  }
+  stack.appendChild(card);
+  if(data&&data.examResult){
+    const p=document.createElement('div'); p.className='card promo';
+    p.innerHTML='<h2>Do you want to prepare for JAMB?</h2><p class="muted" style="font-size:14px">Watch this short video to see how we can help you.</p>'
+      +'<div class="vid"><video id="dVid" data-src="jamb-prep.mp4" autoplay muted loop playsinline controls preload="none"></video><div class="miss hidden" id="dMiss">Video coming soon</div></div>'
+      +'<div class="getready">Message this number to get ready<b>07073607977</b></div>'
+      +'<div class="btns"><a class="btn" href="tel:+2347073607977">Call now</a><a class="btn ghost" href="https://wa.me/2347073607977?text=Hi%2C%20I%20want%20to%20prepare%20for%20JAMB" target="_blank" rel="noopener">WhatsApp</a></div>';
+    stack.appendChild(p);
+    const v=document.getElementById('dVid'); v.src=v.dataset.src; v.addEventListener('error',()=>{ v.classList.add('hidden'); document.getElementById('dMiss').classList.remove('hidden'); });
+  }
+  $('gate').classList.add('hidden'); $('app').classList.remove('hidden');
+});
+</script></body></html>

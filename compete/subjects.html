@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Choose Subjects — Zenova Study Beta Challenge 2.0</title>
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"><link rel="icon" href="logo.png" type="image/png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
+<style>:root{--navy:#0B2A6F;--navy-d:#071C4D;--tint:#F3F6FC;--ink:#0F1B3D;--soft:#5B6784;--line:#E1E7F2;--red:#C0392B;--green:#1B8A5A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{letter-spacing:-.01em;color:var(--navy)}
+.hidden{display:none!important}
+.gate{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:100}
+.spin{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--navy);font-size:15px;text-decoration:none}
+.logo img{width:28px;height:28px;object-fit:contain}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 60px}
+.narrow{max-width:560px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:600 14.5px 'Inter',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:background .15s}
+.btn:hover:not(:disabled){background:var(--navy-d)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.ghost:hover:not(:disabled){background:var(--tint)}
+.btn.red{background:var(--red)}
+.btn.sm{padding:8px 14px;font-size:13px}
+.btn.block{width:100%}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+input,select,textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font:14.5px 'Inter',sans-serif;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,42,111,.12)}
+.field{margin-bottom:14px}
+.alert{display:none;padding:11px 13px;border-radius:10px;font-size:13.5px;line-height:1.5;margin-bottom:14px}
+.alert.show{display:block}
+.alert.err{background:#FDECEA;color:#9B2C20;border:1px solid #F4C6BF}
+.alert.ok{background:#E8F6EF;color:#14683F;border:1px solid #BFE5D2}
+.muted{color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--tint);color:var(--navy);border:1px solid var(--line);padding:6px 13px;border-radius:100px;font-size:13px;font-weight:600}
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:28px;text-align:center}
+.hero .big{font-size:clamp(36px,9vw,48px);font-weight:700;line-height:1}
+.hero .big span{font-size:.45em;opacity:.7;font-weight:600}
+.hero p{opacity:.8;margin-top:8px;font-size:14px}
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border-bottom:0}
+.row b{color:var(--navy)}
+.good{color:var(--green)}.mid{color:#B7791F}.low{color:var(--red)}
+
+.locked{display:flex;align-items:center;gap:12px;background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:18px 0}
+.tick{width:30px;height:30px;border-radius:8px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.sub{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;font:600 14.5px 'Inter',sans-serif;color:var(--navy);cursor:pointer;text-align:left}
+.sub:hover{border-color:#B9C4DC}
+.sub.on{border-color:var(--navy);background:var(--tint)}
+.sub.off{opacity:.4;pointer-events:none}
+.dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex-shrink:0}
+.sub.on .dot{background:var(--navy);border-color:var(--navy);box-shadow:inset 0 0 0 3px #fff}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:14px 20px}
+.bar-in{max-width:880px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+</style></head><body>
+<div class="gate" id="gate"><div class="spin"></div></div>
+<div id="app" class="hidden">
+  <div class="top"><div class="top-in">
+    <a class="logo" href="dashboard.html"><img src="logo.png" alt="">ZENOVA STUDY</a>
+    <a class="btn ghost sm" href="dashboard.html">Dashboard</a>
+  </div></div>
+  <div class="wrap" style="padding-bottom:110px">
+    <h1 style="font-size:26px;margin-bottom:6px">Choose your 4 subjects</h1>
+    <p class="muted">English is compulsory. Pick 3 more.</p>
+    <div class="locked"><span class="tick">✓</span><div><b style="color:var(--navy)">English Language</b><div class="muted" style="font-size:12.5px">Already included</div></div></div>
+    <div class="alert err" id="err"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <div class="bar"><div class="bar-in">
+    <span class="muted" style="font-size:13.5px"><b id="count" style="color:var(--navy)">0</b> of 3 picked</span>
+    <button class="btn" id="go" disabled>Continue</button>
+  </div></div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyA4dDvnadXfwEH4LYOqh4eG1E8CTV0ZNE0",
+    authDomain: "study-hub-2b7cf.firebaseapp.com",
+    projectId: "study-hub-2b7cf",
+    storageBucket: "study-hub-2b7cf.firebasestorage.app",
+    messagingSenderId: "168027609491",
+    appId: "1:168027609491:web:56d682d82dd438f8803066"
+  };
+const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
+const $=id=>document.getElementById(id);
+
+// ===== Exam day gate (all times are Lagos / WAT, UTC+1) =====
+// Exam opens 12 Dec 2026 at 12:00 AM and closes 11:59 PM that same day.
+const EXAM_START=Date.UTC(2026,11,11,23,0,0), EXAM_END=Date.UTC(2026,11,12,23,0,0);
+const EXAM_DAY_TEXT="Saturday, 12 December 2026";
+let clockOffset=0;
+async function syncClock(){
+  // Uses the host's clock (Date header) so a wrong phone clock can't open the exam early.
+  try{
+    const t0=Date.now(), r=await fetch(location.href,{method:'HEAD',cache:'no-store'}), d=r.headers.get('Date');
+    if(d){ const age=parseInt(r.headers.get('Age')||'0',10)||0; clockOffset=new Date(d).getTime()+age*1000-(t0+Date.now())/2; }
+  }catch(e){}
+}
+const nowMs=()=>Date.now()+clockOffset;
+const phaseOf=t=>t<EXAM_START?'before':(t<=EXAM_END?'live':'after');
+function cdText(ms){ const s=Math.max(0,Math.floor(ms/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60; return (d?d+'d ':'')+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(x).padStart(2,'0')+'s'; }
+const OPTIONS=[["maths","Mathematics"],["physics","Physics"],["biology","Biology"],["chemistry","Chemistry"],["geography","Geography"],["economics","Economics"],["literature","Literature in English"],["government","Government"],["history","History"],["agric","Agricultural Science"],["crs","Christian Religious Studies"],["commerce","Commerce"],["irk","Islamic Religious Knowledge"],["accounting","Accounting"]];
+const MAX=3; const sel=new Set(); let me=null;
+
+const grid=$('grid');
+OPTIONS.forEach(([id,name])=>{
+  const b=document.createElement('button'); b.type='button'; b.className='sub'; b.dataset.id=id;
+  b.innerHTML='<span></span><span class="dot"></span>'; b.firstChild.textContent=name;
+  b.onclick=()=>{
+    $('err').classList.remove('show');
+    if(sel.has(id)) sel.delete(id);
+    else if(sel.size<MAX) sel.add(id);
+    else { $('err').textContent='You can only pick 3. Remove one first.'; $('err').classList.add('show'); return; }
+    refresh();
+  };
+  grid.appendChild(b);
+});
+function refresh(){
+  $('count').textContent=sel.size;
+  grid.querySelectorAll('.sub').forEach(b=>{
+    const on=sel.has(b.dataset.id);
+    b.classList.toggle('on',on);
+    b.classList.toggle('off',!on&&sel.size>=MAX);
+  });
+  $('go').disabled=sel.size!==MAX;
+}
+
+onAuthStateChanged(auth,async user=>{
+  if(!user){ location.href="index.html"; return; }
+  me=user;
+  await syncClock();
+  if(phaseOf(nowMs())==='before') $('go').textContent='Save subjects';
+  try{
+    const s=await getDoc(doc(db,"users",user.uid));
+    if(s.exists()){
+      const d=s.data();
+      if(d.examResult){ location.href="dashboard.html"; return; }
+      if(Array.isArray(d.subjects)) d.subjects.forEach(id=>{ if(id!=="english" && OPTIONS.some(o=>o[0]===id)) sel.add(id); });
+    }
+  }catch(e){ console.error(e); }
+  refresh();
+  $('gate').classList.add('hidden'); $('app').classList.remove('hidden');
+});
+
+$('go').onclick=async()=>{
+  if(sel.size!==MAX||!me) return;
+  $('go').disabled=true;
+  try{
+    await setDoc(doc(db,"users",me.uid),{subjects:["english",...sel],subjectsUpdatedAt:serverTimestamp()},{merge:true});
+    location.href=(phaseOf(nowMs())==="live")?"exam.html":"dashboard.html";
+  }catch(e){
+    console.error(e); $('err').textContent='Could not save your subjects. Check your connection and try again.'; $('err').classList.add('show'); $('go').disabled=false;
+  }
+};
+</script></body></html>

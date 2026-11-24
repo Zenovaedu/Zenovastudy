@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leaderboard — Zenova Study Beta Challenge 2.0</title>
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"><link rel="icon" href="logo.png" type="image/png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
+<style>:root{--navy:#0B2A6F;--navy-d:#071C4D;--tint:#F3F6FC;--ink:#0F1B3D;--soft:#5B6784;--line:#E1E7F2;--red:#C0392B;--green:#1B8A5A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{letter-spacing:-.01em;color:var(--navy)}
+.hidden{display:none!important}
+.gate{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:100}
+.spin{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--navy);font-size:15px;text-decoration:none}
+.logo img{width:28px;height:28px;object-fit:contain}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 60px}
+.narrow{max-width:560px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:600 14.5px 'Inter',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:background .15s}
+.btn:hover:not(:disabled){background:var(--navy-d)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.ghost:hover:not(:disabled){background:var(--tint)}
+.btn.red{background:var(--red)}
+.btn.sm{padding:8px 14px;font-size:13px}
+.btn.block{width:100%}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+input,select,textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font:14.5px 'Inter',sans-serif;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,42,111,.12)}
+.field{margin-bottom:14px}
+.alert{display:none;padding:11px 13px;border-radius:10px;font-size:13.5px;line-height:1.5;margin-bottom:14px}
+.alert.show{display:block}
+.alert.err{background:#FDECEA;color:#9B2C20;border:1px solid #F4C6BF}
+.alert.ok{background:#E8F6EF;color:#14683F;border:1px solid #BFE5D2}
+.muted{color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--tint);color:var(--navy);border:1px solid var(--line);padding:6px 13px;border-radius:100px;font-size:13px;font-weight:600}
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:28px;text-align:center}
+.hero .big{font-size:clamp(36px,9vw,48px);font-weight:700;line-height:1}
+.hero .big span{font-size:.45em;opacity:.7;font-weight:600}
+.hero p{opacity:.8;margin-top:8px;font-size:14px}
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border-bottom:0}
+.row b{color:var(--navy)}
+.good{color:var(--green)}.mid{color:#B7791F}.low{color:var(--red)}
+
+.lb{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.lr{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.lr.me{border-color:var(--navy);background:var(--tint)}
+.rk{width:34px;height:34px;border-radius:50%;background:var(--tint);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.lr.top .rk{background:var(--navy);color:#fff}
+.nm{flex:1;min-width:0;font-weight:600;color:var(--navy);font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.you{font-size:11px;font-weight:700;background:var(--navy);color:#fff;border-radius:100px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.sc{text-align:right;flex-shrink:0}.sc b{display:block;color:var(--navy);font-size:15px}.sc span{font-size:12px;color:var(--soft)}
+.mine{background:var(--navy);color:#fff;border-radius:14px;padding:18px;margin-top:16px;text-align:center;font-size:14.5px}
+.mine b{font-size:22px}
+</style></head><body>
+<div class="gate" id="gate"><div class="spin"></div></div>
+<div id="app" class="hidden">
+  <div class="top"><div class="top-in">
+    <a class="logo" href="dashboard.html"><img src="logo.png" alt="">ZENOVA STUDY</a>
+    <a class="btn ghost sm" href="dashboard.html">Dashboard</a>
+  </div></div>
+  <div class="wrap narrow" style="max-width:640px">
+    <h1 style="font-size:clamp(22px,4vw,28px)">Leaderboard</h1>
+    <p class="muted" style="font-size:14px;margin-top:4px">Zenova Study Beta Challenge 2.0 · Top 100. Same score? Whoever finished first ranks higher.</p>
+    <div id="mine"></div>
+    <div class="alert err" id="err" style="margin-top:16px"></div>
+    <div class="lb" id="lb"></div>
+    <button class="btn ghost block" id="refresh" style="margin-top:16px">Refresh</button>
+  </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, getDocs, getDoc, doc, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyA4dDvnadXfwEH4LYOqh4eG1E8CTV0ZNE0",
+    authDomain: "study-hub-2b7cf.firebaseapp.com",
+    projectId: "study-hub-2b7cf",
+    storageBucket: "study-hub-2b7cf.firebasestorage.app",
+    messagingSenderId: "168027609491",
+    appId: "1:168027609491:web:56d682d82dd438f8803066"
+  };
+const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
+const $=id=>document.getElementById(id);
+let me=null;
+
+onAuthStateChanged(auth,u=>{
+  if(!u){ location.href="index.html"; return; }
+  me=u; $('gate').classList.add('hidden'); $('app').classList.remove('hidden'); load();
+});
+$('refresh').onclick=load;
+
+async function load(){
+  $('err').classList.remove('show'); $('lb').textContent='Loading...';
+  try{
+    const snap=await getDocs(query(collection(db,"leaderboard"),orderBy("totalScore","desc"),limit(100)));
+    const rows=[]; snap.forEach(d=>rows.push({uid:d.id,...d.data()}));
+    const t=r=>r.submittedAt&&r.submittedAt.toMillis?r.submittedAt.toMillis():Number.MAX_SAFE_INTEGER;
+    rows.sort((a,b)=>b.totalScore-a.totalScore||t(a)-t(b));
+    const lb=$('lb'); lb.innerHTML='';
+    if(!rows.length) lb.innerHTML='<p class="muted" style="text-align:center;padding:24px 0;font-size:14px">No one is on the board yet.</p>';
+    rows.forEach((r,i)=>{
+      const row=document.createElement('div'); row.className='lr'+(i<3?' top':'')+(r.uid===me.uid?' me':'');
+      const rk=document.createElement('span'); rk.className='rk'; rk.textContent=i+1;
+      const nm=document.createElement('span'); nm.className='nm'; nm.textContent=r.name||'Student';
+      if(r.uid===me.uid){ const y=document.createElement('span'); y.className='you'; y.textContent='You'; nm.appendChild(y); }
+      const sc=document.createElement('span'); sc.className='sc';
+      const pct=r.totalMax?Math.round(r.totalScore/r.totalMax*100):0;
+      sc.innerHTML='<b></b><span></span>'; sc.firstChild.textContent=r.totalScore+' / '+r.totalMax; sc.lastChild.textContent=pct+'%';
+      row.append(rk,nm,sc); lb.appendChild(row);
+    });
+    const idx=rows.findIndex(r=>r.uid===me.uid), mine=$('mine'); mine.innerHTML='';
+    if(idx>=0){ mine.innerHTML='<div class="mine">Your rank<br><b>#'+(idx+1)+'</b> of '+rows.length+(rows.length>=100?'+':'')+'</div>'; }
+    else{
+      let done=false; try{ done=(await getDoc(doc(db,"leaderboard",me.uid))).exists(); }catch(e){}
+      mine.innerHTML='<div class="mine">'+(done?'You finished, but you are outside the top 100.':'Take the exam to get on the leaderboard.')+'</div>';
+    }
+  }catch(e){
+    console.error(e); $('lb').textContent='';
+    $('err').textContent='Could not load the leaderboard ('+(e.code||e.message)+').'; $('err').classList.add('show');
+  }
+}
+</script></body></html>

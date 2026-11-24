@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null &&
+             (request.auth.token.email == 'emmanueloluwadamijohn18@gmail.com' ||
+              request.auth.token.email == 'zenovaofficial188@gmail.com');
+    }
+
+    // Exam day (Lagos time, UTC+1): opens 12 Dec 2026 12:00 AM, closes 11:59 PM.
+    // The extra hour of grace lets a student who started late finish or resume.
+    // Change these two dates here AND in the EXAM_START / EXAM_END lines in the html files.
+    function examOpen() {
+      return request.time >= timestamp.date(2026, 12, 11) + duration.time(23, 0, 0, 0) &&
+             request.time <= timestamp.date(2026, 12, 13) + duration.time(1, 0, 0, 0);
+    }
+
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId &&
+                       (!('examResult' in resource.data) ||
+                        request.resource.data.examResult == resource.data.examResult);
+      allow delete: if isAdmin();
+    }
+
+    // Leaderboard: any signed-in student can read; each student can add only their own entry once.
+    match /leaderboard/{userId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == userId && examOpen();
+      allow update, delete: if isAdmin();
+    }
+
+    match /questions/{subjectId}/items/{questionId} {
+      // Students can only download questions during the exam window, so nobody can peek early.
+      allow read: if isAdmin() || (request.auth != null && examOpen());
+      allow write: if isAdmin();
+    }
+  }
+}
