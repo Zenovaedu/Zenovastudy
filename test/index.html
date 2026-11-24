@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zenova Study</title>
+<style>
+:root{--navy:#0a2463;--navy2:#143a8f;--soft:#e8eefb;--bd:#d5ddf0;--tx:#0d1b3d;--mu:#5b6b91;--bad:#c93a3a}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:16px;text-align:center;font-weight:800;letter-spacing:.5px;font-size:1.2rem}
+#app{max-width:680px;margin:0 auto;padding:20px 16px 40px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 2px 10px rgba(10,36,99,.06)}
+h1{font-size:1.5rem;margin:0 0 6px;color:var(--navy)}h2{font-size:1.15rem;margin:0 0 12px;color:var(--navy)}
+.mu{color:var(--mu);font-size:.92rem}
+input,textarea{width:100%;padding:12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--tx);font:inherit;margin:6px 0 12px}
+input:focus,textarea:focus{outline:2px solid var(--navy2);border-color:var(--navy2)}
+textarea{min-height:70px;resize:vertical}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;border-radius:12px;padding:14px;font:inherit;font-weight:600;background:var(--navy);color:#fff;cursor:pointer;margin-top:10px}
+.btn:hover{background:var(--navy2)}
+.btn.sec{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.btn.sm{display:inline-block;width:auto;padding:8px 14px;font-size:.9rem;margin:0}
+.btn:disabled{opacity:.5}
+.opt{display:block;width:100%;text-align:left;padding:13px 14px;margin:8px 0;border:1px solid var(--bd);border-radius:12px;background:#fff;color:var(--tx);font:inherit;cursor:pointer}
+.opt.on{border-color:var(--navy);background:var(--soft);font-weight:600}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.timer{font-weight:700;font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:99px;background:var(--soft);color:var(--navy)}
+.timer.low{background:var(--bad);color:#fff}
+.bar{height:6px;background:var(--soft);border-radius:9px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--navy)}
+.score{font-size:3.4rem;font-weight:800;text-align:center;margin:8px 0;color:var(--navy)}
+.row{display:flex;gap:8px;align-items:center}.row input[type=radio],.chk{width:auto;margin:0}.row input[type=text]{margin:4px 0}
+.err{color:var(--bad);font-size:.9rem;margin:8px 0}.ok{color:#127a4b;font-size:.9rem;margin:8px 0}
+.lnk{color:var(--mu);background:none;border:0;cursor:pointer;text-decoration:underline;font:inherit;font-size:.85rem}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 8px;font-weight:600}
+td{padding:9px 8px;border-bottom:1px solid var(--bd)}
+tr.me td{background:var(--soft);font-weight:700}
+.wrap{overflow-x:auto}
+.rv{padding:11px 14px;margin:7px 0;border:1px solid var(--bd);border-radius:12px;background:#fff}
+.rv.good{border-color:#127a4b;background:#e6f6ee;font-weight:600}
+.rv.bad{border-color:var(--bad);background:#fdecec}
+.tag{font-size:.8rem;font-weight:700;margin-left:6px}
+.tag.g{color:#127a4b}.tag.r{color:var(--bad)}
+.verdict{font-weight:700;font-size:.9rem;margin-bottom:6px}
+</style>
+</head>
+<body>
+<header>ZENOVA STUDY</header>
+<div id="app"><p class="mu" style="text-align:center">Loading…</p></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,doc,getDoc,setDoc,addDoc,collection,query,where,orderBy,limit,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyC9bPDUJjEsI-pFg-EzA1yLpKjtKXhK1Yo",
+  authDomain:"zenova-study.firebaseapp.com",
+  projectId:"zenova-study",
+  storageBucket:"zenova-study.firebasestorage.app",
+  messagingSenderId:"518862708637",
+  appId:"1:518862708637:web:dc8471c2000094c49f9974"
+};
+const fb=initializeApp(firebaseConfig),db=getFirestore(fb);
+const RATE="https://zenovastudy.com.ng/rate/";
+const L=['A','B','C','D'];
+const app=document.getElementById('app');
+let cfg=null,name='',idx=0,ans=[],left=0,timer=null,t0=0,msg='';
+
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+const key=n=>n.trim().toLowerCase().replace(/\s+/g,' ');
+const $=id=>document.getElementById(id);
+const when=r=>r.createdAt&&r.createdAt.toDate?r.createdAt.toDate().toLocaleString([], {dateStyle:'medium',timeStyle:'short'}):'';
+
+async function loadCfg(){
+  try{const s=await getDoc(doc(db,'config','test'));cfg=s.exists()?s.data():null;}
+  catch(e){cfg=null;msg='Could not load the test: '+e.code}
+}
+
+/* ---------- Student ---------- */
+async function start(){
+  clearInterval(timer);
+  app.innerHTML='<p class="mu" style="text-align:center">Loading…</p>';
+  await loadCfg();
+  const n=cfg&&cfg.questions?cfg.questions.length:0;
+  app.innerHTML='<div class="card"><h1>'+esc(cfg?cfg.title:'Zenova Study Test')+'</h1>'+
+  (n?'<p class="mu">'+n+' question'+(n>1?'s':'')+' · '+cfg.minutes+' minute'+(cfg.minutes>1?'s':'')+'</p>'+
+  '<label>Enter your name<input id="nm" placeholder="Your full name" autocomplete="name" maxlength="60" value="'+esc(name)+'"></label>'+
+  '<div class="err" id="er"></div><button class="btn" id="go">Start Test</button>':
+  '<p class="mu">No test has been set yet. Please check back soon.</p><div class="err">'+esc(msg)+'</div>')+'</div>'+
+  '<button class="btn sec" id="lb">🏆 Leaderboard</button><button class="btn sec" id="hi">📜 My History</button>'+
+  '';
+  if($('go'))$('go').onclick=()=>{
+    const v=$('nm').value.trim();
+    if(!v){$('er').textContent='Please enter your name first.';return}
+    name=v;idx=0;ans=[];left=cfg.minutes*60;t0=Date.now();
+    timer=setInterval(tick,1000);quiz();
+  };
+  $('lb').onclick=()=>{const v=$('nm');if(v&&v.value.trim())name=v.value.trim();leaderboard()};
+  $('hi').onclick=()=>{const v=$('nm');if(v&&v.value.trim())name=v.value.trim();history()};
+}
+function tick(){
+  left--;
+  const t=$('tm');
+  if(t){t.textContent=fmt(Math.max(left,0));if(left<=60)t.className='timer low'}
+  if(left<=0)finish();
+}
+function quiz(){
+  const q=cfg.questions[idx],n=cfg.questions.length;
+  let h='<div class="top"><span class="mu">Question '+(idx+1)+' of '+n+'</span><span id="tm" class="timer'+(left<=60?' low':'')+'">'+fmt(left)+'</span></div>'+
+  '<div class="bar"><i style="width:'+(idx/n*100)+'%"></i></div><div class="card"><h2>'+esc(q.q)+'</h2>';
+  q.o.forEach((o,i)=>{if(o)h+='<button class="opt'+(ans[idx]===i?' on':'')+'" data-i="'+i+'"><b>'+L[i]+'.</b> '+esc(o)+'</button>'});
+  h+='</div><button class="btn" id="nx">'+(idx===n-1?'Finish':'Next')+'</button>';
+  app.innerHTML=h;
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ans[idx]=+b.dataset.i;quiz()});
+  $('nx').onclick=()=>{idx===n-1?finish():(idx++,quiz())};
+}
+let finishing=false,last=null;
+async function finish(){
+  if(finishing)return;finishing=true;clearInterval(timer);
+  const n=cfg.questions.length;let s=0;
+  cfg.questions.forEach((q,i)=>{if(ans[i]===q.a)s++});
+  const pct=Math.round(s/n*100),secs=Math.min(Math.round((Date.now()-t0)/1000),cfg.minutes*60);
+  last={name,title:cfg.title||'Zenova Study Test',s,n,pct,secs,date:new Date(),
+    qs:JSON.parse(JSON.stringify(cfg.questions)),ans:ans.slice(),saveMsg:'Saving your result…',saveCls:'mu'};
+  showResult();
+  try{
+    await addDoc(collection(db,'results'),{name,nameKey:key(name),score:s,total:n,pct,secs,testId:cfg.version||'v1',createdAt:serverTimestamp()});
+    last.saveMsg='Result saved ✓';last.saveCls='mu';
+  }catch(e){last.saveMsg='Your score could not be saved ('+e.code+').';last.saveCls='err'}
+  const x=$('sv');if(x){x.className=last.saveCls;x.textContent=last.saveMsg}
+  finishing=false;
+}
+function showResult(){
+  const r=last;
+  app.innerHTML='<div class="card" style="text-align:center"><h1>Well done, '+esc(r.name)+'!</h1><p class="mu">Your score</p>'+
+  '<div class="score">'+r.s+' / '+r.n+'</div><p class="mu">'+r.pct+'% · '+fmt(r.secs)+'</p><div id="sv" class="'+r.saveCls+'">'+esc(r.saveMsg)+'</div></div>'+
+  '<button class="btn" id="cr">✅ View Corrections</button>'+
+  '<button class="btn" id="dl">⬇️ Download Result (PDF)</button>'+
+  '<a class="btn sec" href="'+RATE+'" target="_blank" rel="noopener">Rate Zenova</a>'+
+  '<button class="btn sec" id="lb">🏆 Leaderboard</button><button class="btn sec" id="hi">📜 My History</button><button class="btn sec" id="hm">Home</button>';
+  $('cr').onclick=corrections;$('dl').onclick=downloadResult;
+  $('lb').onclick=leaderboard;$('hi').onclick=history;$('hm').onclick=start;
+}
+function corrections(){
+  const r=last;
+  let h='<div class="card"><h1>Corrections</h1><p class="mu">'+r.s+' of '+r.n+' correct ('+r.pct+'%). Green = correct answer, red = your wrong answer.</p></div>';
+  r.qs.forEach((q,i)=>{
+    const u=r.ans[i],ok=u===q.a;
+    h+='<div class="card"><div class="verdict '+(ok?'tag g':'tag r')+'" style="margin-left:0">'+(ok?'✓ Correct':(u===undefined?'✗ Not answered':'✗ Wrong'))+' · Question '+(i+1)+'</div><h2>'+esc(q.q)+'</h2>';
+    q.o.forEach((o,k)=>{
+      if(!o)return;
+      let c='rv',t='';
+      if(k===q.a){c+=' good';t='<span class="tag g">✓ Correct answer'+(u===k?' (your answer)':'')+'</span>'}
+      else if(k===u){c+=' bad';t='<span class="tag r">✗ Your answer</span>'}
+      h+='<div class="'+c+'"><b>'+L[k]+'.</b> '+esc(o)+t+'</div>';
+    });
+    h+='</div>';
+  });
+  h+='<button class="btn" id="dl">⬇️ Download Result (PDF)</button><button class="btn sec" id="bk">Back to score</button>';
+  app.innerHTML=h;window.scrollTo(0,0);
+  $('dl').onclick=downloadResult;$('bk').onclick=showResult;
+}
+function loadScript(src){
+  return new Promise((res,rej)=>{
+    if(window.jspdf)return res();
+    const e=document.createElement('script');e.src=src;e.onload=res;e.onerror=rej;document.head.appendChild(e);
+  });
+}
+function saveBlob(blob,fn){
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}
+async function downloadResult(){
+  const r=last;if(!r)return;
+  const fn='Zenova-Result-'+r.name.replace(/[^a-z0-9]+/gi,'_')+'.pdf';
+  const dt=r.date.toLocaleString([], {dateStyle:'medium',timeStyle:'short'});
+  try{
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    const pdf=new window.jspdf.jsPDF({unit:'pt',format:'a4'});
+    const W=pdf.internal.pageSize.getWidth(),H=pdf.internal.pageSize.getHeight(),M=44,TW=W-M*2;
+    let y=0;
+    const need=h=>{if(y+h>H-M){pdf.addPage();y=M}};
+    const write=(txt,size,bold,color)=>{
+      pdf.setFont('helvetica',bold?'bold':'normal');pdf.setFontSize(size);pdf.setTextColor.apply(pdf,color||[13,27,61]);
+      pdf.splitTextToSize(String(txt),TW).forEach(l=>{need(size*1.4);pdf.text(l,M,y);y+=size*1.4});
+    };
+    pdf.setFillColor(10,36,99);pdf.rect(0,0,W,60,'F');
+    pdf.setTextColor(255,255,255);pdf.setFont('helvetica','bold');pdf.setFontSize(18);pdf.text('ZENOVA STUDY',M,38);
+    y=90;
+    write(r.title,16,true,[10,36,99]);y+=4;
+    write('Name: '+r.name,11);write('Date: '+dt,11);
+    write('Score: '+r.s+' / '+r.n+'  ('+r.pct+'%)',13,true,[10,36,99]);
+    write('Time used: '+fmt(r.secs),11);y+=10;
+    write('Corrections',14,true,[10,36,99]);y+=4;
+    r.qs.forEach((q,i)=>{
+      const u=r.ans[i],ok=u===q.a;
+      need(60);y+=6;
+      write((i+1)+'. '+q.q,11,true);
+      q.o.forEach((o,k)=>{
+        if(!o)return;
+        let tag='',col=[13,27,61],b=false;
+        if(k===q.a){tag='  [CORRECT ANSWER]';col=[18,122,75];b=true}
+        if(k===u&&k!==q.a){tag='  [YOUR ANSWER - WRONG]';col=[201,58,58];b=true}
+        else if(k===u&&k===q.a)tag='  [CORRECT ANSWER - YOUR ANSWER]';
+        write('    '+L[k]+'. '+o+tag,10,b,col);
+      });
+      if(u===undefined)write('    Not answered',10,false,[201,58,58]);
+      write('    Result: '+(ok?'Correct':'Wrong'),10,true,ok?[18,122,75]:[201,58,58]);
+    });
+    pdf.save(fn);
+  }catch(e){
+    // Fallback: plain text file if the PDF library cannot load
+    let t=r.title+'\nName: '+r.name+'\nDate: '+dt+'\nScore: '+r.s+'/'+r.n+' ('+r.pct+'%)\nTime: '+fmt(r.secs)+'\n\nCORRECTIONS\n\n';
+    r.qs.forEach((q,i)=>{
+      t+=(i+1)+'. '+q.q+'\n';
+      q.o.forEach((o,k)=>{if(o)t+='   '+L[k]+'. '+o+(k===q.a?'  <-- correct':'')+(k===r.ans[i]&&k!==q.a?'  <-- your answer':'')+'\n'});
+      t+='   Your answer: '+(r.ans[i]===undefined?'None':L[r.ans[i]])+' | Correct: '+L[q.a]+'\n\n';
+    });
+    saveBlob(new Blob([t],{type:'text/plain'}),fn.replace('.pdf','.txt'));
+  }
+}
+async function history(){
+  app.innerHTML='<div class="card"><h1>My History</h1><label>Your name<input id="hn" value="'+esc(name)+'" placeholder="Name you used for the test"></label>'+
+  '<button class="btn" id="sh">Show history</button></div><div id="out"></div><button class="btn sec" id="hm">Back</button>';
+  $('hm').onclick=start;
+  const run=async()=>{
+    const v=$('hn').value.trim();if(!v)return;name=v;
+    $('out').innerHTML='<p class="mu" style="text-align:center">Loading…</p>';
+    try{
+      const s=await getDocs(query(collection(db,'results'),where('nameKey','==',key(v))));
+      const rows=s.docs.map(d=>d.data()).sort((a,b)=>(b.createdAt?b.createdAt.seconds:0)-(a.createdAt?a.createdAt.seconds:0));
+      if(!rows.length){$('out').innerHTML='<div class="card mu">No attempts found for that name.</div>';return}
+      const best=Math.max(...rows.map(r=>r.pct));
+      $('out').innerHTML='<div class="card"><p class="mu">'+rows.length+' attempt'+(rows.length>1?'s':'')+' · Best: '+best+'%</p><div class="wrap"><table><tr><th>Date</th><th>Score</th><th>%</th><th>Time</th></tr>'+
+      rows.map(r=>'<tr><td>'+esc(when(r))+'</td><td>'+r.score+'/'+r.total+'</td><td>'+r.pct+'%</td><td>'+fmt(r.secs||0)+'</td></tr>').join('')+'</table></div></div>';
+    }catch(e){$('out').innerHTML='<div class="err">Could not load history ('+esc(e.code)+').</div>'}
+  };
+  $('sh').onclick=run;if(name)run();
+}
+async function leaderboard(){
+  app.innerHTML='<div class="card"><h1>🏆 Leaderboard</h1><p class="mu">Best score per student for the current test.</p><div id="out"><p class="mu">Loading…</p></div></div><button class="btn sec" id="hm">Back</button>';
+  $('hm').onclick=start;
+  try{
+    if(!cfg)await loadCfg();
+    const tid=cfg&&cfg.version||'v1';
+    const s=await getDocs(query(collection(db,'results'),orderBy('createdAt','desc'),limit(1000)));
+    const best={};
+    s.docs.map(d=>d.data()).filter(r=>(r.testId||'v1')===tid).forEach(r=>{
+      const b=best[r.nameKey];
+      if(!b||r.pct>b.pct||(r.pct===b.pct&&r.secs<b.secs))best[r.nameKey]=r;
+    });
+    const rows=Object.values(best).sort((a,b)=>b.pct-a.pct||a.secs-b.secs).slice(0,50);
+    if(!rows.length){$('out').innerHTML='<p class="mu">No scores yet. Be the first!</p>';return}
+    const me=key(name||'');
+    $('out').innerHTML='<div class="wrap"><table><tr><th>#</th><th>Name</th><th>Score</th><th>Time</th></tr>'+
+    rows.map((r,i)=>'<tr'+(r.nameKey===me?' class="me"':'')+'><td>'+(i<3?['🥇','🥈','🥉'][i]:i+1)+'</td><td>'+esc(r.name)+'</td><td>'+r.score+'/'+r.total+' ('+r.pct+'%)</td><td>'+fmt(r.secs||0)+'</td></tr>').join('')+'</table></div>';
+  }catch(e){$('out').innerHTML='<div class="err">Could not load leaderboard ('+esc(e.code)+').</div>'}
+}
+
+start();
+</script>
+</body>
+</html>
